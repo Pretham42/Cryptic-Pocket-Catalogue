@@ -16,7 +16,7 @@ A website that shows where proteins may hide a drug pocket. A cryptic pocket is 
   - **Strong disease link** keeps proteins whose gene is strongly tied to a disease.
   - **Not a recessive-disease gene** drops proteins behind recessive diseases, which usually come from a missing or broken protein that a pocket drug rarely fixes.
   - **Not already drugged** keeps proteins with no approved drug or potent compound yet.
-  - **A cysteine in reach** keeps proteins with a cysteine next to the pocket, which gives a lab a handle to test it.
+  - **A cysteine in reach** keeps proteins with a cysteine next to the pocket. A lab can use it to test the pocket, and a chemist can aim a covalent drug at it, as with the KRAS drug sotorasib.
 - Click a row to open the protein in 3D. The predicted pocket is violet.
 - Watch real simulations of ten runs. Each one shows the pocket at the start and at its most open moment.
 - Look at an exploratory docking example for TRIB1, a protein linked to acute myeloid leukaemia.
