@@ -1,8 +1,12 @@
 # Cryptic Pocket Catalogue
 
-A website that shows where proteins may hide a drug pocket.
+**Live site: https://pretham42.github.io/Cryptic-Pocket-Catalogue/**
 
-A cryptic pocket is closed in the structures we have and only opens when a drug arrives, so docking and screening usually miss it. This catalogue predicts where such pockets are in 18,336 human proteins and helps you find the ones worth a closer look.
+![The catalogue, one protein in 3D, and a simulation](img/overview.png)
+
+*The catalogue (a), one protein in 3D (b), and the same protein in a simulation at its first (c) and most open (d) frame.*
+
+A website that shows where proteins may hide a drug pocket. A cryptic pocket is closed in the structures we have and only opens when a drug arrives, so docking and screening usually miss it. This catalogue predicts where such pockets are in 18,336 human proteins and helps you find the ones worth a closer look. Everything on it is a prediction or a simulation. It points to places worth testing, and nothing here shows that a pocket is real or that a molecule binds.
 
 ## What you can do
 
@@ -10,20 +14,6 @@ A cryptic pocket is closed in the structures we have and only opens when a drug 
 - Click a row to open the protein in 3D. The predicted pocket is violet.
 - Watch real simulations of ten runs. Each one shows the pocket at the start and at its most open moment.
 - Look at an exploratory docking example for TRIB1, a protein linked to acute myeloid leukaemia.
-
-## Try it
-
-The page loads its data files, so open it through a small web server.
-
-```
-python3 -m http.server
-```
-
-Then go to http://localhost:8000 in your browser. The 3D viewer and the protein structures come from the internet, so you need to be online.
-
-## What it is not
-
-Everything here is a prediction or a simulation. Nothing shows that a molecule binds, and no pocket on this page has been confirmed in the lab.
 
 ## Data and credits
 
