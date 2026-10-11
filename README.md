@@ -10,7 +10,11 @@ A website that shows where proteins may hide a drug pocket. A cryptic pocket is 
 
 ## What you can do
 
-- Choose a starting list, then switch gates on and off. The gates are a strong disease link, not a recessive disease, not already drugged and a cysteine within reach. A bar chart shows how many proteins each gate removes.
+- **Narrow the list like a funnel.** Pick a starting list (the hidden pockets, the disease-linked proteins, or everything), then switch on the questions you care about. Each question removes the proteins that do not fit, and a bar chart shows how many it removed.
+  - A strong disease link means a change in the protein is tied to a disease.
+  - Not a recessive disease keeps out diseases that usually come from a missing or broken protein, which a pocket drug rarely fixes.
+  - Not already drugged means no approved drug or potent compound exists yet.
+  - A cysteine within reach means there is a cysteine next to the pocket, which gives a lab a handle to test it.
 - Click a row to open the protein in 3D. The predicted pocket is violet.
 - Watch real simulations of ten runs. Each one shows the pocket at the start and at its most open moment.
 - Look at an exploratory docking example for TRIB1, a protein linked to acute myeloid leukaemia.
@@ -21,4 +25,4 @@ Structures come from the RCSB Protein Data Bank and the AlphaFold Protein Struct
 
 ## About
 
-An independent research project from 2026. It was built with the help of an AI coding assistant (Claude Code). The research questions, the choices and the checking are the author's.
+Independent research project from 2026. Website and code built with the help of Claude Code.
