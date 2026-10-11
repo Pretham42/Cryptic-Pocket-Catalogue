@@ -1,0 +1,2090 @@
+{
+ "_meta": {
+  "generated": "2026-10-09",
+  "ladder": {
+   "0": "No opening seen in 400 ns aggregate by a readout whose resolution is about 40 A^3; no claim of absence.",
+   "1": "An opening event was sampled (a pocket residue reached +40 A^3 in at least one replica); not evidence by itself.",
+   "2": "The predicted site opened reproducibly from the closed start (a pocket residue at +40 A^3 in 3 or more of 10 replicas, a site-level gain of 40 or more in one of them, first openings not all in the first 100 ps, matched-patch percentile 0.95 or more)."
+  },
+  "not_shown": "These are apo simulations (no ligand) in one force field (Amber03, TIP3P), 10 replicas of 40 ns from one start structure that is a domain cut out of the protein. The label counts a rise of the LIGSITE pocket volume next to a residue; it does not say that a molecule binds or that the shape suits one. In every run here some residue crossed +40 A^3 in 9 or 10 of 10 replicas, so the comparison of the pocket with matched patches of the same protein is what carries specificity, and a pocket with no effect reaches the 90th percentile of that comparison in about a fifth of runs.",
+  "population": {
+   "runs": 6,
+   "hits": 5,
+   "expected_by_chance": 1.3,
+   "poisson_binomial_p": 0.0022,
+   "wilcoxon_p": 0.0156,
+   "level2_runs": 4,
+   "level2_only_poisson_binomial_p": 0.022,
+   "runs_named": [
+    "HCN4",
+    "SETDB1",
+    "RIMS1",
+    "RNASET2",
+    "PCMTD1",
+    "TREM2"
+   ],
+   "exploratory_not_counted": [
+    "TRIB1tail",
+    "TRIB1"
+   ],
+   "as_of": "2026-10-09",
+   "note": "Interim: further target runs would each add a run. A hit is a pocket at the 90th percentile or above of its matched patches (null B); the chance of that on each protein is measured on its own trajectories."
+  },
+  "sensitivity_pooled": {
+   "0.0": {
+    "hits": 5,
+    "runs": 6,
+    "poisson_binomial_p": 0.0022,
+    "wilcoxon_p": 0.0156,
+    "level2_runs": 4,
+    "level2_only_poisson_binomial_p": 0.022
+   },
+   "0.5": {
+    "hits": 5,
+    "runs": 6,
+    "poisson_binomial_p": 0.0022,
+    "wilcoxon_p": 0.0156,
+    "level2_runs": 4,
+    "level2_only_poisson_binomial_p": 0.0217
+   },
+   "1.0": {
+    "hits": 5,
+    "runs": 6,
+    "poisson_binomial_p": 0.0023,
+    "wilcoxon_p": 0.0156,
+    "level2_runs": 4,
+    "level2_only_poisson_binomial_p": 0.0224
+   },
+   "2.0": {
+    "hits": 4,
+    "runs": 6,
+    "poisson_binomial_p": 0.02,
+    "wilcoxon_p": 0.0156,
+    "level2_runs": 3,
+    "level2_only_poisson_binomial_p": 0.1114
+   }
+  },
+  "controls": [
+   {
+    "id": "control_1ALB_20260929",
+    "gene": "1ALB (FABP4)",
+    "role": "Positive control",
+    "verdict": "Passed",
+    "line": "Ten 40 ns replicas of a protein from PocketMiner's own set against PocketMiner's published per-residue opening label: 10 of 10 replicas open, Spearman 0.938, 8 of the 10 most-opening residues shared (rules fixed beforehand: 8 or more replicas, Spearman 0.80 or more, 5 or more shared). One protein, one swarm."
+   },
+   {
+    "id": "control_1NEP_20260929",
+    "gene": "1NEP",
+    "role": "Negative control",
+    "verdict": "Inconclusive",
+    "line": "A protein that should not open: 1 of 10 replicas crossed the label (three residues, at 41.2, 41.8 and 42.9 A^3, 1 to 3 A^3 over the line); Spearman 0.676, 6 of the top 10 shared (rule fixed beforehand: 0 replicas to pass, 3 or more to fail). It sets the label's noise ceiling at a protein that does not open; it is one protein."
+   }
+  ]
+ },
+ "runs": [
+  {
+   "id": "target_HCN4_20260929",
+   "dir": "HCN4_20260929",
+   "kind": "target",
+   "group": "registered",
+   "u": "Q9Y3Q4",
+   "gene": "HCN4",
+   "label": "HCN4",
+   "name": "HCN4 (cyclic nucleotide-binding domain)",
+   "band": 3,
+   "conf": 0.534,
+   "tier": "A",
+   "why": "Chosen because the readout can resolve it: the cAMP and cGMP site of a cyclic nucleotide-binding domain, with ligand-bound structures of the same domain. Not a drug lead.",
+   "start": {
+    "entry": "2MNG",
+    "chain": "A",
+    "model": "model 1 of 10 (NMR)",
+    "residues": "579 to 707",
+    "n_res": 129,
+    "covers": "11 %",
+    "crystal_site_A3": 0.0
+   },
+   "pocket": [
+    623,
+    642,
+    644,
+    650,
+    652,
+    658,
+    659,
+    660,
+    661,
+    662,
+    669,
+    671,
+    673
+   ],
+   "method": {
+    "force_field": "Amber03",
+    "water": "TIP3P",
+    "replicas": 10,
+    "ns": 40,
+    "frame_ps": 20
+   },
+   "prediction": "No probability was written; the claim ladder was fixed before the run.",
+   "ladder": "2",
+   "ladder_sentence": "The predicted site opened reproducibly from the closed start (a pocket residue at +40 A^3 in 3 or more of 10 replicas, a site-level gain of 40 or more in one of them, first openings not all in the first 100 ps, matched-patch percentile 0.95 or more).",
+   "ladder_note": "",
+   "numbers": {
+    "reps_any_residue": 9,
+    "reps_pocket_residue": 4,
+    "pocket_residues_in_3plus": 1,
+    "gain_per_replica": [
+     40.1,
+     32.6,
+     51.8,
+     57.6,
+     87.1,
+     46.3,
+     54.5,
+     58.7,
+     33.6,
+     25.0
+    ],
+    "median_gain": 49.0,
+    "reps_site_gain_40": 7,
+    "open_frames": 165,
+    "frames": 20010,
+    "pocket_opening": 67.0,
+    "rest_opening": 42.4,
+    "draws": 921,
+    "notebook_percentile": 1.0,
+    "distinct_patches": 30,
+    "percentile": 1.0,
+    "chance_top_rank": 0.198,
+    "calibrated_p": 0.164
+   },
+   "facts": [
+    "The sulfur of Cys662 was exposed (over 10 A^2) in 1.1 % of frames.",
+    "Scored against the cGMP of the bound structure 4KL1, 17 % of all frames overlap it with 4.8 atoms of 23 or fewer, and the frames the volume label calls open are not the ones that fit (an open frame is better than its neighbours by 0.8 atoms; replica 9 never opens by the label and 42 % of its frames fit)."
+   ],
+   "sensitivity": [
+    {
+     "ref_ns": 0.0,
+     "level": 2,
+     "level_same_residue": 2,
+     "percentile": 1.0,
+     "site_gain_40": 7,
+     "pocket_replicas": 4,
+     "open_pct": 0.825
+    },
+    {
+     "ref_ns": 0.5,
+     "level": 2,
+     "level_same_residue": 1,
+     "percentile": 1.0,
+     "site_gain_40": 4,
+     "pocket_replicas": 3,
+     "open_pct": 0.152
+    },
+    {
+     "ref_ns": 1.0,
+     "level": 2,
+     "level_same_residue": 2,
+     "percentile": 1.0,
+     "site_gain_40": 5,
+     "pocket_replicas": 4,
+     "open_pct": 0.318
+    },
+    {
+     "ref_ns": 2.0,
+     "level": 1,
+     "level_same_residue": 1,
+     "percentile": 0.867,
+     "site_gain_40": 2,
+     "pocket_replicas": 2,
+     "open_pct": 0.095
+    }
+   ],
+   "frames": [
+    {
+     "file": "rep05_start_frame0000.pdb",
+     "kind": "start",
+     "label": "Start frame, replica 5",
+     "replica": 5,
+     "time_ns": 0.0,
+     "atoms": 1208
+    },
+    {
+     "file": "rep05_maxopen_frame0099.pdb",
+     "kind": "maxopen",
+     "label": "Most open frame, replica 5, 1.98 ns",
+     "replica": 5,
+     "time_ns": 1.98,
+     "atoms": 1208
+    },
+    {
+     "file": "rep08_start_frame0000.pdb",
+     "kind": "start",
+     "label": "Start frame, replica 8",
+     "replica": 8,
+     "time_ns": 0.0,
+     "atoms": 1208
+    },
+    {
+     "file": "rep08_maxopen_frame0031.pdb",
+     "kind": "maxopen",
+     "label": "Most open frame, replica 8, 0.62 ns",
+     "replica": 8,
+     "time_ns": 0.62,
+     "atoms": 1208
+    },
+    {
+     "file": "rep04_start_frame0000.pdb",
+     "kind": "start",
+     "label": "Start frame, replica 4",
+     "replica": 4,
+     "time_ns": 0.0,
+     "atoms": 1208
+    },
+    {
+     "file": "rep04_maxopen_frame0778.pdb",
+     "kind": "maxopen",
+     "label": "Most open frame, replica 4, 15.56 ns",
+     "replica": 4,
+     "time_ns": 15.56,
+     "atoms": 1208
+    },
+    {
+     "file": "cluster1_medoid_rep05_frame0099.pdb",
+     "kind": "medoid",
+     "label": "Open state 1 (1.5 A group of 55 frames, 33 % of the open frames)",
+     "replica": 5,
+     "time_ns": 1.98,
+     "gain": 87.1,
+     "group_frames": 55,
+     "group_replicas": [
+      5
+     ],
+     "atoms": 1208
+    },
+    {
+     "file": "cluster2_medoid_rep08_frame0028.pdb",
+     "kind": "medoid",
+     "label": "Open state 2 (1.5 A group of 32 frames, 19 % of the open frames)",
+     "replica": 8,
+     "time_ns": 0.56,
+     "gain": 40.8,
+     "group_frames": 32,
+     "group_replicas": [
+      4,
+      5,
+      7,
+      8
+     ],
+     "atoms": 1208
+    },
+    {
+     "file": "cluster3_medoid_rep05_frame0642.pdb",
+     "kind": "medoid",
+     "label": "Open state 3 (1.5 A group of 21 frames, 13 % of the open frames)",
+     "replica": 5,
+     "time_ns": 12.84,
+     "gain": 53.9,
+     "group_frames": 21,
+     "group_replicas": [
+      5
+     ],
+     "atoms": 1208
+    },
+    {
+     "file": "cluster4_medoid_rep05_frame1572.pdb",
+     "kind": "medoid",
+     "label": "Open state 4 (1.5 A group of 15 frames, 9 % of the open frames)",
+     "replica": 5,
+     "time_ns": 31.44,
+     "gain": 49.4,
+     "group_frames": 15,
+     "group_replicas": [
+      5
+     ],
+     "atoms": 1208
+    },
+    {
+     "file": "cluster5_medoid_rep07_frame0747.pdb",
+     "kind": "medoid",
+     "label": "Open state 5 (1.5 A group of 8 frames, 5 % of the open frames)",
+     "replica": 7,
+     "time_ns": 14.94,
+     "gain": 44.9,
+     "group_frames": 8,
+     "group_replicas": [
+      7
+     ],
+     "atoms": 1208
+    },
+    {
+     "file": "cluster6_medoid_rep05_frame1066.pdb",
+     "kind": "medoid",
+     "label": "Open state 6 (1.5 A group of 6 frames, 4 % of the open frames)",
+     "replica": 5,
+     "time_ns": 21.32,
+     "gain": 46.0,
+     "group_frames": 6,
+     "group_replicas": [
+      5
+     ],
+     "atoms": 1208
+    }
+   ]
+  },
+  {
+   "id": "target_SETDB1_20260929",
+   "dir": "SETDB1_20260929",
+   "kind": "target",
+   "group": "registered",
+   "u": "Q15047",
+   "gene": "SETDB1",
+   "label": "SETDB1",
+   "name": "SETDB1 (tandem Tudor domain)",
+   "band": 3,
+   "conf": 0.489,
+   "tier": "out",
+   "why": "An exploratory probe of the AlphaFold-cavity rule, fixed as descriptive before the run: the label cannot be checked at this site (the bound crystals show a neighbouring groove, gain under 10 A^3).",
+   "start": {
+    "entry": "3DLM",
+    "chain": "A",
+    "model": "crystal",
+    "residues": null,
+    "n_res": 202,
+    "covers": "16 %",
+    "crystal_site_A3": null
+   },
+   "pocket": [
+    207,
+    208,
+    209,
+    212,
+    213,
+    240,
+    241,
+    242,
+    243,
+    244,
+    245,
+    246,
+    268,
+    275,
+    277,
+    315
+   ],
+   "method": {
+    "force_field": "Amber03",
+    "water": "TIP3P",
+    "replicas": 10,
+    "ns": 40,
+    "frame_ps": 20
+   },
+   "prediction": "Descriptive; no probability was written.",
+   "ladder": "descriptive",
+   "ladder_sentence": "",
+   "ladder_note": "Opens, and so does much of the domain equally: the pocket does not stand out from matched patches.",
+   "numbers": {
+    "reps_any_residue": 10,
+    "reps_pocket_residue": 7,
+    "pocket_residues_in_3plus": 1,
+    "gain_per_replica": [
+     47.7,
+     54.5,
+     64.8,
+     65.9,
+     69.6,
+     77.2,
+     64.8,
+     58.7,
+     64.1,
+     53.5
+    ],
+    "median_gain": 64.5,
+    "reps_site_gain_40": 10,
+    "open_frames": 615,
+    "frames": 20010,
+    "pocket_opening": 65.2,
+    "rest_opening": 46.4,
+    "draws": 1453,
+    "notebook_percentile": 0.83,
+    "distinct_patches": 71,
+    "percentile": 0.86,
+    "chance_top_rank": 0.167,
+    "calibrated_p": 0.197
+   },
+   "facts": [],
+   "sensitivity": [
+    {
+     "ref_ns": 0.0,
+     "level": 1,
+     "level_same_residue": 1,
+     "percentile": 0.859,
+     "site_gain_40": 10,
+     "pocket_replicas": 7,
+     "open_pct": 3.073
+    },
+    {
+     "ref_ns": 0.5,
+     "level": 1,
+     "level_same_residue": 1,
+     "percentile": 0.795,
+     "site_gain_40": 8,
+     "pocket_replicas": 6,
+     "open_pct": 1.174
+    },
+    {
+     "ref_ns": 1.0,
+     "level": 1,
+     "level_same_residue": 1,
+     "percentile": 0.795,
+     "site_gain_40": 7,
+     "pocket_replicas": 5,
+     "open_pct": 0.641
+    },
+    {
+     "ref_ns": 2.0,
+     "level": 1,
+     "level_same_residue": 1,
+     "percentile": 0.781,
+     "site_gain_40": 9,
+     "pocket_replicas": 4,
+     "open_pct": 0.447
+    }
+   ],
+   "frames": [
+    {
+     "file": "rep06_start_frame0000.pdb",
+     "kind": "start",
+     "label": "Start frame, replica 6",
+     "replica": 6,
+     "time_ns": 0.0,
+     "atoms": 1922
+    },
+    {
+     "file": "rep06_maxopen_frame1944.pdb",
+     "kind": "maxopen",
+     "label": "Most open frame, replica 6, 38.88 ns",
+     "replica": 6,
+     "time_ns": 38.88,
+     "atoms": 1922
+    },
+    {
+     "file": "rep05_start_frame0000.pdb",
+     "kind": "start",
+     "label": "Start frame, replica 5",
+     "replica": 5,
+     "time_ns": 0.0,
+     "atoms": 1922
+    },
+    {
+     "file": "rep05_maxopen_frame0517.pdb",
+     "kind": "maxopen",
+     "label": "Most open frame, replica 5, 10.34 ns",
+     "replica": 5,
+     "time_ns": 10.34,
+     "atoms": 1922
+    },
+    {
+     "file": "rep04_start_frame0000.pdb",
+     "kind": "start",
+     "label": "Start frame, replica 4",
+     "replica": 4,
+     "time_ns": 0.0,
+     "atoms": 1922
+    },
+    {
+     "file": "rep04_maxopen_frame1137.pdb",
+     "kind": "maxopen",
+     "label": "Most open frame, replica 4, 22.74 ns",
+     "replica": 4,
+     "time_ns": 22.74,
+     "atoms": 1922
+    },
+    {
+     "file": "cluster1_medoid_rep03_frame1112.pdb",
+     "kind": "medoid",
+     "label": "Open state 1 (1.5 A group of 292 frames, 48 % of the open frames)",
+     "replica": 3,
+     "time_ns": 22.24,
+     "gain": 42.2,
+     "group_frames": 292,
+     "group_replicas": [
+      2,
+      3,
+      4,
+      6,
+      7
+     ],
+     "atoms": 1922
+    },
+    {
+     "file": "cluster2_medoid_rep03_frame0463.pdb",
+     "kind": "medoid",
+     "label": "Open state 2 (1.5 A group of 118 frames, 19 % of the open frames)",
+     "replica": 3,
+     "time_ns": 9.26,
+     "gain": 40.1,
+     "group_frames": 118,
+     "group_replicas": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      10
+     ],
+     "atoms": 1922
+    },
+    {
+     "file": "cluster3_medoid_rep07_frame1211.pdb",
+     "kind": "medoid",
+     "label": "Open state 3 (1.5 A group of 70 frames, 11 % of the open frames)",
+     "replica": 7,
+     "time_ns": 24.22,
+     "gain": 40.8,
+     "group_frames": 70,
+     "group_replicas": [
+      7,
+      9
+     ],
+     "atoms": 1922
+    },
+    {
+     "file": "cluster4_medoid_rep06_frame0229.pdb",
+     "kind": "medoid",
+     "label": "Open state 4 (1.5 A group of 33 frames, 5 % of the open frames)",
+     "replica": 6,
+     "time_ns": 4.58,
+     "gain": 41.5,
+     "group_frames": 33,
+     "group_replicas": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+     ],
+     "atoms": 1922
+    },
+    {
+     "file": "cluster5_medoid_rep07_frame0896.pdb",
+     "kind": "medoid",
+     "label": "Open state 5 (1.5 A group of 26 frames, 4 % of the open frames)",
+     "replica": 7,
+     "time_ns": 17.92,
+     "gain": 53.5,
+     "group_frames": 26,
+     "group_replicas": [
+      4,
+      6,
+      7
+     ],
+     "atoms": 1922
+    },
+    {
+     "file": "cluster6_medoid_rep06_frame1893.pdb",
+     "kind": "medoid",
+     "label": "Open state 6 (1.5 A group of 26 frames, 4 % of the open frames)",
+     "replica": 6,
+     "time_ns": 37.86,
+     "gain": 56.9,
+     "group_frames": 26,
+     "group_replicas": [
+      4,
+      6
+     ],
+     "atoms": 1922
+    }
+   ]
+  },
+  {
+   "id": "target_RIMS1_20260929",
+   "dir": "RIMS1_20260929",
+   "kind": "target",
+   "group": "registered",
+   "u": "Q86UR5",
+   "gene": "RIMS1",
+   "label": "RIMS1",
+   "name": "RIMS1 (PDZ groove)",
+   "band": 2,
+   "conf": 0.426,
+   "tier": "B",
+   "why": "A method test on a band 2 pocket (a PDZ groove with no known drug; Alzheimer's GWAS locus, inferred gene); not chosen for its place in the screen.",
+   "start": {
+    "entry": "2CSS",
+    "chain": "A",
+    "model": "model 1 of 20 (NMR)",
+    "residues": "585 to 692",
+    "n_res": 108,
+    "covers": "6 %",
+    "crystal_site_A3": 13.4
+   },
+   "pocket": [
+    602,
+    604,
+    608,
+    615,
+    616,
+    617,
+    639,
+    642,
+    643,
+    645,
+    646,
+    649
+   ],
+   "method": {
+    "force_field": "Amber03",
+    "water": "TIP3P",
+    "replicas": 10,
+    "ns": 40,
+    "frame_ps": 20
+   },
+   "prediction": "Level 2 with probability about 15 %, written 2026-10-03 before the run.",
+   "ladder": "2",
+   "ladder_sentence": "The predicted site opened reproducibly from the closed start (a pocket residue at +40 A^3 in 3 or more of 10 replicas, a site-level gain of 40 or more in one of them, first openings not all in the first 100 ps, matched-patch percentile 0.95 or more).",
+   "ladder_note": "",
+   "numbers": {
+    "reps_any_residue": 10,
+    "reps_pocket_residue": 10,
+    "pocket_residues_in_3plus": 7,
+    "gain_per_replica": [
+     103.2,
+     68.6,
+     158.5,
+     142.0,
+     67.6,
+     91.2,
+     77.9,
+     120.4,
+     65.2,
+     75.8
+    ],
+    "median_gain": 84.5,
+    "reps_site_gain_40": 10,
+    "open_frames": 1422,
+    "frames": 20010,
+    "pocket_opening": 107.2,
+    "rest_opening": 55.3,
+    "draws": 856,
+    "notebook_percentile": 1.0,
+    "distinct_patches": 23,
+    "percentile": 1.0,
+    "chance_top_rank": 0.247,
+    "calibrated_p": 0.214
+   },
+   "facts": [
+    "Novelty tier B: its first C2 domain (not the PDZ pocket) is 35 % identical to a training chain.",
+    "The AlphaFold-implied gain at the site was 26 A^3, under the label's 40.",
+    "Open frames recur across replicas at about 3 A (11 groups; the largest, 485 frames, spans 7 replicas)."
+   ],
+   "sensitivity": [
+    {
+     "ref_ns": 0.0,
+     "level": 2,
+     "level_same_residue": 2,
+     "percentile": 1.0,
+     "site_gain_40": 10,
+     "pocket_replicas": 10,
+     "open_pct": 7.106
+    },
+    {
+     "ref_ns": 0.5,
+     "level": 2,
+     "level_same_residue": 2,
+     "percentile": 1.0,
+     "site_gain_40": 10,
+     "pocket_replicas": 9,
+     "open_pct": 6.781
+    },
+    {
+     "ref_ns": 1.0,
+     "level": 2,
+     "level_same_residue": 2,
+     "percentile": 1.0,
+     "site_gain_40": 9,
+     "pocket_replicas": 9,
+     "open_pct": 4.762
+    },
+    {
+     "ref_ns": 2.0,
+     "level": 2,
+     "level_same_residue": 2,
+     "percentile": 1.0,
+     "site_gain_40": 8,
+     "pocket_replicas": 9,
+     "open_pct": 4.487
+    }
+   ],
+   "frames": [
+    {
+     "file": "rep03_start_frame0000.pdb",
+     "kind": "start",
+     "label": "Start frame, replica 3",
+     "replica": 3,
+     "time_ns": 0.0,
+     "atoms": 990
+    },
+    {
+     "file": "rep03_maxopen_frame0437.pdb",
+     "kind": "maxopen",
+     "label": "Most open frame, replica 3, 8.74 ns",
+     "replica": 3,
+     "time_ns": 8.74,
+     "atoms": 990
+    },
+    {
+     "file": "rep04_start_frame0000.pdb",
+     "kind": "start",
+     "label": "Start frame, replica 4",
+     "replica": 4,
+     "time_ns": 0.0,
+     "atoms": 990
+    },
+    {
+     "file": "rep04_maxopen_frame1102.pdb",
+     "kind": "maxopen",
+     "label": "Most open frame, replica 4, 22.04 ns",
+     "replica": 4,
+     "time_ns": 22.04,
+     "atoms": 990
+    },
+    {
+     "file": "rep08_start_frame0000.pdb",
+     "kind": "start",
+     "label": "Start frame, replica 8",
+     "replica": 8,
+     "time_ns": 0.0,
+     "atoms": 990
+    },
+    {
+     "file": "rep08_maxopen_frame1691.pdb",
+     "kind": "maxopen",
+     "label": "Most open frame, replica 8, 33.82 ns",
+     "replica": 8,
+     "time_ns": 33.82,
+     "atoms": 990
+    },
+    {
+     "file": "cluster1_medoid_rep01_frame1560.pdb",
+     "kind": "medoid",
+     "label": "Open state 1 (1.5 A group of 54 frames, 4 % of the open frames)",
+     "replica": 1,
+     "time_ns": 31.2,
+     "gain": 54.2,
+     "group_frames": 54,
+     "group_replicas": [
+      1
+     ],
+     "atoms": 990
+    },
+    {
+     "file": "cluster2_medoid_rep08_frame1378.pdb",
+     "kind": "medoid",
+     "label": "Open state 2 (1.5 A group of 47 frames, 3 % of the open frames)",
+     "replica": 8,
+     "time_ns": 27.56,
+     "gain": 46.0,
+     "group_frames": 47,
+     "group_replicas": [
+      8
+     ],
+     "atoms": 990
+    },
+    {
+     "file": "cluster3_medoid_rep04_frame0721.pdb",
+     "kind": "medoid",
+     "label": "Open state 3 (1.5 A group of 35 frames, 2 % of the open frames)",
+     "replica": 4,
+     "time_ns": 14.42,
+     "gain": 43.9,
+     "group_frames": 35,
+     "group_replicas": [
+      4
+     ],
+     "atoms": 990
+    },
+    {
+     "file": "cluster4_medoid_rep01_frame1834.pdb",
+     "kind": "medoid",
+     "label": "Open state 4 (1.5 A group of 27 frames, 2 % of the open frames)",
+     "replica": 1,
+     "time_ns": 36.68,
+     "gain": 98.4,
+     "group_frames": 27,
+     "group_replicas": [
+      1
+     ],
+     "atoms": 990
+    },
+    {
+     "file": "cluster5_medoid_rep08_frame1724.pdb",
+     "kind": "medoid",
+     "label": "Open state 5 (1.5 A group of 23 frames, 2 % of the open frames)",
+     "replica": 8,
+     "time_ns": 34.48,
+     "gain": 62.8,
+     "group_frames": 23,
+     "group_replicas": [
+      8
+     ],
+     "atoms": 990
+    },
+    {
+     "file": "cluster6_medoid_rep08_frame0659.pdb",
+     "kind": "medoid",
+     "label": "Open state 6 (1.5 A group of 23 frames, 2 % of the open frames)",
+     "replica": 8,
+     "time_ns": 13.18,
+     "gain": 70.7,
+     "group_frames": 23,
+     "group_replicas": [
+      8
+     ],
+     "atoms": 990
+    },
+    {
+     "file": "loose3p0_group1_medoid_rep08_frame1383.pdb",
+     "kind": "loose",
+     "label": "Open state, 3.0 A group 1 (485 frames in 7 replicas, 34 % of the open frames)",
+     "replica": 8,
+     "time_ns": 27.66,
+     "group_frames": 485,
+     "group_replicas": [
+      1,
+      3,
+      4,
+      5,
+      6,
+      8,
+      10
+     ],
+     "atoms": 990
+    },
+    {
+     "file": "loose3p0_group2_medoid_rep01_frame1704.pdb",
+     "kind": "loose",
+     "label": "Open state, 3.0 A group 2 (485 frames in 3 replicas, 34 % of the open frames)",
+     "replica": 1,
+     "time_ns": 34.08,
+     "group_frames": 485,
+     "group_replicas": [
+      1,
+      2,
+      4
+     ],
+     "atoms": 990
+    },
+    {
+     "file": "loose3p0_group3_medoid_rep04_frame0702.pdb",
+     "kind": "loose",
+     "label": "Open state, 3.0 A group 3 (197 frames in 1 replica, 14 % of the open frames)",
+     "replica": 4,
+     "time_ns": 14.04,
+     "group_frames": 197,
+     "group_replicas": [
+      4
+     ],
+     "atoms": 990
+    },
+    {
+     "file": "loose3p0_group4_medoid_rep03_frame0487.pdb",
+     "kind": "loose",
+     "label": "Open state, 3.0 A group 4 (150 frames in 2 replicas, 10 % of the open frames)",
+     "replica": 3,
+     "time_ns": 9.74,
+     "group_frames": 150,
+     "group_replicas": [
+      3,
+      6
+     ],
+     "atoms": 990
+    },
+    {
+     "file": "loose3p0_group5_medoid_rep06_frame0322.pdb",
+     "kind": "loose",
+     "label": "Open state, 3.0 A group 5 (43 frames in 2 replicas, 3 % of the open frames)",
+     "replica": 6,
+     "time_ns": 6.44,
+     "group_frames": 43,
+     "group_replicas": [
+      5,
+      6
+     ],
+     "atoms": 990
+    },
+    {
+     "file": "loose3p0_group6_medoid_rep07_frame1216.pdb",
+     "kind": "loose",
+     "label": "Open state, 3.0 A group 6 (28 frames in 1 replica, 2 % of the open frames)",
+     "replica": 7,
+     "time_ns": 24.32,
+     "group_frames": 28,
+     "group_replicas": [
+      7
+     ],
+     "atoms": 990
+    }
+   ]
+  },
+  {
+   "id": "target_RNASET2_20260929",
+   "dir": "RNASET2_20260929",
+   "kind": "target",
+   "group": "registered",
+   "u": "O00584",
+   "gene": "RNASET2",
+   "label": "RNASET2",
+   "name": "RNASET2 (catalytic cleft)",
+   "band": 2,
+   "conf": 0.453,
+   "tier": "A",
+   "why": "A method test on a band 2 pocket with a sound fold and the largest AlphaFold-implied gain in the batch (39 A^3). The pocket is the catalytic cleft, not a new site.",
+   "start": {
+    "entry": "3T0O",
+    "chain": "A",
+    "model": "crystal",
+    "residues": "34 to 188",
+    "n_res": 155,
+    "covers": "77 %",
+    "crystal_site_A3": 13.7
+   },
+   "pocket": [
+    38,
+    40,
+    42,
+    49,
+    65,
+    66,
+    68,
+    99,
+    101,
+    102,
+    104,
+    106,
+    109,
+    110,
+    113,
+    114,
+    117,
+    118
+   ],
+   "method": {
+    "force_field": "Amber03",
+    "water": "TIP3P",
+    "replicas": 10,
+    "ns": 40,
+    "frame_ps": 20
+   },
+   "prediction": "Level 2 with probability about 30 %, written 2026-10-03 before the run.",
+   "ladder": "2",
+   "ladder_sentence": "The predicted site opened reproducibly from the closed start (a pocket residue at +40 A^3 in 3 or more of 10 replicas, a site-level gain of 40 or more in one of them, first openings not all in the first 100 ps, matched-patch percentile 0.95 or more).",
+   "ladder_note": "The four conditions are met, with weaker support than the other two: first site-level crossings at 20 to 200 ps, and only 0.075 % of frames open at site level.",
+   "numbers": {
+    "reps_any_residue": 10,
+    "reps_pocket_residue": 7,
+    "pocket_residues_in_3plus": 5,
+    "gain_per_replica": [
+     75.5,
+     80.3,
+     56.3,
+     28.5,
+     26.4,
+     0.0,
+     43.6,
+     72.7,
+     49.0,
+     23.3
+    ],
+    "median_gain": 46.3,
+    "reps_site_gain_40": 6,
+    "open_frames": 15,
+    "frames": 20010,
+    "pocket_opening": 70.0,
+    "rest_opening": 42.9,
+    "draws": 461,
+    "notebook_percentile": 1.0,
+    "distinct_patches": 19,
+    "percentile": 1.0,
+    "chance_top_rank": 0.283,
+    "calibrated_p": 0.226
+   },
+   "facts": [
+    "The site volume read 14.7 A^3 without hydrogens and 47.3 with them on the same coordinates after the protein was built, and 21 to 42 A^3 without hydrogens at the end of equilibration (crystal 13.7): the pocket partly opens during preparation.",
+    "The largest openers are mostly outside the pocket or at the cut end of the construct (residues 182 to 188); 72 % of the pocket residues crossed +40 against 25 % of the other residues."
+   ],
+   "sensitivity": [
+    {
+     "ref_ns": 0.0,
+     "level": 2,
+     "level_same_residue": 2,
+     "percentile": 1.0,
+     "site_gain_40": 6,
+     "pocket_replicas": 7,
+     "open_pct": 0.075
+    },
+    {
+     "ref_ns": 0.5,
+     "level": 2,
+     "level_same_residue": 2,
+     "percentile": 1.0,
+     "site_gain_40": 6,
+     "pocket_replicas": 5,
+     "open_pct": 1.488
+    },
+    {
+     "ref_ns": 1.0,
+     "level": 2,
+     "level_same_residue": 2,
+     "percentile": 1.0,
+     "site_gain_40": 6,
+     "pocket_replicas": 5,
+     "open_pct": 1.415
+    },
+    {
+     "ref_ns": 2.0,
+     "level": 2,
+     "level_same_residue": 2,
+     "percentile": 1.0,
+     "site_gain_40": 9,
+     "pocket_replicas": 5,
+     "open_pct": 0.984
+    }
+   ],
+   "frames": [
+    {
+     "file": "rep02_start_frame0000.pdb",
+     "kind": "start",
+     "label": "Start frame, replica 2",
+     "replica": 2,
+     "time_ns": 0.0,
+     "atoms": 1466
+    },
+    {
+     "file": "rep02_maxopen_frame0894.pdb",
+     "kind": "maxopen",
+     "label": "Most open frame, replica 2, 17.88 ns",
+     "replica": 2,
+     "time_ns": 17.88,
+     "atoms": 1466
+    },
+    {
+     "file": "rep01_start_frame0000.pdb",
+     "kind": "start",
+     "label": "Start frame, replica 1",
+     "replica": 1,
+     "time_ns": 0.0,
+     "atoms": 1466
+    },
+    {
+     "file": "rep01_maxopen_frame0007.pdb",
+     "kind": "maxopen",
+     "label": "Most open frame, replica 1, 0.14 ns",
+     "replica": 1,
+     "time_ns": 0.14,
+     "atoms": 1466
+    },
+    {
+     "file": "rep08_start_frame0000.pdb",
+     "kind": "start",
+     "label": "Start frame, replica 8",
+     "replica": 8,
+     "time_ns": 0.0,
+     "atoms": 1466
+    },
+    {
+     "file": "rep08_maxopen_frame0003.pdb",
+     "kind": "maxopen",
+     "label": "Most open frame, replica 8, 0.06 ns",
+     "replica": 8,
+     "time_ns": 0.06,
+     "atoms": 1466
+    },
+    {
+     "file": "cluster1_medoid_rep07_frame0010.pdb",
+     "kind": "medoid",
+     "label": "Open state 1 (1.5 A group of 8 frames, 53 % of the open frames)",
+     "replica": 7,
+     "time_ns": 0.2,
+     "gain": 43.6,
+     "group_frames": 8,
+     "group_replicas": [
+      1,
+      2,
+      3,
+      7,
+      8,
+      9
+     ],
+     "atoms": 1466
+    },
+    {
+     "file": "cluster2_medoid_rep02_frame0891.pdb",
+     "kind": "medoid",
+     "label": "Open state 2 (1.5 A group of 4 frames, 27 % of the open frames)",
+     "replica": 2,
+     "time_ns": 17.82,
+     "gain": 59.0,
+     "group_frames": 4,
+     "group_replicas": [
+      2
+     ],
+     "atoms": 1466
+    },
+    {
+     "file": "cluster3_medoid_rep03_frame0084.pdb",
+     "kind": "medoid",
+     "label": "Open state 3 (1.5 A group of 1 frames, 7 % of the open frames)",
+     "replica": 3,
+     "time_ns": 1.68,
+     "gain": 56.3,
+     "group_frames": 1,
+     "group_replicas": [
+      3
+     ],
+     "atoms": 1466
+    },
+    {
+     "file": "cluster4_medoid_rep02_frame1007.pdb",
+     "kind": "medoid",
+     "label": "Open state 4 (1.5 A group of 1 frames, 7 % of the open frames)",
+     "replica": 2,
+     "time_ns": 20.14,
+     "gain": 41.8,
+     "group_frames": 1,
+     "group_replicas": [
+      2
+     ],
+     "atoms": 1466
+    },
+    {
+     "file": "cluster5_medoid_rep03_frame0422.pdb",
+     "kind": "medoid",
+     "label": "Open state 5 (1.5 A group of 1 frames, 7 % of the open frames)",
+     "replica": 3,
+     "time_ns": 8.44,
+     "gain": 45.6,
+     "group_frames": 1,
+     "group_replicas": [
+      3
+     ],
+     "atoms": 1466
+    }
+   ]
+  },
+  {
+   "id": "target_PCMTD1_20260929",
+   "dir": "PCMTD1_20260929",
+   "kind": "target",
+   "group": "registered",
+   "u": "Q96MG8",
+   "gene": "PCMTD1",
+   "label": "PCMTD1",
+   "name": "PCMTD1 (AdoMet-binding groove)",
+   "band": 4,
+   "conf": 0.606,
+   "tier": "A",
+   "why": "A band 4 row of the screen with a usable start, run as the best test of what the screen claims. The pocket is a known cofactor groove, not a new site.",
+   "start": {
+    "entry": "9OMF",
+    "chain": "A",
+    "model": "crystal",
+    "residues": "10 to 264",
+    "n_res": 255,
+    "covers": "71 %",
+    "crystal_site_A3": 20.2
+   },
+   "pocket": [
+    56,
+    57,
+    60,
+    61,
+    62,
+    63,
+    64,
+    69,
+    88,
+    89,
+    90,
+    91,
+    93,
+    111,
+    112,
+    113,
+    114,
+    117,
+    148,
+    149,
+    150,
+    151,
+    166,
+    167,
+    168,
+    216,
+    219,
+    220
+   ],
+   "method": {
+    "force_field": "Amber03",
+    "water": "TIP3P",
+    "replicas": 10,
+    "ns": 40,
+    "frame_ps": 20
+   },
+   "prediction": "Level 2 with probability about 40 %, written before the run.",
+   "ladder": "2",
+   "ladder_sentence": "The predicted site opened reproducibly from the closed start (a pocket residue at +40 A^3 in 3 or more of 10 replicas, a site-level gain of 40 or more in one of them, first openings not all in the first 100 ps, matched-patch percentile 0.95 or more).",
+   "ladder_note": "",
+   "numbers": {
+    "reps_any_residue": 10,
+    "reps_pocket_residue": 10,
+    "pocket_residues_in_3plus": 25,
+    "gain_per_replica": [
+     151.3,
+     293.3,
+     180.1,
+     177.7,
+     226.7,
+     204.4,
+     324.1,
+     235.3,
+     451.0,
+     226.7
+    ],
+    "median_gain": 226.7,
+    "reps_site_gain_40": 10,
+    "open_frames": 14111,
+    "frames": 20010,
+    "pocket_opening": 190.8,
+    "rest_opening": 80.6,
+    "draws": 396,
+    "notebook_percentile": 1.0,
+    "distinct_patches": 24,
+    "percentile": 1.0,
+    "chance_top_rank": 0.223,
+    "calibrated_p": 0.121
+   },
+   "facts": [
+    "Five pocket residues lie inside UniProt's AdoMet-binding motif and residue 64 is the active-site residue: a known cofactor groove opening in an apo structure.",
+    "A pocket residue is at +40 A^3 in 10 of 10 replicas, and 86 % of the pocket residues cross in 5 or more replicas, against 16 % of the residues within 10 A of the pocket and 20 % of the farther ones; but 67.5 % of all residues cross somewhere, so part of the opening is a protein-wide background, and the two cut ends of the construct fray.",
+    "The domain stays folded but moves: its core sits 2.9 to 4.2 A (C-alpha RMSD) from the start."
+   ],
+   "sensitivity": [
+    {
+     "ref_ns": 0.0,
+     "level": 2,
+     "level_same_residue": 2,
+     "percentile": 1.0,
+     "site_gain_40": 10,
+     "pocket_replicas": 10,
+     "open_pct": 70.52
+    },
+    {
+     "ref_ns": 0.5,
+     "level": 2,
+     "level_same_residue": 2,
+     "percentile": 1.0,
+     "site_gain_40": 10,
+     "pocket_replicas": 10,
+     "open_pct": 36.063
+    },
+    {
+     "ref_ns": 1.0,
+     "level": 2,
+     "level_same_residue": 2,
+     "percentile": 1.0,
+     "site_gain_40": 10,
+     "pocket_replicas": 10,
+     "open_pct": 31.276
+    },
+    {
+     "ref_ns": 2.0,
+     "level": 2,
+     "level_same_residue": 2,
+     "percentile": 1.0,
+     "site_gain_40": 10,
+     "pocket_replicas": 10,
+     "open_pct": 31.557
+    }
+   ],
+   "frames": [
+    {
+     "file": "rep09_start_frame0000.pdb",
+     "kind": "start",
+     "label": "Start frame, replica 9",
+     "replica": 9,
+     "time_ns": 0.0,
+     "atoms": 2351
+    },
+    {
+     "file": "rep09_maxopen_frame1712.pdb",
+     "kind": "maxopen",
+     "label": "Most open frame, replica 9, 34.24 ns",
+     "replica": 9,
+     "time_ns": 34.24,
+     "atoms": 2351
+    },
+    {
+     "file": "rep07_start_frame0000.pdb",
+     "kind": "start",
+     "label": "Start frame, replica 7",
+     "replica": 7,
+     "time_ns": 0.0,
+     "atoms": 2351
+    },
+    {
+     "file": "rep07_maxopen_frame0893.pdb",
+     "kind": "maxopen",
+     "label": "Most open frame, replica 7, 17.86 ns",
+     "replica": 7,
+     "time_ns": 17.86,
+     "atoms": 2351
+    },
+    {
+     "file": "rep02_start_frame0000.pdb",
+     "kind": "start",
+     "label": "Start frame, replica 2",
+     "replica": 2,
+     "time_ns": 0.0,
+     "atoms": 2351
+    },
+    {
+     "file": "rep02_maxopen_frame0584.pdb",
+     "kind": "maxopen",
+     "label": "Most open frame, replica 2, 11.68 ns",
+     "replica": 2,
+     "time_ns": 11.68,
+     "atoms": 2351
+    }
+   ]
+  },
+  {
+   "id": "target_TREM2_20260929",
+   "dir": "TREM2_20260929",
+   "kind": "target",
+   "group": "registered",
+   "u": "Q9NZC2",
+   "gene": "TREM2",
+   "label": "TREM2",
+   "name": "TREM2 (structure 5ELI)",
+   "band": 2,
+   "conf": 0.396,
+   "tier": "A",
+   "why": "The rule's negative side: a band 2 pocket that should mostly stay closed. Both disulfides are bonded in the simulation.",
+   "start": {
+    "entry": "5ELI",
+    "chain": "A",
+    "model": "crystal",
+    "residues": "20 to 131",
+    "n_res": 112,
+    "covers": "49 %",
+    "crystal_site_A3": 0.0
+   },
+   "pocket": [
+    43,
+    44,
+    46,
+    47,
+    48,
+    65,
+    67,
+    111,
+    113,
+    114,
+    119
+   ],
+   "method": {
+    "force_field": "Amber03",
+    "water": "TIP3P",
+    "replicas": 10,
+    "ns": 40,
+    "frame_ps": 20
+   },
+   "prediction": "Level 2 with probability about 10 %, written before the run.",
+   "ladder": "0",
+   "ladder_sentence": "No opening seen in 400 ns aggregate by a readout whose resolution is about 40 A^3; no claim of absence.",
+   "ladder_note": "Level 0 at the registered line: no pocket residue reaches +40 in any replica. The percentile counts as a hit in the pooled test only because the patches it is ranked among also barely open.",
+   "numbers": {
+    "reps_any_residue": 4,
+    "reps_pocket_residue": 0,
+    "pocket_residues_in_3plus": 0,
+    "gain_per_replica": [
+     27.4,
+     28.8,
+     45.3,
+     50.1,
+     49.0,
+     24.4,
+     44.2,
+     39.8,
+     34.0,
+     27.4
+    ],
+    "median_gain": 36.9,
+    "reps_site_gain_40": 4,
+    "open_frames": 14,
+    "frames": 20010,
+    "pocket_opening": 51.4,
+    "rest_opening": 34.4,
+    "draws": 1013,
+    "notebook_percentile": 0.96,
+    "distinct_patches": 29,
+    "percentile": 0.97,
+    "chance_top_rank": 0.183,
+    "calibrated_p": 0.095
+   },
+   "facts": [
+    "The site starts fully closed (0.0 A^3) and gains a median of 36.9 A^3 per replica (24.4 to 50.1), under the +40 line; 4 of 10 replicas reach +40 at the site level, none at a pocket residue.",
+    "Only 4 of 112 residues cross +40 anywhere (one in each of four replicas, none in the pocket).",
+    "A post hoc sweep of the line shows a specific opening of the pocket at 20 and 30 A^3 (Level 2 there), which the registered line cannot see."
+   ],
+   "sensitivity": [
+    {
+     "ref_ns": 0.0,
+     "level": 0,
+     "level_same_residue": 0,
+     "percentile": 0.966,
+     "site_gain_40": 4,
+     "pocket_replicas": 0,
+     "open_pct": 0.07
+    },
+    {
+     "ref_ns": 0.5,
+     "level": 0,
+     "level_same_residue": 0,
+     "percentile": 1.0,
+     "site_gain_40": 4,
+     "pocket_replicas": 0,
+     "open_pct": 0.076
+    },
+    {
+     "ref_ns": 1.0,
+     "level": 0,
+     "level_same_residue": 0,
+     "percentile": 1.0,
+     "site_gain_40": 4,
+     "pocket_replicas": 0,
+     "open_pct": 0.056
+    },
+    {
+     "ref_ns": 2.0,
+     "level": 0,
+     "level_same_residue": 0,
+     "percentile": 1.0,
+     "site_gain_40": 3,
+     "pocket_replicas": 0,
+     "open_pct": 0.032
+    }
+   ],
+   "frames": [
+    {
+     "file": "rep04_start_frame0000.pdb",
+     "kind": "start",
+     "label": "Start frame, replica 4",
+     "replica": 4,
+     "time_ns": 0.0,
+     "atoms": 1023
+    },
+    {
+     "file": "rep04_maxopen_frame0701.pdb",
+     "kind": "maxopen",
+     "label": "Most open frame, replica 4, 14.02 ns",
+     "replica": 4,
+     "time_ns": 14.02,
+     "atoms": 1023
+    },
+    {
+     "file": "rep05_start_frame0000.pdb",
+     "kind": "start",
+     "label": "Start frame, replica 5",
+     "replica": 5,
+     "time_ns": 0.0,
+     "atoms": 1023
+    },
+    {
+     "file": "rep05_maxopen_frame1653.pdb",
+     "kind": "maxopen",
+     "label": "Most open frame, replica 5, 33.06 ns",
+     "replica": 5,
+     "time_ns": 33.06,
+     "atoms": 1023
+    },
+    {
+     "file": "rep03_start_frame0000.pdb",
+     "kind": "start",
+     "label": "Start frame, replica 3",
+     "replica": 3,
+     "time_ns": 0.0,
+     "atoms": 1023
+    },
+    {
+     "file": "rep03_maxopen_frame0740.pdb",
+     "kind": "maxopen",
+     "label": "Most open frame, replica 3, 14.8 ns",
+     "replica": 3,
+     "time_ns": 14.8,
+     "atoms": 1023
+    }
+   ]
+  },
+  {
+   "id": "target_TRIB1tail_20260929",
+   "dir": "TRIB1tail_20260929",
+   "kind": "target",
+   "group": "exploratory",
+   "u": "Q96RU8",
+   "gene": "TRIB1tail",
+   "label": "TRIB1 + tail",
+   "name": "TRIB1 with its C-terminal tail (regulatory switch)",
+   "band": 3,
+   "conf": 0.594,
+   "tier": "B",
+   "why": "An exploratory run on the pseudokinase TRIB1, whose published regulatory switch (the SLE motif and the activation loop) holds the screen's pocket; this start keeps the C-terminal tail docked, the closer match to the autoinhibited protein. Not a registered test; not counted in the pooled test.",
+   "start": {
+    "entry": "5CEM",
+    "chain": "A",
+    "model": "crystal; the tail (357 to 364) kept, two loops and a 14-residue linker modelled",
+    "residues": "88 to 364",
+    "n_res": 277,
+    "covers": "74 %",
+    "crystal_site_A3": 16.8
+   },
+   "pocket": [
+    104,
+    105,
+    118,
+    120,
+    122,
+    127,
+    130,
+    131,
+    134,
+    146,
+    149,
+    158,
+    159,
+    160,
+    161,
+    162,
+    163,
+    164,
+    165,
+    210,
+    224,
+    225,
+    226,
+    227
+   ],
+   "method": {
+    "force_field": "Amber03",
+    "water": "TIP3P",
+    "replicas": 10,
+    "ns": 40,
+    "frame_ps": 20
+   },
+   "prediction": "No probability was written; the plan and its reading rule were declared before the run (TRIB1_Tail_Run_Plan_2026-10-06.md).",
+   "ladder": "1",
+   "ladder_sentence": "An opening event was sampled (a pocket residue reached +40 A^3 in at least one replica); not evidence by itself.",
+   "ladder_note": "Not a ladder test: the level is computed here for comparison with the other runs. At the first frame it is Level 1 (the pocket is above 93 % of 82 distinct patches, under the 95 % the ladder needs); with the reference moved to 0.5, 1 or 2 ns it is Level 2.",
+   "numbers": {
+    "reps_any_residue": 10,
+    "reps_pocket_residue": 10,
+    "pocket_residues_in_3plus": 13,
+    "gain_per_replica": [
+     127.9,
+     84.7,
+     136.9,
+     107.4,
+     80.3,
+     156.8,
+     105.6,
+     103.6,
+     172.5,
+     122.1
+    ],
+    "median_gain": 114.7,
+    "reps_site_gain_40": 10,
+    "open_frames": 4630,
+    "frames": 20010,
+    "pocket_opening": 103.8,
+    "rest_opening": 75.8,
+    "draws": 1194,
+    "notebook_percentile": 0.92,
+    "distinct_patches": 82,
+    "percentile": 0.93,
+    "chance_top_rank": 0.195,
+    "calibrated_p": 0.179
+   },
+   "facts": [
+    "The linker is within 4 A of the pocket in 1 % of frames, and deleting it lowers the site volume by about 10 %: it does not make the pocket.",
+    "The tail stays docked (C-alpha RMSD of residues 357 to 364 under 3 A) in 63 % of frames; the site is open at the size of the open crystal 6DC0 or more in 73 % of frames with the tail docked and 76 % with it undocked.",
+    "In 10 of 10 replicas the site stays that open for 1 ns in a row, and in 2 of 10 it stays ligand-sized (116 A^3 or more); the opened frames lie nearer the closed crystal (2.0 A) than the open one (3.2 A)."
+   ],
+   "sensitivity": [
+    {
+     "ref_ns": 0.0,
+     "level": 1,
+     "level_same_residue": 1,
+     "percentile": 0.927,
+     "site_gain_40": 10,
+     "pocket_replicas": 10,
+     "open_pct": 23.138
+    },
+    {
+     "ref_ns": 0.5,
+     "level": 2,
+     "level_same_residue": 2,
+     "percentile": 0.951,
+     "site_gain_40": 9,
+     "pocket_replicas": 10,
+     "open_pct": 13.138
+    },
+    {
+     "ref_ns": 1.0,
+     "level": 2,
+     "level_same_residue": 2,
+     "percentile": 0.951,
+     "site_gain_40": 10,
+     "pocket_replicas": 10,
+     "open_pct": 13.316
+    },
+    {
+     "ref_ns": 2.0,
+     "level": 2,
+     "level_same_residue": 2,
+     "percentile": 0.951,
+     "site_gain_40": 10,
+     "pocket_replicas": 10,
+     "open_pct": 23.972
+    }
+   ],
+   "frames": [
+    {
+     "file": "rep09_start_frame0000.pdb",
+     "kind": "start",
+     "label": "Start frame, replica 9",
+     "replica": 9,
+     "time_ns": 0.0,
+     "atoms": 2590
+    },
+    {
+     "file": "rep09_maxopen_frame1493.pdb",
+     "kind": "maxopen",
+     "label": "Most open frame, replica 9, 29.86 ns",
+     "replica": 9,
+     "time_ns": 29.86,
+     "atoms": 2590
+    },
+    {
+     "file": "rep06_start_frame0000.pdb",
+     "kind": "start",
+     "label": "Start frame, replica 6",
+     "replica": 6,
+     "time_ns": 0.0,
+     "atoms": 2590
+    },
+    {
+     "file": "rep06_maxopen_frame0484.pdb",
+     "kind": "maxopen",
+     "label": "Most open frame, replica 6, 9.68 ns",
+     "replica": 6,
+     "time_ns": 9.68,
+     "atoms": 2590
+    },
+    {
+     "file": "rep03_start_frame0000.pdb",
+     "kind": "start",
+     "label": "Start frame, replica 3",
+     "replica": 3,
+     "time_ns": 0.0,
+     "atoms": 2590
+    },
+    {
+     "file": "rep03_maxopen_frame1700.pdb",
+     "kind": "maxopen",
+     "label": "Most open frame, replica 3, 34.0 ns",
+     "replica": 3,
+     "time_ns": 34.0,
+     "atoms": 2590
+    }
+   ]
+  },
+  {
+   "id": "target_TRIB1_20260929",
+   "dir": "TRIB1_20260929",
+   "kind": "target",
+   "group": "exploratory",
+   "u": "Q96RU8",
+   "gene": "TRIB1",
+   "label": "TRIB1, no tail",
+   "name": "TRIB1 without its C-terminal tail (regulatory switch)",
+   "band": 3,
+   "conf": 0.594,
+   "tier": "B",
+   "why": "The first TRIB1 run, chosen by biology after the screen: the pocket sits on the pseudokinase's regulatory switch, and the loop 229 to 237 that was modelled is the activation loop that gates it. There is no tail in this run. Not counted in the pooled test.",
+   "start": {
+    "entry": "5CEM",
+    "chain": "A",
+    "model": "crystal; two loops (140 to 141 and 229 to 237) modelled",
+    "residues": "88 to 342",
+    "n_res": 255,
+    "covers": "69 %",
+    "crystal_site_A3": 16.8
+   },
+   "pocket": [
+    104,
+    105,
+    118,
+    120,
+    122,
+    127,
+    130,
+    131,
+    134,
+    146,
+    149,
+    158,
+    159,
+    160,
+    161,
+    162,
+    163,
+    164,
+    165,
+    210,
+    224,
+    225,
+    226,
+    227
+   ],
+   "method": {
+    "force_field": "Amber03",
+    "water": "TIP3P",
+    "replicas": 10,
+    "ns": 40,
+    "frame_ps": 20
+   },
+   "prediction": "No probability was written; the readout (site volume and the largest single cavity) was declared before the run (TRIB1_Discovery_Readout_2026-10-05.md).",
+   "ladder": "2",
+   "ladder_sentence": "The predicted site opened reproducibly from the closed start (a pocket residue at +40 A^3 in 3 or more of 10 replicas, a site-level gain of 40 or more in one of them, first openings not all in the first 100 ps, matched-patch percentile 0.95 or more).",
+   "ladder_note": "",
+   "numbers": {
+    "reps_any_residue": 10,
+    "reps_pocket_residue": 10,
+    "pocket_residues_in_3plus": 14,
+    "gain_per_replica": [
+     98.8,
+     79.2,
+     130.3,
+     118.3,
+     101.2,
+     91.9,
+     165.0,
+     143.0,
+     80.3,
+     150.9
+    ],
+    "median_gain": 109.8,
+    "reps_site_gain_40": 10,
+    "open_frames": 5073,
+    "frames": 20010,
+    "pocket_opening": 100.9,
+    "rest_opening": 53.9,
+    "draws": 1261,
+    "notebook_percentile": 0.97,
+    "distinct_patches": 80,
+    "percentile": 0.96,
+    "chance_top_rank": 0.198,
+    "calibrated_p": 0.148
+   },
+   "facts": [
+    "The site is open at the size of the open crystal 6DC0 (52 A^3) or more in 72 % of frames and ligand-sized (116 A^3 or more with a cavity of 80 or more) in 16.5 %; 3 of 10 replicas keep it ligand-sized for 1 ns.",
+    "The opened frames are 2.6 A (median pocket C-alpha RMSD) from the closed crystal and 3.8 A from the open one, which are 2.4 A apart: they resemble neither.",
+    "There is no tail in this run; the TRIB1 + tail run keeps it docked."
+   ],
+   "sensitivity": [
+    {
+     "ref_ns": 0.0,
+     "level": 2,
+     "level_same_residue": 2,
+     "percentile": 0.963,
+     "site_gain_40": 10,
+     "pocket_replicas": 10,
+     "open_pct": 25.352
+    },
+    {
+     "ref_ns": 0.5,
+     "level": 2,
+     "level_same_residue": 2,
+     "percentile": 0.988,
+     "site_gain_40": 10,
+     "pocket_replicas": 10,
+     "open_pct": 18.689
+    },
+    {
+     "ref_ns": 1.0,
+     "level": 2,
+     "level_same_residue": 2,
+     "percentile": 0.988,
+     "site_gain_40": 10,
+     "pocket_replicas": 10,
+     "open_pct": 12.968
+    },
+    {
+     "ref_ns": 2.0,
+     "level": 2,
+     "level_same_residue": 2,
+     "percentile": 0.963,
+     "site_gain_40": 10,
+     "pocket_replicas": 10,
+     "open_pct": 10.295
+    }
+   ],
+   "frames": [
+    {
+     "file": "rep07_start_frame0000.pdb",
+     "kind": "start",
+     "label": "Start frame, replica 7",
+     "replica": 7,
+     "time_ns": 0.0,
+     "atoms": 2398
+    },
+    {
+     "file": "rep07_maxopen_frame1681.pdb",
+     "kind": "maxopen",
+     "label": "Most open frame, replica 7, 33.62 ns",
+     "replica": 7,
+     "time_ns": 33.62,
+     "atoms": 2398
+    },
+    {
+     "file": "rep10_start_frame0000.pdb",
+     "kind": "start",
+     "label": "Start frame, replica 10",
+     "replica": 10,
+     "time_ns": 0.0,
+     "atoms": 2398
+    },
+    {
+     "file": "rep10_maxopen_frame0665.pdb",
+     "kind": "maxopen",
+     "label": "Most open frame, replica 10, 13.3 ns",
+     "replica": 10,
+     "time_ns": 13.3,
+     "atoms": 2398
+    },
+    {
+     "file": "rep08_start_frame0000.pdb",
+     "kind": "start",
+     "label": "Start frame, replica 8",
+     "replica": 8,
+     "time_ns": 0.0,
+     "atoms": 2398
+    },
+    {
+     "file": "rep08_maxopen_frame0482.pdb",
+     "kind": "maxopen",
+     "label": "Most open frame, replica 8, 9.64 ns",
+     "replica": 8,
+     "time_ns": 9.64,
+     "atoms": 2398
+    }
+   ]
+  },
+  {
+   "id": "control_1ALB_20260929",
+   "dir": "1ALB_20260929",
+   "kind": "control",
+   "group": "control",
+   "u": "P15090",
+   "gene": "1ALB",
+   "label": "1ALB",
+   "name": "1ALB (FABP4), the positive control",
+   "why": "A control, not a prediction: a protein from PocketMiner's own set whose opening PocketMiner reported. It checks that our pipeline reproduces a published result.",
+   "pocket": [
+    73,
+    75,
+    126,
+    58,
+    55,
+    20,
+    74,
+    40,
+    57,
+    60
+   ],
+   "role": "Positive control",
+   "verdict": "Passed",
+   "line": "Ten 40 ns replicas of a protein from PocketMiner's own set against PocketMiner's published per-residue opening label: 10 of 10 replicas open, Spearman 0.938, 8 of the 10 most-opening residues shared (rules fixed beforehand: 8 or more replicas, Spearman 0.80 or more, 5 or more shared). One protein, one swarm.",
+   "row": "Reproduced the published opening of a protein from PocketMiner's own set: 10 of 10 runs open.",
+   "start": {
+    "entry": "1ALB",
+    "chain": null,
+    "model": "PocketMiner's equilibrated start structure",
+    "residues": null,
+    "n_res": 131,
+    "covers": null,
+    "crystal_site_A3": null
+   },
+   "method": {
+    "force_field": "Amber03",
+    "water": "TIP3P",
+    "replicas": 10,
+    "ns": 40,
+    "frame_ps": 20
+   },
+   "ladder": "control",
+   "ladder_sentence": "",
+   "ladder_note": "",
+   "prediction": "The rules were fixed before the run (MD_Target_Decision_2026-10-01.md section 5).",
+   "control": {
+    "reps_with_open_residue": 10,
+    "spearman_vs_pocketminer": 0.938,
+    "top10_overlap": 8,
+    "pocket_residue_most_open": 75,
+    "pocket_definition": "the ten residues that open most in our own simulations (top10_residues of the run's RESULTS.json); the rise of a residue is the largest rise of the pocket volume next to it above the replica's first frame"
+   },
+   "numbers": {
+    "reps_any_residue": 10,
+    "reps_pocket_residue": 10,
+    "gain_per_replica": [
+     136.2,
+     144.4,
+     167.0,
+     179.4,
+     161.9,
+     136.5,
+     181.1,
+     170.1,
+     161.2,
+     176.6
+    ],
+    "median_gain": 164.4,
+    "reps_site_gain_40": 10,
+    "open_frames": 18019,
+    "frames": 20010,
+    "distinct_patches": null,
+    "percentile": null
+   },
+   "facts": [],
+   "frames": [
+    {
+     "file": "rep07_start_frame0000.pdb",
+     "kind": "start",
+     "label": "Start frame, replica 7",
+     "replica": 7,
+     "time_ns": 0.0,
+     "atoms": 1211
+    },
+    {
+     "file": "rep07_maxopen_frame1487.pdb",
+     "kind": "maxopen",
+     "label": "Most open frame, replica 7, 29.74 ns",
+     "replica": 7,
+     "time_ns": 29.74,
+     "atoms": 1211
+    }
+   ]
+  },
+  {
+   "id": "control_1NEP_20260929",
+   "dir": "1NEP_20260929",
+   "kind": "control",
+   "group": "control",
+   "u": "P61916",
+   "gene": "1NEP",
+   "label": "1NEP",
+   "name": "1NEP (NPC2), the negative control",
+   "why": "A control, not a prediction: a protein that should not open in PocketMiner's own simulations. It sets the label's noise ceiling at a protein that does not open.",
+   "pocket": [
+    66,
+    96,
+    100,
+    97,
+    94,
+    105,
+    126,
+    95,
+    120,
+    15
+   ],
+   "role": "Negative control",
+   "verdict": "Inconclusive",
+   "line": "A protein that should not open: 1 of 10 replicas crossed the label (three residues, at 41.2, 41.8 and 42.9 A^3, 1 to 3 A^3 over the line); Spearman 0.676, 6 of the top 10 shared (rule fixed beforehand: 0 replicas to pass, 3 or more to fail). It sets the label's noise ceiling at a protein that does not open; it is one protein.",
+   "row": "1 of 10 runs crossed the line, by 1 to 3 A^3.",
+   "start": {
+    "entry": "1NEP",
+    "chain": null,
+    "model": "PocketMiner's equilibrated start structure",
+    "residues": null,
+    "n_res": 130,
+    "covers": null,
+    "crystal_site_A3": null
+   },
+   "method": {
+    "force_field": "Amber03",
+    "water": "TIP3P",
+    "replicas": 10,
+    "ns": 40,
+    "frame_ps": 20
+   },
+   "ladder": "control",
+   "ladder_sentence": "",
+   "ladder_note": "",
+   "prediction": "The rules were fixed before the run (MD_Target_Decision_2026-10-01.md section 5).",
+   "control": {
+    "reps_with_open_residue": 1,
+    "spearman_vs_pocketminer": 0.676,
+    "top10_overlap": 6,
+    "pocket_residue_most_open": 97,
+    "pocket_definition": "the ten residues that open most in our own simulations (top10_residues of the run's RESULTS.json); the rise of a residue is the largest rise of the pocket volume next to it above the replica's first frame"
+   },
+   "numbers": {
+    "reps_any_residue": 1,
+    "reps_pocket_residue": 1,
+    "gain_per_replica": [
+     18.9,
+     18.9,
+     28.5,
+     18.5,
+     27.1,
+     36.7,
+     27.8,
+     19.9,
+     42.9,
+     30.5
+    ],
+    "median_gain": 27.5,
+    "reps_site_gain_40": 1,
+    "open_frames": 3,
+    "frames": 20010,
+    "distinct_patches": null,
+    "percentile": null
+   },
+   "facts": [],
+   "frames": [
+    {
+     "file": "rep09_start_frame0000.pdb",
+     "kind": "start",
+     "label": "Start frame, replica 9",
+     "replica": 9,
+     "time_ns": 0.0,
+     "atoms": 1187
+    },
+    {
+     "file": "rep09_maxopen_frame1074.pdb",
+     "kind": "maxopen",
+     "label": "Most open frame, replica 9, 21.48 ns",
+     "replica": 9,
+     "time_ns": 21.48,
+     "atoms": 1187
+    }
+   ]
+  }
+ ]
+}

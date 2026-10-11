@@ -1,0 +1,242 @@
+{
+ "_meta": {
+  "generated": "2026-10-10",
+  "audit_table": "audit_numbers_20261010.csv",
+  "dir": "TRIB1complex_20261009",
+  "ns": 20,
+  "replicas_per_system": 3,
+  "frame_ps": 20,
+  "ligand_resn": "LIG",
+  "source": "TRIB1_Complex_MD_Results_2026-10-10.md (audit rows CX9 to CX13); frames by code/md/site_complex_frames_vm.py, checked against the readout's own displacement (max difference 0.0 A over the nine ligand simulations)",
+  "rules": {
+   "stays": "the molecule's centre stays within 6 A of its docked position in at least 80 % of the frames and never goes beyond 10 A for more than 1 ns",
+   "rmsd": "the median distance of the molecule's atoms from the docked pose after fitting the protein on the pocket residues (A)"
+  },
+  "shown_rule": "for each of the two molecules shown, the simulation whose molecule stayed closest to its docked pose (the lowest median distance); all nine ligand simulations are in the table",
+  "not_shown": "F03 (stays in 1 of 3) and the empty pocket are in the table and the text, not in the viewer",
+  "empty_pocket_start_volume_A3": 123.8,
+  "empty_pocket_replica_medians_A3": [
+   95,
+   113,
+   116
+  ]
+ },
+ "pocket": [
+  104,
+  105,
+  118,
+  120,
+  122,
+  127,
+  130,
+  131,
+  134,
+  146,
+  149,
+  158,
+  159,
+  160,
+  161,
+  162,
+  163,
+  164,
+  165,
+  210,
+  224,
+  225,
+  226,
+  227
+ ],
+ "systems": [
+  {
+   "id": "F03",
+   "label": "F03",
+   "role": "the search's best docked molecule",
+   "what": "the best-scoring molecule of the docking search (a small benzimidazole carbamate)",
+   "stays": 1,
+   "holds": 0,
+   "n": 3,
+   "median_site_volume_A3": 120,
+   "ligand_sized_share": 0.33
+  },
+  {
+   "id": "MBZ",
+   "label": "Mebendazole",
+   "role": "candidate",
+   "what": "an approved drug of the same chemical family as the molecules the search proposed",
+   "stays": 3,
+   "holds": 2,
+   "n": 3,
+   "median_site_volume_A3": 111,
+   "ligand_sized_share": 0.16
+  },
+  {
+   "id": "PRP",
+   "label": "Propranolol",
+   "role": "control",
+   "what": "an unrelated approved drug that docks about as well, used as the control",
+   "stays": 2,
+   "holds": 0,
+   "n": 3,
+   "median_site_volume_A3": 123,
+   "ligand_sized_share": 0.43
+  },
+  {
+   "id": "apo",
+   "label": "Empty pocket",
+   "role": "empty",
+   "what": "the same protein frame with no molecule in the pocket",
+   "stays": null,
+   "holds": null,
+   "n": 3,
+   "median_site_volume_A3": 113,
+   "ligand_sized_share": 0.26
+  }
+ ],
+ "replicas": [
+  {
+   "system": "F03",
+   "run": 1,
+   "replica": 4,
+   "stays": false,
+   "holds": false,
+   "median_rmsd_A": 5.14,
+   "share_within_6A": 0.55,
+   "longest_beyond_10A_ps": 3220,
+   "median_pocket_contacts": 3,
+   "end_shift_A": 22.13
+  },
+  {
+   "system": "F03",
+   "run": 2,
+   "replica": 5,
+   "stays": true,
+   "holds": false,
+   "median_rmsd_A": 4.35,
+   "share_within_6A": 1.0,
+   "longest_beyond_10A_ps": 0,
+   "median_pocket_contacts": 3,
+   "end_shift_A": 2.63
+  },
+  {
+   "system": "F03",
+   "run": 3,
+   "replica": 6,
+   "stays": false,
+   "holds": false,
+   "median_rmsd_A": 10.89,
+   "share_within_6A": 0.34,
+   "longest_beyond_10A_ps": 2960,
+   "median_pocket_contacts": 1,
+   "end_shift_A": 9.38
+  },
+  {
+   "system": "MBZ",
+   "run": 1,
+   "replica": 7,
+   "stays": true,
+   "holds": false,
+   "median_rmsd_A": 3.68,
+   "share_within_6A": 1.0,
+   "longest_beyond_10A_ps": 0,
+   "median_pocket_contacts": 3,
+   "end_shift_A": 3.51
+  },
+  {
+   "system": "MBZ",
+   "run": 2,
+   "replica": 8,
+   "stays": true,
+   "holds": true,
+   "median_rmsd_A": 2.02,
+   "share_within_6A": 1.0,
+   "longest_beyond_10A_ps": 0,
+   "median_pocket_contacts": 6,
+   "end_shift_A": 1.73
+  },
+  {
+   "system": "MBZ",
+   "run": 3,
+   "replica": 9,
+   "stays": true,
+   "holds": true,
+   "median_rmsd_A": 2.18,
+   "share_within_6A": 1.0,
+   "longest_beyond_10A_ps": 0,
+   "median_pocket_contacts": 5,
+   "end_shift_A": 2.75
+  },
+  {
+   "system": "PRP",
+   "run": 1,
+   "replica": 10,
+   "stays": true,
+   "holds": false,
+   "median_rmsd_A": 4.89,
+   "share_within_6A": 1.0,
+   "longest_beyond_10A_ps": 0,
+   "median_pocket_contacts": 4,
+   "end_shift_A": 4.59
+  },
+  {
+   "system": "PRP",
+   "run": 2,
+   "replica": 11,
+   "stays": true,
+   "holds": false,
+   "median_rmsd_A": 4.79,
+   "share_within_6A": 1.0,
+   "longest_beyond_10A_ps": 0,
+   "median_pocket_contacts": 4,
+   "end_shift_A": 4.66
+  },
+  {
+   "system": "PRP",
+   "run": 3,
+   "replica": 12,
+   "stays": false,
+   "holds": false,
+   "median_rmsd_A": 8.21,
+   "share_within_6A": 0.03,
+   "longest_beyond_10A_ps": 60,
+   "median_pocket_contacts": 0,
+   "end_shift_A": 7.08
+  }
+ ],
+ "shown": [
+  {
+   "system": "MBZ",
+   "run": 2,
+   "replica": 8,
+   "start": {
+    "file": "MBZ_rep08_start.pdb",
+    "time_ns": 0.0
+   },
+   "end": {
+    "file": "MBZ_rep08_end.pdb",
+    "time_ns": 20.0
+   },
+   "atoms": 2084,
+   "ligand_atoms": 22,
+   "start_shift_A": 0.71,
+   "end_shift_A": 1.73
+  },
+  {
+   "system": "PRP",
+   "run": 2,
+   "replica": 11,
+   "start": {
+    "file": "PRP_rep11_start.pdb",
+    "time_ns": 0.0
+   },
+   "end": {
+    "file": "PRP_rep11_end.pdb",
+    "time_ns": 20.0
+   },
+   "atoms": 2081,
+   "ligand_atoms": 19,
+   "start_shift_A": 0.45,
+   "end_shift_A": 4.66
+  }
+ ]
+}
