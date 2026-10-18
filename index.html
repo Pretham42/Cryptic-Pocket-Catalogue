@@ -298,6 +298,16 @@ table.mdt{border-collapse:collapse;width:100%;min-width:900px;font-size:13.5px}
 table.mdt th{text-align:left;font-size:12.5px;color:var(--ink-3);font-weight:600;padding:9px 10px;border-bottom:1px solid var(--line-2);vertical-align:bottom}
 table.mdt td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.4}
 
+/* ── cancer mutations at the predicted pockets ───────────────────────────── */
+section#mut{padding-top:56px}
+.mutctl{display:flex;flex-wrap:wrap;gap:8px 14px;margin:0 0 12px}
+#muttable td.sy b,#losstable td.sy b{font-weight:700}
+#muttable .chg,#losstable .chg{font-weight:700;font-variant-numeric:tabular-nums;margin-right:6px}
+#muttable .org,#muttable .role,#losstable .lh{display:block;font-size:13px;color:var(--ink-3);font-weight:400}
+#muttable td.num{font-variant-numeric:tabular-nums}
+#lossh{margin:26px 0 8px}
+.res-chip.mut{background:var(--warn-pale);border-color:var(--cys);color:var(--warn);font-weight:700;border-style:dashed}
+
 /* ── trust ───────────────────────────────────────────────────────────────── */
 section#trust{padding-bottom:56px;padding-top:56px}
 .trustgrid{display:grid;gap:14px;grid-template-columns:1fr;margin:8px 0 8px}
@@ -456,6 +466,7 @@ details.dd .dsec{padding:0;border:0}
     <a class="brand" href="#top"><span class="logo" aria-hidden="true"></span>Cryptic Pocket Catalogue</a>
     <nav aria-label="Sections">
       <a href="#screen">Screen</a>
+      <a href="#mut" id="navmut" hidden>Mutations</a>
       <a href="#sim">Simulations</a>
       <a href="#trust">Trust</a>
     </nav>
@@ -580,6 +591,24 @@ details.dd .dsec{padding:0;border:0}
   </div>
 </section>
 
+<!-- ══ CANCER MUTATIONS AT THE PREDICTED POCKETS ═══════════════════════ -->
+<section class="blk" id="mut" hidden>
+  <div class="wrap">
+    <h2 class="sec">Which cancer mutations add a handle for a covalent drug? <span class="mdex">exploratory</span></h2>
+    <p class="sub" id="mutintro"></p>
+    <div class="mutctl">
+      <span class="seg" id="mutres" role="group" aria-label="The residue the mutation adds"></span>
+      <span class="seg" id="mutsite" role="group" aria-label="Whether a ligand already sits at the site"></span>
+    </div>
+    <div class="tw-res" id="mutw"><table class="mdsimple" id="muttable"><thead><tr><th>Protein</th><th>Change</th><th>Tumours</th><th>Where</th><th title="A drug-like molecule already sits at the predicted site in the structure the row was scored from">Ligand there</th></tr></thead><tbody id="mutrows"></tbody></table></div>
+    <button class="more" id="mutmore" hidden></button>
+    <p class="foot-note" id="mutnote"></p>
+    <h3 class="mdch" id="lossh" hidden>The other direction: a mutation removes the cysteine a drug binds</h3>
+    <div class="tw-res" id="lossw" hidden><table class="mdsimple" id="losstable"><thead><tr><th>Protein</th><th>Change</th><th>Drug</th><th>Where</th><th>Evidence</th></tr></thead><tbody id="lossrows"></tbody></table></div>
+    <details class="acc"><summary>How this was made, and the chance level</summary><div class="in"><p class="foot-note" id="mutmore2"></p></div></details>
+  </div>
+</section>
+
 <!-- ══ SIMULATIONS ═════════════════════════════════════════════════════ -->
 <section class="blk" id="sim">
   <div class="wrap">
@@ -607,7 +636,7 @@ details.dd .dsec{padding:0;border:0}
       <div id="mdcctl"></div>
       <p class="mdcap" id="mdccap"></p>
       <p class="foot-note" id="mdcnote"></p>
-      <details class="acc"><summary>All nine simulations, and the rule</summary><div class="in">
+      <details class="acc"><summary>All twenty simulations, and the rule</summary><div class="in">
         <div class="tw-res"><table class="mdsimple" id="mdctable"><thead><tr><th>Molecule</th><th>Simulation</th><th title="The centre of the molecule stayed within 6 &Aring;ngstr&ouml;ms of its docked position in at least 80% of the frames and never went beyond 10 &Aring;ngstr&ouml;ms for more than 1 nanosecond">Stayed near its docked position</th><th>Share of the time within 6 &Aring;</th><th title="The median distance of the molecule's atoms from the docked pose, after fitting the protein on the pocket residues">Typical distance from the docked pose</th></tr></thead><tbody id="mdcrows"></tbody></table></div>
         <p class="foot-note" id="mdcmore"></p>
       </div></details>
@@ -1348,7 +1377,7 @@ function rebuild(){
 function boot(){
   $("tblempty").hidden=false;$("tblempty").innerHTML="Loading the catalogue (18,336 proteins, about 14 MB)&hellip;";
   const get=(file,key)=>fetch("data/"+file).then(r=>{if(!r.ok)throw new Error("HTTP "+r.status);return r.json();}).then(d=>{PARTS[key]=d;return true;},()=>false);
-  Promise.all([get("catalogue.json","catalogue"),get("state.json","state"),get("disease.json","disease"),get("positions.json","positions"),get("md_examples.json","md"),get("md_cavity.json","cav"),get("md_complex.json","mdc")]).then(ok=>{
+  Promise.all([get("catalogue.json","catalogue"),get("state.json","state"),get("disease.json","disease"),get("positions.json","positions"),get("md_examples.json","md"),get("md_cavity.json","cav"),get("md_complex.json","mdc"),get("mutations.json","mut")]).then(ok=>{
     if(!ok[0]){PARTS.catalogue=jget("embedded-sample");}
     if(!PARTS.catalogue){$("tblempty").innerHTML="The catalogue could not be loaded. Serve the <b>website</b> folder over HTTP (<code>python3 -m http.server --directory website 8777</code>) and open <code>http://localhost:8777</code>.";return;}
     install(!ok[0]);
@@ -1364,7 +1393,7 @@ function install(isSample){
   const gen=String((PARTS.state&&PARTS.state._meta&&PARTS.state._meta.generated)||m.generated||"").slice(0,10);
   $("verchip").textContent=isSample?"Sample data":(gen?"Data of "+gen:"");
   $("prov").innerHTML="Ranked by "+esc(m.ordering||"confidence")+". Precision measured on the "+esc(m.precision_curve_lane||"")+" model lane."+(m.built_from?" Built from "+esc(m.built_from.join(", "))+".":"");
-  renderTrust();renderMD();renderMDC();renderStats();
+  renderTrust();renderMD();renderMDC();renderMut();renderStats();
   READY=true;
   applyPreset(DEFAULT_PRESET);
   fromHash();
@@ -1889,11 +1918,12 @@ function detail(r){
   h+=mdCardHtml(r);
   h+='<div class="dsec"><h4>Predicted pocket</h4>';
   if(hasRes(r)){
-    h+='<div class="chipsr">'+r.pocket_resids.map(x=>'<span class="res-chip'+((cysNum(r)&&x===r.cys_resid)?" cys":"")+'">'+x+'</span>').join("")+'</div>'+
+    const mp=mutChips(r);
+    h+='<div class="chipsr">'+r.pocket_resids.map(x=>'<span class="res-chip'+((cysNum(r)&&x===r.cys_resid)?" cys":"")+(mp[x]?" mut":"")+'"'+(mp[x]?' title="'+esc(mp[x])+'"':"")+'>'+x+'</span>').join("")+'</div>'+
        '<div class="acts"><button class="mini" data-act="res">Copy residue numbers</button><button class="mini" data-act="pymol">Copy PyMOL selection</button><button class="mini" data-act="chimera">Copy ChimeraX selection</button></div>'+
        '<p class="note">'+r.pocket_resids.length+' residues, numbered as in '+esc(structName(r))+'.</p>';
   }else h+='<p class="hint" style="margin:0">'+(r.cluster_size!=null?'The model groups '+r.cluster_size+' residues into this pocket, but their residue numbers are not in the current export.':'The pocket residue numbers are not in the current export.')+'</p>';
-  h+='</div><div class="dsec"><h4>Cysteines near the pocket</h4>';
+  h+='</div>'+mutHtml(r)+'<div class="dsec"><h4>Cysteines near the pocket</h4>';
   h+=(hasCys(r)?'<p class="note" style="margin:0 0 8px">The catalogue\'s labelling cysteine (buried, unpaired, not bound to a metal, within 6 &Aring;): <b>'+(cysNum(r)?"Cys"+r.cys_resid:"number pending")+'</b>, '+(r.cys_dist===0?"inside the pocket":r.cys_dist.toFixed(1)+" &Aring; away")+'.</p>':'<p class="note" style="margin:0 0 8px">No eligible labelling cysteine (buried, unpaired, not bound to a metal) lies within 6 &Aring; of the pocket.</p>');
   h+='<div id="nat_body"><p class="hint" style="margin:0">Working out from the structure...</p></div></div>';
   h+='<details class="dd"><summary>Disease and drugs</summary><div class="in">'+diseaseHtml(r)+'</div></details>';
@@ -2176,7 +2206,7 @@ function renderMD(){
   mdSelect(MDSEL);
 }
 
-/* ── TRIB1 with a docked molecule in the opened pocket (data/md_complex.json and data/md_frames/<dir>/, made by code/md/build_md_complex.py): two real frames of one simulation, joined by a straight-line path ─── */
+/* ── TRIB1 with a docked molecule in the opened pocket (data/md_complex.json and data/md_frames/<dir>/, made by code/md/build_md_complex2.py): two real frames of one simulation, joined by a straight-line path ─── */
 const mdcStop=()=>{MDCLIVE.forEach(p=>p.stop());MDCLIVE=[];};
 function mdcFetch(C,f){
   const u="data/md_frames/"+C._meta.dir+"/"+f;
@@ -2230,12 +2260,12 @@ function mdcPlayer(host,C,S,ui,list){
     if(typeof window.$3Dmol==="undefined"){if(tries<80)setTimeout(()=>go(tries+1),250);else host.innerHTML='<p class="hint pad">The 3D viewer did not load.</p>';return;}
     Promise.all([mdcFetch(C,S.start.file),mdcFetch(C,S.end.file)]).then(tx=>{
       if(!P.alive||host._tok!==tok)return;
-      const key="mdc:"+S.system+S.replica,mp=MDMORPH[key]||(MDMORPH[key]=morphPdb(tx[0],tx[1],MD_FRAMES,C.pocket));
+      const key="mdc:"+S.system+S.run,mp=MDMORPH[key]||(MDMORPH[key]=morphPdb(tx[0],tx[1],MD_FRAMES,C.pocket));
       if(!mp){host.innerHTML='<p class="hint pad">The two frames do not match each other.</p>';return;}
       const bg=getComputedStyle(document.documentElement).getPropertyValue("--viewer").trim()||"#f3f5f8";
       host.innerHTML="";P.v=window.$3Dmol.createViewer(host,{backgroundColor:bg});
       P.v.addModelsAsFrames(mp.text,"pdb");
-      P.ready=true;P.style();P.camera();P.set(0);P.draw(0);
+      P.ready=true;P.style();P.setView(S.view||"pocket");P.set(0);P.draw(0);
       if(ui.btn)ui.btn.disabled=false;if(ui.slide)ui.slide.disabled=false;
       if("IntersectionObserver" in window){P.io=new IntersectionObserver(es=>{if(!es[0].isIntersecting)P.pause();},{threshold:0.05});P.io.observe(host);}
     },e=>{host.innerHTML='<p class="hint pad">The frames could not be loaded ('+esc(e.message)+').</p>';});
@@ -2250,28 +2280,90 @@ function mdcSelect(i){
   document.querySelectorAll("#mdctabs button").forEach((b,k)=>b.setAttribute("aria-selected",String(k===i)));
   document.querySelectorAll("#mdcrows tr[data-sys]").forEach(tr=>tr.classList.toggle("sel",tr.dataset.sys===S.system));
   mdcPlayer($("mdcview"),C,S,mdcUi("mdc"),MDCLIVE);
-  $("mdccap").innerHTML="<b>"+esc(y.label)+".</b> Simulation "+S.run+", closest to its docked pose: after "+S.end.time_ns+" ns its centre had moved "+S.end_shift_A.toFixed(1)+" &Aring;.";
+  $("mdccap").innerHTML="<b>"+esc(y.label)+".</b> Simulation "+S.run+" of "+C._meta.replicas_per_system+", which "+esc(S.how)+": its centre moved "+S.end_shift_A.toFixed(1)+" &Aring; in "+S.end.time_ns+" ns.";
 }
 function renderMDC(){
   const C=PARTS.mdc,box=$("mdc");
   if(!box)return;
   if(!C||!C.systems||!C.shown||!C.shown.length||!C.replicas){box.hidden=true;return;}
-  const M=C._meta,sysBy={};C.systems.forEach(s=>{sysBy[s.id]=s;});
-  const stay=id=>sysBy[id].stays+" of "+sysBy[id].n;
-  $("mdcintro").innerHTML="We docked drug-sized molecules into TRIB1's opened pocket and simulated each "+M.replicas_per_system+" times for "+M.ns+" nanoseconds. Staying near the docked position: "+esc(sysBy.MBZ.label.toLowerCase())+" "+stay("MBZ")+", "+esc(sysBy.F03.label)+" "+stay("F03")+", an unrelated control drug "+stay("PRP")+".";
-  $("mdctabs").innerHTML=C.shown.map((s,i)=>'<button role="tab" data-i="'+i+'" aria-selected="'+(i===MDCSEL)+'">'+esc(sysBy[s.system].label)+' <span class="hint">('+(sysBy[s.system].role==="control"?"the control":"a candidate")+')</span></button>').join("");
+  const M=C._meta,n=M.replicas_per_system,sysBy={};C.systems.forEach(s=>{sysBy[s.id]=s;});
+  const lc=id=>esc(sysBy[id].label.toLowerCase());
+  const ctl=C.systems.filter(s=>s.role==="control").map(s=>s.id);
+  $("mdcintro").innerHTML="We docked drug-sized molecules into TRIB1's opened pocket and simulated each "+n+" times for "+M.ns+" nanoseconds. Staying near the docked position, of "+n+": "+lc("MBZ")+" "+sysBy.MBZ.stays+"; controls "+ctl.map(id=>lc(id)+" "+sysBy[id].stays).join(", ")+"; "+lc("MBX")+" "+sysBy.MBX.stays+".";
+  $("mdctabs").innerHTML=C.shown.map((s,i)=>'<button role="tab" data-i="'+i+'" aria-selected="'+(i===MDCSEL)+'">'+esc(sysBy[s.system].label)+' <span class="hint">('+esc(s.hint)+')</span></button>').join("");
   $("mdctabs").querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>mdcSelect(+b.dataset.i)));
   $("mdcctl").innerHTML=mdcControls("mdc");
   $("mdcrows").innerHTML=C.replicas.map(r=>{
-    const y=sysBy[r.system],shown=C.shown.some(s=>s.system===r.system&&s.replica===r.replica);
+    const y=sysBy[r.system],shown=C.shown.some(s=>s.system===r.system&&s.run===r.run);
     return '<tr data-sys="'+r.system+'"'+(shown?' data-shown="1"':"")+'><td class="sy">'+esc(y.label)+'</td><td>'+r.run+(shown?' <span class="hint">(shown)</span>':"")+'</td><td>'+(r.stays?"yes":'<span class="no">no</span>')+'</td><td>'+Math.round(100*r.share_within_6A)+'%</td><td>'+r.median_rmsd_A.toFixed(1)+' &Aring;</td></tr>';
   }).join("");
-  $("mdcnote").innerHTML="Nothing here shows that either molecule binds.";
-  $("mdcmore").innerHTML="A molecule stays if its centre keeps within 6 &Aring; of its docked position in at least 80% of the frames and never goes beyond 10 &Aring; for more than 1 nanosecond. "+esc(sysBy.MBZ.label)+" is an approved drug of the same chemical family as the molecules the docking search proposed; "+esc(sysBy.F03.label)+" is the search's best-scoring molecule; "+esc(sysBy.PRP.label.toLowerCase())+" is an unrelated approved drug that docks about as well, used as the control. "+
-    M.replicas_per_system+" simulations of "+M.ns+" nanoseconds for each molecule, one force field, molecules placed by docking. Staying that long is weak evidence of anything: the control stays in "+stay("PRP")+" as well. Shown: "+esc(sysBy.MBZ.label.toLowerCase())+" and the control, each in the simulation where the molecule stayed closest to the docked pose; the start and the end frame are real, the path between them is a straight line, not the simulation. "+
-    "The empty pocket did not close in "+M.ns+" nanoseconds (its size in the three simulations: "+M.empty_pocket_replica_medians_A3.join(", ")+" "+A3+" at the median, against "+Math.round(M.empty_pocket_start_volume_A3)+" "+A3+" at the start).";
+  $("mdcnote").innerHTML="Nothing here shows that any molecule binds.";
+  const full=ctl.filter(id=>sysBy[id].stays===sysBy[id].n).map(id=>lc(id)),E=M.earlier_round,es=E.stays;
+  $("mdcmore").innerHTML="A molecule stays if its centre keeps within 6 &Aring; of its docked position in at least 80% of the frames and never goes beyond 10 &Aring; for more than 1 nanosecond. It keeps the docked pose if its atoms are, at the median, under 3 &Aring; from that pose (kept the pose, of "+n+": "+C.systems.map(s=>lc(s.id)+" "+s.holds).join(", ")+"). "+
+    esc(sysBy.MBZ.label)+" is an approved drug of the same chemical family as the molecules the docking search proposed. The controls are unrelated approved drugs: "+lc("PRP")+" (positively charged), "+lc("IBU")+" (negatively charged) and "+lc("NDC")+" (neutral, chosen before the simulations by a fixed rule: the best-docking of "+M.neutral_pool+" neutral drugs of mebendazole's size and polarity). The other cavity is a small surface cavity "+M.control_cavity_distance_A+" &Aring; from the pocket, lined by none of its residues. "+
+    n+" simulations of "+M.ns+" nanoseconds for each molecule, one force field, molecules placed by docking. Staying that long is weak evidence of anything"+(full.length?": "+full.join(" and ")+" stay"+(full.length===1?"s":"")+" in "+n+" of "+n:"")+". Shown: "+lc("MBZ")+" in the simulation where it kept closest to the docked pose and in the one where it moved furthest, and "+lc("NDC")+" in the one where it kept closest; the start and the end frame are real, the path between them is a straight line, not the simulation. "+
+    "An earlier round, in a different opened frame without the C-terminal tail, ran "+E.replicas_per_system+" simulations of "+E.ns+" nanoseconds: mebendazole stayed in "+es.MBZ[0]+" of "+es.MBZ[1]+", F03 (the docking search's best-scoring molecule) in "+es.F03[0]+" of "+es.F03[1]+", propranolol in "+es.PRP[0]+" of "+es.PRP[1]+".";
   box.hidden=false;
   mdcSelect(MDCSEL);
+}
+
+/* ── cancer mutations at the predicted pockets (data/mutations.json, made by code/md/build_mutations_json.py): recurrent cancer substitutions that add a Cys, Ser, Lys or Tyr at a pocket residue or next to one ─── */
+const MUT={res:"all",site:"any",all:false},MUT_CAP=10;
+const mutShown=()=>PARTS.mut.rows.map((x,i)=>Object.assign({i},x)).filter(x=>(MUT.res==="all"||x.gained===MUT.res)&&(MUT.site==="any"||x.site===MUT.site));
+const orgTxt=x=>x.organs&&x.organs.length?esc(x.organs[0][0])+" "+Math.round(100*x.organs[0][1]/x.tumours)+"%":"";
+const gainTag=g=>'<span class="tag '+(g==="Cys"?"a":"b")+'">adds '+esc(g)+'</span>';
+const SITE_TXT={ligand:"Yes",none:"No",unknown:"Not checked"};
+const LOSS_WHERE={pocket:"In the pocket",contact:"Next to it",window:"Within 8 &Aring; of it",far:"Farther away",unresolved:"Not in the structure"};
+function mutSegs(){
+  const c=PARTS.mut._meta.counts;
+  $("mutres").innerHTML=[["all","All "+c.substitutions],["Cys","Cys "+c.gained.Cys],["Ser","Ser "+c.gained.Ser],["Lys","Lys "+c.gained.Lys],["Tyr","Tyr "+c.gained.Tyr]].map(o=>'<button data-v="'+o[0]+'" aria-pressed="'+(MUT.res===o[0])+'">'+o[1]+'</button>').join("");
+  $("mutsite").innerHTML=[["any","Any site"],["ligand","Ligand there"],["none","No ligand"]].map(o=>'<button data-v="'+o[0]+'" aria-pressed="'+(MUT.site===o[0])+'">'+o[1]+'</button>').join("");
+  $("mutres").querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{MUT.res=b.dataset.v;MUT.all=false;mutSegs();mutTable();}));
+  $("mutsite").querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{MUT.site=b.dataset.v;MUT.all=false;mutSegs();mutTable();}));
+}
+function mutTable(){
+  const rows=mutShown(),cap=MUT.all?rows.length:Math.min(MUT_CAP,rows.length);
+  $("mutrows").innerHTML=rows.slice(0,cap).map(x=>'<tr data-i="'+x.i+'" tabindex="0"><td class="sy"><b>'+esc(x.gene)+'</b>'+(x.role?'<span class="role">'+esc(x.role)+'</span>':"")+'</td><td><span class="chg">'+esc(x.ref+x.pos+x.alt)+'</span>'+gainTag(x.gained)+'<span class="org">'+orgTxt(x)+'</span></td><td class="num">'+fmt(x.tumours)+'</td><td>'+(x.where==="pocket"?"In the pocket":"Next to it")+'</td><td>'+SITE_TXT[x.site]+'</td></tr>').join("")||'<tr><td colspan="5" class="hint">No substitution matches.</td></tr>';
+  const m=$("mutmore");
+  if(rows.length>cap){m.hidden=false;m.textContent="Show all "+rows.length;}else m.hidden=true;
+}
+function renderMut(){
+  const M=PARTS.mut,box=$("mut");
+  if(!box)return;
+  if(!M||!M.rows||!M.rows.length||!M._meta||!M._meta.counts){box.hidden=true;$("navmut").hidden=true;return;}
+  const m=M._meta,c=m.counts,e=m.enrichment,ratio=(o,x)=>(o/x).toFixed(1);
+  $("mutintro").innerHTML="A covalent drug binds a reactive residue: cysteine most often, serine, lysine and tyrosine less often. Some recurrent cancer mutations create one at a predicted pocket, as KRAS G12C does for sotorasib.";
+  mutSegs();mutTable();
+  $("mutmore").onclick=()=>{MUT.all=true;mutTable();};
+  const open=tr=>{const x=M.rows[+tr.dataset.i];if(x)openRow(x.u,x.gene);};
+  $("mutrows").addEventListener("click",ev=>{const tr=ev.target.closest("tr[data-i]");if(tr)open(tr);});
+  $("mutrows").addEventListener("keydown",ev=>{const tr=ev.target.closest("tr[data-i]");if(tr&&(ev.key==="Enter"||ev.key===" ")){ev.preventDefault();open(tr);}});
+  $("mutnote").innerHTML="Recurrent substitutions in "+fmt(m.tumours)+" sequenced tumours (Cancer Hotspots); a tumour can be counted twice. One predicted pocket per protein. Nothing here shows that the new residue is reachable or that a drug binds.";
+  const L=M.losses||[];
+  $("lossh").hidden=!L.length;$("lossw").hidden=!L.length;
+  $("lossrows").innerHTML=L.map((x,i)=>'<tr data-i="'+i+'" tabindex="0"><td class="sy"><b>'+esc(x.gene)+'</b></td><td><span class="chg">'+esc(x.change)+'</span><span class="lh">removes Cys'+x.pos+'</span></td><td>'+esc(x.therapies)+'<span class="lh">'+esc(x.diseases)+'</span></td><td>'+(LOSS_WHERE[x.where]||esc(x.where))+((x.catalogue_cys&&x.catalogue_cys!==x.pos)?'<span class="lh">the catalogue names Cys'+x.catalogue_cys+' for this protein</span>':"")+'</td><td><a href="https://civicdb.org/links/evidence_items/'+x.evidence[0]+'" target="_blank" rel="noopener">CIViC level '+esc(x.levels)+'</a><span class="lh">'+esc(x.citations)+'</span></td></tr>').join("");
+  $("lossrows").addEventListener("click",ev=>{if(ev.target.closest("a"))return;const tr=ev.target.closest("tr[data-i]");if(tr){const x=L[+tr.dataset.i];if(x)openRow(x.u,x.gene);}});
+  $("mutmore2").innerHTML="Recurrent cancer substitutions ("+fmt(m.hotspot_substitutions)+" in "+fmt(m.hotspot_genes)+" genes, Cancer Hotspots) were joined to the predicted pocket of each protein, the residue numbers checked against UniProt and the structure. A substitution counts when it creates a Cys, or a Ser, Lys or Tyr from a residue that is none of the four, at a pocket residue or one with an atom within 4.5 &Aring; of it: "+c.substitutions+" in "+c.genes+" genes ("+c.in_pocket+" at a pocket residue). "+
+    "<b>Chance.</b> Recurrent substitutions fall on predicted pocket residues "+ratio(e.position_matched.observed,e.position_matched.expected)+" times as often as chance for the same residue type in the same protein ("+e.position_matched.observed+" against "+e.position_matched.expected+"), and "+ratio(e.patches.observed,e.patches.expected)+" times as often as burial-matched patches of the same size ("+e.patches.observed+" against "+e.patches.expected+", "+e.proteins+" proteins); "+ratio(e.patches_no_ligand.observed,e.patches_no_ligand.expected)+" times where no ligand sits at the site ("+e.patches_no_ligand.observed+" against "+e.patches_no_ligand.expected+"). With the pocket moved along the sequence the excess is gone. A minority of proteins carries it. "+
+    "<b>What it does not show.</b> Positions outside the structure the catalogue scored were not tested ("+Math.round(100*m.not_tested.outside_structure_share)+"% of the pairs); the pocket of KRAS here is the nucleotide site, which holds G12, not the switch II pocket; "+c.genes_no_ligand_tumour_suppressor+" of the "+c.genes_no_ligand+" proteins with no ligand at the site are tumour suppressors, where a covalent inhibitor would be the wrong direction. "+
+    "Acquired cysteines in cancer were listed before by Visscher, Arkin and Dansen (2016).";
+  box.hidden=false;$("navmut").hidden=false;
+}
+function mutChips(r){                                             /* the pocket residues of this structure that carry a cancer substitution: {residue number in the structure: text} */
+  const M=PARTS.mut,out={};if(!M||!M.by_uniprot)return out;
+  (M.by_uniprot[r.u]||[]).forEach(i=>{const x=M.rows[i];if(x.where==="pocket"&&x.auth!=null)out[x.auth]=(out[x.auth]?out[x.auth]+"; ":"")+x.ref+x.pos+x.alt+" adds "+x.gained+" ("+fmt(x.tumours)+" tumours)";});
+  return out;
+}
+function mutHtml(r){
+  const M=PARTS.mut;if(!M||!M.by_uniprot)return"";
+  const idx=M.by_uniprot[r.u]||[],loss=(M.losses||[]).filter(x=>x.u===r.u);
+  if(!idx.length&&!loss.length)return"";
+  const site=s=>s==="ligand"?"a ligand already sits at the site":(s==="none"?"no ligand at the site in this structure":"");
+  let h='<div class="dsec"><h4>Cancer mutations at the pocket</h4>';
+  idx.slice(0,5).forEach(i=>{const x=M.rows[i];h+='<p class="note" style="margin:0 0 6px"><b>'+esc(x.ref+x.pos+x.alt)+'</b> adds '+esc(x.gained)+': '+fmt(x.tumours)+' tumours'+(x.organs.length?', most in '+esc(x.organs[0][0]):"")+'. '+(x.where==="pocket"?"In the pocket":"Next to the pocket")+(site(x.site)?"; "+site(x.site):"")+'.</p>';});
+  if(idx.length>5)h+='<p class="note" style="margin:0 0 6px">'+(idx.length-5)+' more in the table under Mutations.</p>';
+  loss.forEach(x=>{h+='<p class="note" style="margin:0 0 6px"><b>'+esc(x.change)+'</b> removes Cys'+x.pos+', the cysteine '+esc(x.therapies.toLowerCase())+' binds: resistance (CIViC level '+esc(x.levels)+').</p>';});
+  return h+'<p class="note">Recurrent substitutions in '+fmt(M._meta.tumours)+' sequenced tumours. Nothing here shows that the new residue is reachable or that a drug binds.</p></div>';
 }
 
 /* ── how far to trust a row ───────────────────────────────────────────────── */

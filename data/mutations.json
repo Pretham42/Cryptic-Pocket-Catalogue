@@ -1,0 +1,2752 @@
+{
+ "_meta": {
+  "generated": "2026-10-17",
+  "source": "Cancer Hotspots (cancerhotspots.org, hotspots_v2.xls) and the catalogue's predicted pockets; resistance evidence from CIViC (accepted predictive evidence); covalent bonds read from PDB entries",
+  "tumours": 24592,
+  "hotspot_substitutions": 2673,
+  "hotspot_genes": 227,
+  "rule": "a recurrent substitution that creates a Cys, or a Ser, Lys or Tyr from a residue that is none of the four, at a predicted pocket residue or a residue with a heavy atom within 4.5 A of one",
+  "counts": {
+   "substitutions": 98,
+   "genes": 30,
+   "positions": 77,
+   "in_pocket": 49,
+   "next_to_pocket": 49,
+   "gained": {
+    "Cys": 31,
+    "Ser": 35,
+    "Lys": 14,
+    "Tyr": 18
+   },
+   "ligand_at_site": 57,
+   "no_ligand": 39,
+   "site_unknown": 2,
+   "observations": 1203,
+   "genes_no_ligand": 9,
+   "genes_no_ligand_tumour_suppressor": 4
+  },
+  "enrichment": {
+   "proteins": 92,
+   "position_matched": {
+    "observed": 81,
+    "expected": 42.1,
+    "positions": 348
+   },
+   "patches": {
+    "observed": 79,
+    "expected": 28.78
+   },
+   "patches_no_ligand": {
+    "proteins": 51,
+    "observed": 35,
+    "expected": 14.8
+   },
+   "shifted": {
+    "-40": {
+     "observed": 13,
+     "expected": 19.7
+    },
+    "40": {
+     "observed": 29,
+     "expected": 23.1
+    },
+    "80": {
+     "observed": 19,
+     "expected": 19.4
+    }
+   }
+  },
+  "not_tested": {
+   "pairs": 2672,
+   "outside_structure": 1570,
+   "outside_structure_share": 0.588
+  },
+  "losses_not_shown": [
+   {
+    "gene": "ABL1",
+    "change": "C475V",
+    "therapies": "Bosutinib; Imatinib Mesylate",
+    "reason": "no covalent ligand at this cysteine in the PDB entries scanned"
+   },
+   {
+    "gene": "ATM",
+    "change": "C2488Y",
+    "therapies": "Doxorubicin",
+    "reason": "no catalogue row"
+   },
+   {
+    "gene": "KIT",
+    "change": "C809G",
+    "therapies": "Imatinib",
+    "reason": "no covalent ligand at this cysteine in the PDB entries scanned"
+   },
+   {
+    "gene": "MAP2K1",
+    "change": "C121S",
+    "therapies": "Vemurafenib",
+    "reason": "no covalent ligand at this cysteine in the PDB entries scanned"
+   },
+   {
+    "gene": "MAP2K2",
+    "change": "C125S",
+    "therapies": "Dabrafenib; Vemurafenib",
+    "reason": "no covalent ligand at this cysteine in the PDB entries scanned"
+   },
+   {
+    "gene": "PIK3CA",
+    "change": "C420R",
+    "therapies": "Cetuximab; Trastuzumab; Trastuzumab Emtansine",
+    "reason": "no covalent ligand at this cysteine in the PDB entries scanned"
+   },
+   {
+    "gene": "PRPS1",
+    "change": "C77S",
+    "therapies": "Mercaptopurine; Thioguanine",
+    "reason": "no covalent ligand at this cysteine in the PDB entries scanned"
+   },
+   {
+    "gene": "RET",
+    "change": "C634W",
+    "therapies": "Motesanib",
+    "reason": "no covalent ligand at this cysteine in the PDB entries scanned"
+   }
+  ],
+  "audit": "CM1 to CM13"
+ },
+ "rows": [
+  {
+   "u": "P01116",
+   "gene": "KRAS",
+   "ref": "G",
+   "pos": 12,
+   "auth": 12,
+   "alt": "C",
+   "gained": "Cys",
+   "tumours": 384,
+   "organs": [
+    [
+     "lung",
+     287
+    ],
+    [
+     "bowel",
+     46
+    ],
+    [
+     "pancreas",
+     15
+    ]
+   ],
+   "where": "pocket",
+   "site": "ligand",
+   "dist_A": 0.0,
+   "tdl": "Tclin",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "O75874",
+   "gene": "IDH1",
+   "ref": "R",
+   "pos": 132,
+   "auth": 132,
+   "alt": "C",
+   "gained": "Cys",
+   "tumours": 139,
+   "organs": [
+    [
+     "bile duct",
+     48
+    ],
+    [
+     "brain",
+     26
+    ],
+    [
+     "skin",
+     23
+    ]
+   ],
+   "where": "next",
+   "site": "ligand",
+   "dist_A": 3.2,
+   "tdl": "Tclin",
+   "role": ""
+  },
+  {
+   "u": "P01116",
+   "gene": "KRAS",
+   "ref": "G",
+   "pos": 12,
+   "auth": 12,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 68,
+   "organs": [
+    [
+     "bowel",
+     32
+    ],
+    [
+     "lung",
+     16
+    ],
+    [
+     "esophagus and stomach",
+     7
+    ]
+   ],
+   "where": "pocket",
+   "site": "ligand",
+   "dist_A": 0.0,
+   "tdl": "Tclin",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "P42771",
+   "gene": "CDKN2A",
+   "ref": "H",
+   "pos": 83,
+   "auth": 83,
+   "alt": "Y",
+   "gained": "Tyr",
+   "tumours": 48,
+   "organs": [
+    [
+     "pancreas",
+     11
+    ],
+    [
+     "lung",
+     9
+    ],
+    [
+     "esophagus and stomach",
+     6
+    ]
+   ],
+   "where": "next",
+   "site": "none",
+   "dist_A": 1.34,
+   "tdl": "Tbio",
+   "role": "tumour suppressor"
+  },
+  {
+   "u": "P63000",
+   "gene": "RAC1",
+   "ref": "P",
+   "pos": 29,
+   "auth": 29,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 43,
+   "organs": [
+    [
+     "skin",
+     34
+    ],
+    [
+     "unknown site",
+     4
+    ],
+    [
+     "head and neck",
+     2
+    ]
+   ],
+   "where": "next",
+   "site": "ligand",
+   "dist_A": 3.69,
+   "tdl": "Tbio",
+   "role": ""
+  },
+  {
+   "u": "P04637",
+   "gene": "TP53",
+   "ref": "R",
+   "pos": 337,
+   "auth": 337,
+   "alt": "C",
+   "gained": "Cys",
+   "tumours": 36,
+   "organs": [
+    [
+     "bowel",
+     7
+    ],
+    [
+     "breast",
+     6
+    ],
+    [
+     "head and neck",
+     4
+    ]
+   ],
+   "where": "next",
+   "site": "none",
+   "dist_A": 2.59,
+   "tdl": "Tchem",
+   "role": "tumour suppressor"
+  },
+  {
+   "u": "P01116",
+   "gene": "KRAS",
+   "ref": "G",
+   "pos": 13,
+   "auth": 13,
+   "alt": "C",
+   "gained": "Cys",
+   "tumours": 32,
+   "organs": [
+    [
+     "lung",
+     26
+    ],
+    [
+     "bowel",
+     3
+    ],
+    [
+     "soft tissue",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "ligand",
+   "dist_A": 0.0,
+   "tdl": "Tclin",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "P01112",
+   "gene": "HRAS",
+   "ref": "Q",
+   "pos": 61,
+   "auth": 61,
+   "alt": "K",
+   "gained": "Lys",
+   "tumours": 28,
+   "organs": [
+    [
+     "skin",
+     6
+    ],
+    [
+     "thyroid",
+     6
+    ],
+    [
+     "bladder",
+     4
+    ]
+   ],
+   "where": "pocket",
+   "site": "ligand",
+   "dist_A": 0.0,
+   "tdl": "Tchem",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "P21802",
+   "gene": "FGFR2",
+   "ref": "N",
+   "pos": 549,
+   "auth": 549,
+   "alt": "K",
+   "gained": "Lys",
+   "tumours": 21,
+   "organs": [
+    [
+     "breast",
+     9
+    ],
+    [
+     "uterus",
+     4
+    ],
+    [
+     "bladder",
+     3
+    ]
+   ],
+   "where": "next",
+   "site": "ligand",
+   "dist_A": 1.34,
+   "tdl": "Tclin",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "P01116",
+   "gene": "KRAS",
+   "ref": "Q",
+   "pos": 61,
+   "auth": 61,
+   "alt": "K",
+   "gained": "Lys",
+   "tumours": 20,
+   "organs": [
+    [
+     "bowel",
+     9
+    ],
+    [
+     "pancreas",
+     3
+    ],
+    [
+     "thyroid",
+     2
+    ]
+   ],
+   "where": "next",
+   "site": "ligand",
+   "dist_A": 3.47,
+   "tdl": "Tclin",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "O00743",
+   "gene": "PPP6C",
+   "ref": "R",
+   "pos": 264,
+   "auth": 264,
+   "alt": "C",
+   "gained": "Cys",
+   "tumours": 19,
+   "organs": [
+    [
+     "skin",
+     17
+    ],
+    [
+     "lung",
+     1
+    ],
+    [
+     "unknown site",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "none",
+   "dist_A": 0.0,
+   "tdl": "Tbio",
+   "role": ""
+  },
+  {
+   "u": "O75874",
+   "gene": "IDH1",
+   "ref": "R",
+   "pos": 132,
+   "auth": 132,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 16,
+   "organs": [
+    [
+     "brain",
+     13
+    ],
+    [
+     "blood",
+     2
+    ],
+    [
+     "bile duct",
+     1
+    ]
+   ],
+   "where": "next",
+   "site": "ligand",
+   "dist_A": 3.2,
+   "tdl": "Tclin",
+   "role": ""
+  },
+  {
+   "u": "P42771",
+   "gene": "CDKN2A",
+   "ref": "D",
+   "pos": 108,
+   "auth": 108,
+   "alt": "Y",
+   "gained": "Tyr",
+   "tumours": 14,
+   "organs": [
+    [
+     "lung",
+     6
+    ],
+    [
+     "bladder",
+     4
+    ],
+    [
+     "head and neck",
+     2
+    ]
+   ],
+   "where": "next",
+   "site": "none",
+   "dist_A": 3.51,
+   "tdl": "Tbio",
+   "role": "tumour suppressor"
+  },
+  {
+   "u": "P01112",
+   "gene": "HRAS",
+   "ref": "G",
+   "pos": 12,
+   "auth": 12,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 14,
+   "organs": [
+    [
+     "head and neck",
+     8
+    ],
+    [
+     "bladder",
+     4
+    ],
+    [
+     "skin",
+     2
+    ]
+   ],
+   "where": "pocket",
+   "site": "ligand",
+   "dist_A": 0.0,
+   "tdl": "Tchem",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "P10721",
+   "gene": "KIT",
+   "ref": "N",
+   "pos": 822,
+   "auth": 822,
+   "alt": "K",
+   "gained": "Lys",
+   "tumours": 14,
+   "organs": [
+    [
+     "testis",
+     7
+    ],
+    [
+     "soft tissue",
+     4
+    ],
+    [
+     "bowel",
+     2
+    ]
+   ],
+   "where": "next",
+   "site": "ligand",
+   "dist_A": 3.88,
+   "tdl": "Tclin",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "Q02750",
+   "gene": "MAP2K1",
+   "ref": "E",
+   "pos": 203,
+   "auth": 203,
+   "alt": "K",
+   "gained": "Lys",
+   "tumours": 14,
+   "organs": [
+    [
+     "skin",
+     5
+    ],
+    [
+     "brain",
+     2
+    ],
+    [
+     "bladder",
+     1
+    ]
+   ],
+   "where": "next",
+   "site": "ligand",
+   "dist_A": 3.86,
+   "tdl": "Tclin",
+   "role": ""
+  },
+  {
+   "u": "P60484",
+   "gene": "PTEN",
+   "ref": "R",
+   "pos": 173,
+   "auth": 173,
+   "alt": "C",
+   "gained": "Cys",
+   "tumours": 14,
+   "organs": [
+    [
+     "bowel",
+     5
+    ],
+    [
+     "brain",
+     4
+    ],
+    [
+     "uterus",
+     2
+    ]
+   ],
+   "where": "next",
+   "site": "none",
+   "dist_A": 3.17,
+   "tdl": "Tbio",
+   "role": "tumour suppressor"
+  },
+  {
+   "u": "P61586",
+   "gene": "RHOA",
+   "ref": "Y",
+   "pos": 42,
+   "auth": 42,
+   "alt": "C",
+   "gained": "Cys",
+   "tumours": 14,
+   "organs": [
+    [
+     "esophagus and stomach",
+     13
+    ],
+    [
+     "ampulla of Vater",
+     1
+    ]
+   ],
+   "where": "next",
+   "site": "ligand",
+   "dist_A": 3.95,
+   "tdl": "Tbio",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "P15056",
+   "gene": "BRAF",
+   "ref": "N",
+   "pos": 581,
+   "auth": 581,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 13,
+   "organs": [
+    [
+     "lung",
+     5
+    ],
+    [
+     "bowel",
+     2
+    ],
+    [
+     "ovary",
+     2
+    ]
+   ],
+   "where": "pocket",
+   "site": "ligand",
+   "dist_A": 0.0,
+   "tdl": "Tclin",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "O43791",
+   "gene": "SPOP",
+   "ref": "F",
+   "pos": 102,
+   "auth": 102,
+   "alt": "C",
+   "gained": "Cys",
+   "tumours": 12,
+   "organs": [
+    [
+     "prostate",
+     12
+    ]
+   ],
+   "where": "next",
+   "site": "none",
+   "dist_A": 3.76,
+   "tdl": "Tbio",
+   "role": ""
+  },
+  {
+   "u": "P36888",
+   "gene": "FLT3",
+   "ref": "D",
+   "pos": 835,
+   "auth": 835,
+   "alt": "Y",
+   "gained": "Tyr",
+   "tumours": 11,
+   "organs": [
+    [
+     "blood",
+     11
+    ]
+   ],
+   "where": "next",
+   "site": "ligand",
+   "dist_A": 1.33,
+   "tdl": "Tclin",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "P01111",
+   "gene": "NRAS",
+   "ref": "G",
+   "pos": 12,
+   "auth": 12,
+   "alt": "C",
+   "gained": "Cys",
+   "tumours": 11,
+   "organs": [
+    [
+     "bowel",
+     7
+    ],
+    [
+     "bladder",
+     1
+    ],
+    [
+     "blood",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "ligand",
+   "dist_A": 0.0,
+   "tdl": "Tchem",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "P42771",
+   "gene": "CDKN2A",
+   "ref": "E",
+   "pos": 88,
+   "auth": 88,
+   "alt": "K",
+   "gained": "Lys",
+   "tumours": 8,
+   "organs": [
+    [
+     "skin",
+     5
+    ],
+    [
+     "cervix",
+     1
+    ],
+    [
+     "head and neck",
+     1
+    ]
+   ],
+   "where": "next",
+   "site": "none",
+   "dist_A": 2.9,
+   "tdl": "Tbio",
+   "role": "tumour suppressor"
+  },
+  {
+   "u": "P01111",
+   "gene": "NRAS",
+   "ref": "G",
+   "pos": 12,
+   "auth": 12,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 8,
+   "organs": [
+    [
+     "blood",
+     3
+    ],
+    [
+     "unknown site",
+     2
+    ],
+    [
+     "bowel",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "ligand",
+   "dist_A": 0.0,
+   "tdl": "Tchem",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "O43791",
+   "gene": "SPOP",
+   "ref": "F",
+   "pos": 133,
+   "auth": 133,
+   "alt": "C",
+   "gained": "Cys",
+   "tumours": 8,
+   "organs": [
+    [
+     "prostate",
+     8
+    ]
+   ],
+   "where": "pocket",
+   "site": "none",
+   "dist_A": 0.0,
+   "tdl": "Tbio",
+   "role": ""
+  },
+  {
+   "u": "P00533",
+   "gene": "EGFR",
+   "ref": "G",
+   "pos": 719,
+   "auth": 719,
+   "alt": "C",
+   "gained": "Cys",
+   "tumours": 7,
+   "organs": [
+    [
+     "lung",
+     6
+    ],
+    [
+     "brain",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "ligand",
+   "dist_A": 0.0,
+   "tdl": "Tclin",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "P60484",
+   "gene": "PTEN",
+   "ref": "P",
+   "pos": 38,
+   "auth": 38,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 7,
+   "organs": [
+    [
+     "skin",
+     7
+    ]
+   ],
+   "where": "next",
+   "site": "none",
+   "dist_A": 1.34,
+   "tdl": "Tbio",
+   "role": "tumour suppressor"
+  },
+  {
+   "u": "Q15831",
+   "gene": "STK11",
+   "ref": "D",
+   "pos": 194,
+   "auth": 194,
+   "alt": "Y",
+   "gained": "Tyr",
+   "tumours": 7,
+   "organs": [
+    [
+     "lung",
+     7
+    ]
+   ],
+   "where": "pocket",
+   "site": "none",
+   "dist_A": 0.0,
+   "tdl": "Tchem",
+   "role": "tumour suppressor"
+  },
+  {
+   "u": "P42771",
+   "gene": "CDKN2A",
+   "ref": "D",
+   "pos": 84,
+   "auth": 84,
+   "alt": "Y",
+   "gained": "Tyr",
+   "tumours": 6,
+   "organs": [
+    [
+     "bladder",
+     2
+    ],
+    [
+     "lung",
+     2
+    ],
+    [
+     "bile duct",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "none",
+   "dist_A": 0.0,
+   "tdl": "Tbio",
+   "role": "tumour suppressor"
+  },
+  {
+   "u": "P10721",
+   "gene": "KIT",
+   "ref": "N",
+   "pos": 822,
+   "auth": 822,
+   "alt": "Y",
+   "gained": "Tyr",
+   "tumours": 6,
+   "organs": [
+    [
+     "testis",
+     3
+    ],
+    [
+     "skin",
+     1
+    ],
+    [
+     "soft tissue",
+     1
+    ]
+   ],
+   "where": "next",
+   "site": "ligand",
+   "dist_A": 3.88,
+   "tdl": "Tclin",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "Q13485",
+   "gene": "SMAD4",
+   "ref": "E",
+   "pos": 330,
+   "auth": 330,
+   "alt": "K",
+   "gained": "Lys",
+   "tumours": 6,
+   "organs": [
+    [
+     "bowel",
+     3
+    ],
+    [
+     "breast",
+     1
+    ],
+    [
+     "esophagus and stomach",
+     1
+    ]
+   ],
+   "where": "next",
+   "site": "none",
+   "dist_A": 1.32,
+   "tdl": "Tbio",
+   "role": ""
+  },
+  {
+   "u": "Q13485",
+   "gene": "SMAD4",
+   "ref": "W",
+   "pos": 524,
+   "auth": 524,
+   "alt": "C",
+   "gained": "Cys",
+   "tumours": 6,
+   "organs": [
+    [
+     "pancreas",
+     3
+    ],
+    [
+     "bowel",
+     1
+    ],
+    [
+     "breast",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "none",
+   "dist_A": 0.0,
+   "tdl": "Tbio",
+   "role": ""
+  },
+  {
+   "u": "P00533",
+   "gene": "EGFR",
+   "ref": "G",
+   "pos": 719,
+   "auth": 719,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 5,
+   "organs": [
+    [
+     "lung",
+     5
+    ]
+   ],
+   "where": "pocket",
+   "site": "ligand",
+   "dist_A": 0.0,
+   "tdl": "Tclin",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "P10721",
+   "gene": "KIT",
+   "ref": "D",
+   "pos": 816,
+   "auth": 816,
+   "alt": "Y",
+   "gained": "Tyr",
+   "tumours": 5,
+   "organs": [
+    [
+     "testis",
+     4
+    ],
+    [
+     "blood",
+     1
+    ]
+   ],
+   "where": "next",
+   "site": "ligand",
+   "dist_A": 1.35,
+   "tdl": "Tclin",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "P01116",
+   "gene": "KRAS",
+   "ref": "Q",
+   "pos": 22,
+   "auth": 22,
+   "alt": "K",
+   "gained": "Lys",
+   "tumours": 5,
+   "organs": [
+    [
+     "bowel",
+     2
+    ],
+    [
+     "blood",
+     1
+    ],
+    [
+     "lung",
+     1
+    ]
+   ],
+   "where": "next",
+   "site": "ligand",
+   "dist_A": 2.96,
+   "tdl": "Tclin",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "O43791",
+   "gene": "SPOP",
+   "ref": "F",
+   "pos": 133,
+   "auth": 133,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 5,
+   "organs": [
+    [
+     "prostate",
+     5
+    ]
+   ],
+   "where": "pocket",
+   "site": "none",
+   "dist_A": 0.0,
+   "tdl": "Tbio",
+   "role": ""
+  },
+  {
+   "u": "P01112",
+   "gene": "HRAS",
+   "ref": "G",
+   "pos": 12,
+   "auth": 12,
+   "alt": "C",
+   "gained": "Cys",
+   "tumours": 4,
+   "organs": [
+    [
+     "head and neck",
+     3
+    ],
+    [
+     "soft tissue",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "ligand",
+   "dist_A": 0.0,
+   "tdl": "Tchem",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "Q14145",
+   "gene": "KEAP1",
+   "ref": "G",
+   "pos": 333,
+   "auth": 333,
+   "alt": "C",
+   "gained": "Cys",
+   "tumours": 4,
+   "organs": [
+    [
+     "lung",
+     4
+    ]
+   ],
+   "where": "next",
+   "site": "unknown",
+   "dist_A": 1.33,
+   "tdl": "Tclin",
+   "role": ""
+  },
+  {
+   "u": "P10721",
+   "gene": "KIT",
+   "ref": "D",
+   "pos": 820,
+   "auth": 820,
+   "alt": "Y",
+   "gained": "Tyr",
+   "tumours": 4,
+   "organs": [
+    [
+     "soft tissue",
+     3
+    ],
+    [
+     "unknown site",
+     1
+    ]
+   ],
+   "where": "next",
+   "site": "ligand",
+   "dist_A": 3.54,
+   "tdl": "Tclin",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "P60484",
+   "gene": "PTEN",
+   "ref": "H",
+   "pos": 93,
+   "auth": 93,
+   "alt": "Y",
+   "gained": "Tyr",
+   "tumours": 4,
+   "organs": [
+    [
+     "bowel",
+     1
+    ],
+    [
+     "brain",
+     1
+    ],
+    [
+     "skin",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "none",
+   "dist_A": 0.0,
+   "tdl": "Tbio",
+   "role": "tumour suppressor"
+  },
+  {
+   "u": "P60484",
+   "gene": "PTEN",
+   "ref": "A",
+   "pos": 126,
+   "auth": 126,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 4,
+   "organs": [
+    [
+     "breast",
+     1
+    ],
+    [
+     "soft tissue",
+     1
+    ],
+    [
+     "unknown site",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "none",
+   "dist_A": 0.0,
+   "tdl": "Tbio",
+   "role": "tumour suppressor"
+  },
+  {
+   "u": "P60484",
+   "gene": "PTEN",
+   "ref": "Y",
+   "pos": 155,
+   "auth": 155,
+   "alt": "C",
+   "gained": "Cys",
+   "tumours": 4,
+   "organs": [
+    [
+     "uterus",
+     3
+    ],
+    [
+     "bile duct",
+     1
+    ]
+   ],
+   "where": "next",
+   "site": "none",
+   "dist_A": 2.62,
+   "tdl": "Tbio",
+   "role": "tumour suppressor"
+  },
+  {
+   "u": "O43791",
+   "gene": "SPOP",
+   "ref": "W",
+   "pos": 131,
+   "auth": 131,
+   "alt": "C",
+   "gained": "Cys",
+   "tumours": 4,
+   "organs": [
+    [
+     "prostate",
+     2
+    ],
+    [
+     "brain",
+     1
+    ],
+    [
+     "uterus",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "none",
+   "dist_A": 0.0,
+   "tdl": "Tbio",
+   "role": ""
+  },
+  {
+   "u": "P04637",
+   "gene": "TP53",
+   "ref": "R",
+   "pos": 337,
+   "auth": 337,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 4,
+   "organs": [
+    [
+     "bladder",
+     1
+    ],
+    [
+     "bowel",
+     1
+    ],
+    [
+     "esophagus and stomach",
+     1
+    ]
+   ],
+   "where": "next",
+   "site": "none",
+   "dist_A": 2.59,
+   "tdl": "Tchem",
+   "role": "tumour suppressor"
+  },
+  {
+   "u": "P40337",
+   "gene": "VHL",
+   "ref": "P",
+   "pos": 86,
+   "auth": 86,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 4,
+   "organs": [
+    [
+     "kidney",
+     4
+    ]
+   ],
+   "where": "next",
+   "site": "ligand",
+   "dist_A": 3.96,
+   "tdl": "Tchem",
+   "role": "tumour suppressor"
+  },
+  {
+   "u": "P42771",
+   "gene": "CDKN2A",
+   "ref": "D",
+   "pos": 74,
+   "auth": 74,
+   "alt": "Y",
+   "gained": "Tyr",
+   "tumours": 3,
+   "organs": [
+    [
+     "lung",
+     2
+    ],
+    [
+     "esophagus and stomach",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "none",
+   "dist_A": 0.0,
+   "tdl": "Tbio",
+   "role": "tumour suppressor"
+  },
+  {
+   "u": "P22455",
+   "gene": "FGFR4",
+   "ref": "N",
+   "pos": 535,
+   "auth": 535,
+   "alt": "K",
+   "gained": "Lys",
+   "tumours": 3,
+   "organs": [
+    [
+     "breast",
+     3
+    ]
+   ],
+   "where": "next",
+   "site": "ligand",
+   "dist_A": 1.33,
+   "tdl": "Tclin",
+   "role": ""
+  },
+  {
+   "u": "P55317",
+   "gene": "FOXA1",
+   "ref": "R",
+   "pos": 219,
+   "auth": 219,
+   "alt": "C",
+   "gained": "Cys",
+   "tumours": 3,
+   "organs": [
+    [
+     "bowel",
+     1
+    ],
+    [
+     "brain",
+     1
+    ],
+    [
+     "prostate",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "none",
+   "dist_A": 0.0,
+   "tdl": "Tbio",
+   "role": ""
+  },
+  {
+   "u": "P55317",
+   "gene": "FOXA1",
+   "ref": "R",
+   "pos": 219,
+   "auth": 219,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 3,
+   "organs": [
+    [
+     "prostate",
+     3
+    ]
+   ],
+   "where": "pocket",
+   "site": "none",
+   "dist_A": 0.0,
+   "tdl": "Tbio",
+   "role": ""
+  },
+  {
+   "u": "Q9H334",
+   "gene": "FOXP1",
+   "ref": "R",
+   "pos": 514,
+   "auth": 53,
+   "alt": "C",
+   "gained": "Cys",
+   "tumours": 3,
+   "organs": [
+    [
+     "bladder",
+     1
+    ],
+    [
+     "bowel",
+     1
+    ],
+    [
+     "breast",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "none",
+   "dist_A": 0.0,
+   "tdl": "Tbio",
+   "role": ""
+  },
+  {
+   "u": "P01112",
+   "gene": "HRAS",
+   "ref": "G",
+   "pos": 13,
+   "auth": 13,
+   "alt": "C",
+   "gained": "Cys",
+   "tumours": 3,
+   "organs": [
+    [
+     "head and neck",
+     1
+    ],
+    [
+     "lung",
+     1
+    ],
+    [
+     "unknown site",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "ligand",
+   "dist_A": 0.0,
+   "tdl": "Tchem",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "Q02750",
+   "gene": "MAP2K1",
+   "ref": "Y",
+   "pos": 130,
+   "auth": 130,
+   "alt": "C",
+   "gained": "Cys",
+   "tumours": 3,
+   "organs": [
+    [
+     "bowel",
+     1
+    ],
+    [
+     "liver",
+     1
+    ],
+    [
+     "lymph node",
+     1
+    ]
+   ],
+   "where": "next",
+   "site": "ligand",
+   "dist_A": 3.55,
+   "tdl": "Tclin",
+   "role": ""
+  },
+  {
+   "u": "P08581",
+   "gene": "MET",
+   "ref": "H",
+   "pos": 1094,
+   "auth": 1094,
+   "alt": "Y",
+   "gained": "Tyr",
+   "tumours": 3,
+   "organs": [
+    [
+     "kidney",
+     2
+    ],
+    [
+     "lung",
+     1
+    ]
+   ],
+   "where": "next",
+   "site": "ligand",
+   "dist_A": 3.44,
+   "tdl": "Tclin",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "P01111",
+   "gene": "NRAS",
+   "ref": "G",
+   "pos": 13,
+   "auth": 13,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 3,
+   "organs": [
+    [
+     "bile duct",
+     1
+    ],
+    [
+     "skin",
+     1
+    ],
+    [
+     "unknown site",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "ligand",
+   "dist_A": 0.0,
+   "tdl": "Tchem",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "P60484",
+   "gene": "PTEN",
+   "ref": "G",
+   "pos": 132,
+   "auth": 132,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 3,
+   "organs": [
+    [
+     "brain",
+     1
+    ],
+    [
+     "skin",
+     1
+    ],
+    [
+     "uterus",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "none",
+   "dist_A": 0.0,
+   "tdl": "Tbio",
+   "role": "tumour suppressor"
+  },
+  {
+   "u": "Q06124",
+   "gene": "PTPN11",
+   "ref": "F",
+   "pos": 285,
+   "auth": 285,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 3,
+   "organs": [
+    [
+     "brain",
+     3
+    ]
+   ],
+   "where": "next",
+   "site": "ligand",
+   "dist_A": 3.59,
+   "tdl": "Tchem",
+   "role": ""
+  },
+  {
+   "u": "Q06124",
+   "gene": "PTPN11",
+   "ref": "T",
+   "pos": 507,
+   "auth": 507,
+   "alt": "K",
+   "gained": "Lys",
+   "tumours": 3,
+   "organs": [
+    [
+     "brain",
+     3
+    ]
+   ],
+   "where": "pocket",
+   "site": "ligand",
+   "dist_A": 0.0,
+   "tdl": "Tchem",
+   "role": ""
+  },
+  {
+   "u": "Q13485",
+   "gene": "SMAD4",
+   "ref": "E",
+   "pos": 526,
+   "auth": 526,
+   "alt": "K",
+   "gained": "Lys",
+   "tumours": 3,
+   "organs": [
+    [
+     "bile duct",
+     1
+    ],
+    [
+     "bowel",
+     1
+    ],
+    [
+     "lung",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "none",
+   "dist_A": 0.0,
+   "tdl": "Tbio",
+   "role": ""
+  },
+  {
+   "u": "O43791",
+   "gene": "SPOP",
+   "ref": "W",
+   "pos": 131,
+   "auth": 131,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 3,
+   "organs": [
+    [
+     "prostate",
+     3
+    ]
+   ],
+   "where": "pocket",
+   "site": "none",
+   "dist_A": 0.0,
+   "tdl": "Tbio",
+   "role": ""
+  },
+  {
+   "u": "P15056",
+   "gene": "BRAF",
+   "ref": "G",
+   "pos": 469,
+   "auth": 469,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 2,
+   "organs": [
+    [
+     "lung",
+     1
+    ],
+    [
+     "skin",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "ligand",
+   "dist_A": 0.0,
+   "tdl": "Tclin",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "P15056",
+   "gene": "BRAF",
+   "ref": "D",
+   "pos": 594,
+   "auth": 594,
+   "alt": "Y",
+   "gained": "Tyr",
+   "tumours": 2,
+   "organs": [
+    [
+     "bladder",
+     1
+    ],
+    [
+     "lung",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "ligand",
+   "dist_A": 0.0,
+   "tdl": "Tclin",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "P01112",
+   "gene": "HRAS",
+   "ref": "G",
+   "pos": 13,
+   "auth": 13,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 2,
+   "organs": [
+    [
+     "bowel",
+     1
+    ],
+    [
+     "skin",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "ligand",
+   "dist_A": 0.0,
+   "tdl": "Tchem",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "Q14145",
+   "gene": "KEAP1",
+   "ref": "G",
+   "pos": 333,
+   "auth": 333,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 2,
+   "organs": [
+    [
+     "lung",
+     2
+    ]
+   ],
+   "where": "next",
+   "site": "unknown",
+   "dist_A": 1.33,
+   "tdl": "Tclin",
+   "role": ""
+  },
+  {
+   "u": "P01111",
+   "gene": "NRAS",
+   "ref": "G",
+   "pos": 13,
+   "auth": 13,
+   "alt": "C",
+   "gained": "Cys",
+   "tumours": 2,
+   "organs": [
+    [
+     "bowel",
+     1
+    ],
+    [
+     "skin",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "ligand",
+   "dist_A": 0.0,
+   "tdl": "Tchem",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "P60484",
+   "gene": "PTEN",
+   "ref": "D",
+   "pos": 92,
+   "auth": 92,
+   "alt": "Y",
+   "gained": "Tyr",
+   "tumours": 2,
+   "organs": [
+    [
+     "breast",
+     1
+    ],
+    [
+     "lung",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "none",
+   "dist_A": 0.0,
+   "tdl": "Tbio",
+   "role": "tumour suppressor"
+  },
+  {
+   "u": "P10276",
+   "gene": "RARA",
+   "ref": "F",
+   "pos": 286,
+   "auth": 286,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 2,
+   "organs": [
+    [
+     "breast",
+     1
+    ],
+    [
+     "lung",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "ligand",
+   "dist_A": 0.0,
+   "tdl": "Tclin",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "Q15382",
+   "gene": "RHEB",
+   "ref": "Y",
+   "pos": 35,
+   "auth": 35,
+   "alt": "C",
+   "gained": "Cys",
+   "tumours": 2,
+   "organs": [
+    [
+     "bladder",
+     1
+    ],
+    [
+     "bowel",
+     1
+    ]
+   ],
+   "where": "next",
+   "site": "ligand",
+   "dist_A": 3.29,
+   "tdl": "Tbio",
+   "role": ""
+  },
+  {
+   "u": "P61586",
+   "gene": "RHOA",
+   "ref": "E",
+   "pos": 40,
+   "auth": 40,
+   "alt": "K",
+   "gained": "Lys",
+   "tumours": 2,
+   "organs": [
+    [
+     "esophagus and stomach",
+     1
+    ],
+    [
+     "head and neck",
+     1
+    ]
+   ],
+   "where": "next",
+   "site": "ligand",
+   "dist_A": 2.7,
+   "tdl": "Tbio",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "O43791",
+   "gene": "SPOP",
+   "ref": "Y",
+   "pos": 87,
+   "auth": 87,
+   "alt": "C",
+   "gained": "Cys",
+   "tumours": 2,
+   "organs": [
+    [
+     "prostate",
+     2
+    ]
+   ],
+   "where": "pocket",
+   "site": "none",
+   "dist_A": 0.0,
+   "tdl": "Tbio",
+   "role": ""
+  },
+  {
+   "u": "O43791",
+   "gene": "SPOP",
+   "ref": "F",
+   "pos": 102,
+   "auth": 102,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 2,
+   "organs": [
+    [
+     "prostate",
+     2
+    ]
+   ],
+   "where": "next",
+   "site": "none",
+   "dist_A": 3.76,
+   "tdl": "Tbio",
+   "role": ""
+  },
+  {
+   "u": "P40337",
+   "gene": "VHL",
+   "ref": "H",
+   "pos": 115,
+   "auth": 115,
+   "alt": "Y",
+   "gained": "Tyr",
+   "tumours": 2,
+   "organs": [
+    [
+     "kidney",
+     2
+    ]
+   ],
+   "where": "pocket",
+   "site": "ligand",
+   "dist_A": 0.0,
+   "tdl": "Tchem",
+   "role": "tumour suppressor"
+  },
+  {
+   "u": "P15056",
+   "gene": "BRAF",
+   "ref": "L",
+   "pos": 485,
+   "auth": 485,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 1,
+   "organs": [
+    [
+     "lung",
+     1
+    ]
+   ],
+   "where": "next",
+   "site": "ligand",
+   "dist_A": 3.19,
+   "tdl": "Tclin",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "P15056",
+   "gene": "BRAF",
+   "ref": "N",
+   "pos": 581,
+   "auth": 581,
+   "alt": "Y",
+   "gained": "Tyr",
+   "tumours": 1,
+   "organs": [
+    [
+     "bowel",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "ligand",
+   "dist_A": 0.0,
+   "tdl": "Tclin",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "P15056",
+   "gene": "BRAF",
+   "ref": "G",
+   "pos": 596,
+   "auth": 596,
+   "alt": "C",
+   "gained": "Cys",
+   "tumours": 1,
+   "organs": [
+    [
+     "lung",
+     1
+    ]
+   ],
+   "where": "next",
+   "site": "ligand",
+   "dist_A": 1.33,
+   "tdl": "Tclin",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "P15056",
+   "gene": "BRAF",
+   "ref": "G",
+   "pos": 596,
+   "auth": 596,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 1,
+   "organs": [
+    [
+     "lung",
+     1
+    ]
+   ],
+   "where": "next",
+   "site": "ligand",
+   "dist_A": 1.33,
+   "tdl": "Tclin",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "P42771",
+   "gene": "CDKN2A",
+   "ref": "N",
+   "pos": 42,
+   "auth": 42,
+   "alt": "K",
+   "gained": "Lys",
+   "tumours": 1,
+   "organs": [
+    [
+     "esophagus and stomach",
+     1
+    ]
+   ],
+   "where": "next",
+   "site": "none",
+   "dist_A": 2.58,
+   "tdl": "Tbio",
+   "role": "tumour suppressor"
+  },
+  {
+   "u": "P42771",
+   "gene": "CDKN2A",
+   "ref": "N",
+   "pos": 42,
+   "auth": 42,
+   "alt": "Y",
+   "gained": "Tyr",
+   "tumours": 1,
+   "organs": [
+    [
+     "unknown site",
+     1
+    ]
+   ],
+   "where": "next",
+   "site": "none",
+   "dist_A": 2.58,
+   "tdl": "Tbio",
+   "role": "tumour suppressor"
+  },
+  {
+   "u": "P00533",
+   "gene": "EGFR",
+   "ref": "L",
+   "pos": 747,
+   "auth": 747,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 1,
+   "organs": [
+    [
+     "lung",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "ligand",
+   "dist_A": 0.0,
+   "tdl": "Tclin",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "P21802",
+   "gene": "FGFR2",
+   "ref": "N",
+   "pos": 549,
+   "auth": 549,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 1,
+   "organs": [
+    [
+     "bladder",
+     1
+    ]
+   ],
+   "where": "next",
+   "site": "ligand",
+   "dist_A": 1.34,
+   "tdl": "Tclin",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "P23458",
+   "gene": "JAK1",
+   "ref": "L",
+   "pos": 910,
+   "auth": 910,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 1,
+   "organs": [
+    [
+     "liver",
+     1
+    ]
+   ],
+   "where": "next",
+   "site": "ligand",
+   "dist_A": 2.73,
+   "tdl": "Tclin",
+   "role": ""
+  },
+  {
+   "u": "P10721",
+   "gene": "KIT",
+   "ref": "Y",
+   "pos": 823,
+   "auth": 823,
+   "alt": "C",
+   "gained": "Cys",
+   "tumours": 1,
+   "organs": [
+    [
+     "testis",
+     1
+    ]
+   ],
+   "where": "next",
+   "site": "ligand",
+   "dist_A": 2.83,
+   "tdl": "Tclin",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "P01116",
+   "gene": "KRAS",
+   "ref": "G",
+   "pos": 60,
+   "auth": 60,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 1,
+   "organs": [
+    [
+     "unknown site",
+     1
+    ]
+   ],
+   "where": "next",
+   "site": "ligand",
+   "dist_A": 1.33,
+   "tdl": "Tclin",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "P08581",
+   "gene": "MET",
+   "ref": "Y",
+   "pos": 1230,
+   "auth": 1230,
+   "alt": "C",
+   "gained": "Cys",
+   "tumours": 1,
+   "organs": [
+    [
+     "kidney",
+     1
+    ]
+   ],
+   "where": "next",
+   "site": "ligand",
+   "dist_A": 3.04,
+   "tdl": "Tclin",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "P60484",
+   "gene": "PTEN",
+   "ref": "R",
+   "pos": 130,
+   "auth": 130,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 1,
+   "organs": [
+    [
+     "uterus",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "none",
+   "dist_A": 0.0,
+   "tdl": "Tbio",
+   "role": "tumour suppressor"
+  },
+  {
+   "u": "P60484",
+   "gene": "PTEN",
+   "ref": "Q",
+   "pos": 171,
+   "auth": 171,
+   "alt": "K",
+   "gained": "Lys",
+   "tumours": 1,
+   "organs": [
+    [
+     "lung",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "none",
+   "dist_A": 0.0,
+   "tdl": "Tbio",
+   "role": "tumour suppressor"
+  },
+  {
+   "u": "P60484",
+   "gene": "PTEN",
+   "ref": "W",
+   "pos": 274,
+   "auth": 274,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 1,
+   "organs": [
+    [
+     "brain",
+     1
+    ]
+   ],
+   "where": "next",
+   "site": "none",
+   "dist_A": 3.19,
+   "tdl": "Tbio",
+   "role": "tumour suppressor"
+  },
+  {
+   "u": "Q06124",
+   "gene": "PTPN11",
+   "ref": "N",
+   "pos": 308,
+   "auth": 308,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 1,
+   "organs": [
+    [
+     "brain",
+     1
+    ]
+   ],
+   "where": "next",
+   "site": "ligand",
+   "dist_A": 2.63,
+   "tdl": "Tchem",
+   "role": ""
+  },
+  {
+   "u": "P10276",
+   "gene": "RARA",
+   "ref": "F",
+   "pos": 286,
+   "auth": 286,
+   "alt": "C",
+   "gained": "Cys",
+   "tumours": 1,
+   "organs": [
+    [
+     "skin",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "ligand",
+   "dist_A": 0.0,
+   "tdl": "Tclin",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "P61586",
+   "gene": "RHOA",
+   "ref": "T",
+   "pos": 37,
+   "auth": 37,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 1,
+   "organs": [
+    [
+     "head and neck",
+     1
+    ]
+   ],
+   "where": "next",
+   "site": "ligand",
+   "dist_A": 3.05,
+   "tdl": "Tbio",
+   "role": "proto-oncogene"
+  },
+  {
+   "u": "Q92963",
+   "gene": "RIT1",
+   "ref": "A",
+   "pos": 77,
+   "auth": 77,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 1,
+   "organs": [
+    [
+     "lung",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "ligand",
+   "dist_A": 0.0,
+   "tdl": "Tbio",
+   "role": ""
+  },
+  {
+   "u": "Q13485",
+   "gene": "SMAD4",
+   "ref": "W",
+   "pos": 524,
+   "auth": 524,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 1,
+   "organs": [
+    [
+     "bowel",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "none",
+   "dist_A": 0.0,
+   "tdl": "Tbio",
+   "role": ""
+  },
+  {
+   "u": "O43791",
+   "gene": "SPOP",
+   "ref": "F",
+   "pos": 125,
+   "auth": 125,
+   "alt": "C",
+   "gained": "Cys",
+   "tumours": 1,
+   "organs": [
+    [
+     "prostate",
+     1
+    ]
+   ],
+   "where": "next",
+   "site": "none",
+   "dist_A": 1.33,
+   "tdl": "Tbio",
+   "role": ""
+  },
+  {
+   "u": "Q15831",
+   "gene": "STK11",
+   "ref": "H",
+   "pos": 174,
+   "auth": 174,
+   "alt": "Y",
+   "gained": "Tyr",
+   "tumours": 1,
+   "organs": [
+    [
+     "kidney",
+     1
+    ]
+   ],
+   "where": "next",
+   "site": "none",
+   "dist_A": 3.06,
+   "tdl": "Tchem",
+   "role": "tumour suppressor"
+  },
+  {
+   "u": "Q15831",
+   "gene": "STK11",
+   "ref": "N",
+   "pos": 181,
+   "auth": 181,
+   "alt": "S",
+   "gained": "Ser",
+   "tumours": 1,
+   "organs": [
+    [
+     "lung",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "none",
+   "dist_A": 0.0,
+   "tdl": "Tchem",
+   "role": "tumour suppressor"
+  },
+  {
+   "u": "Q15831",
+   "gene": "STK11",
+   "ref": "N",
+   "pos": 181,
+   "auth": 181,
+   "alt": "Y",
+   "gained": "Tyr",
+   "tumours": 1,
+   "organs": [
+    [
+     "lung",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "none",
+   "dist_A": 0.0,
+   "tdl": "Tchem",
+   "role": "tumour suppressor"
+  },
+  {
+   "u": "P40337",
+   "gene": "VHL",
+   "ref": "Y",
+   "pos": 112,
+   "auth": 112,
+   "alt": "C",
+   "gained": "Cys",
+   "tumours": 1,
+   "organs": [
+    [
+     "pancreas",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "ligand",
+   "dist_A": 0.0,
+   "tdl": "Tchem",
+   "role": "tumour suppressor"
+  },
+  {
+   "u": "P40337",
+   "gene": "VHL",
+   "ref": "G",
+   "pos": 114,
+   "auth": 114,
+   "alt": "C",
+   "gained": "Cys",
+   "tumours": 1,
+   "organs": [
+    [
+     "kidney",
+     1
+    ]
+   ],
+   "where": "next",
+   "site": "ligand",
+   "dist_A": 1.33,
+   "tdl": "Tchem",
+   "role": "tumour suppressor"
+  },
+  {
+   "u": "P40337",
+   "gene": "VHL",
+   "ref": "W",
+   "pos": 117,
+   "auth": 117,
+   "alt": "C",
+   "gained": "Cys",
+   "tumours": 1,
+   "organs": [
+    [
+     "kidney",
+     1
+    ]
+   ],
+   "where": "pocket",
+   "site": "ligand",
+   "dist_A": 0.0,
+   "tdl": "Tchem",
+   "role": "tumour suppressor"
+  }
+ ],
+ "losses": [
+  {
+   "u": "Q06187",
+   "gene": "BTK",
+   "change": "C481S",
+   "pos": 481,
+   "therapies": "Ibrutinib",
+   "diseases": "Chronic Lymphocytic Leukemia",
+   "levels": "B",
+   "citations": "Maddocks et al., 2015; Woyach et al., 2014",
+   "pubmed": [
+    "24869598",
+    "26182309"
+   ],
+   "evidence": [
+    436,
+    1770
+   ],
+   "where": "pocket",
+   "dist_A": 0.0,
+   "site": "ligand",
+   "pdb_entries": 21,
+   "pdb_example": {
+    "entry": "5J87",
+    "ligand": "N42"
+   },
+   "catalogue_cys": 527,
+   "native_kind": "pocket"
+  },
+  {
+   "u": "P00533",
+   "gene": "EGFR",
+   "change": "C797S",
+   "pos": 797,
+   "therapies": "Osimertinib",
+   "diseases": "Lung Non-small Cell Carcinoma",
+   "levels": "B",
+   "citations": "Thress et al., 2015",
+   "pubmed": [
+    "25939061"
+   ],
+   "evidence": [
+    964
+   ],
+   "where": "contact",
+   "dist_A": 1.33,
+   "site": "ligand",
+   "pdb_entries": 104,
+   "pdb_example": {
+    "entry": "2J5F",
+    "ligand": "DJK"
+   },
+   "catalogue_cys": 775,
+   "native_kind": "none"
+  }
+ ],
+ "by_uniprot": {
+  "P01116": [
+   0,
+   2,
+   6,
+   9,
+   34,
+   81
+  ],
+  "O75874": [
+   1,
+   11
+  ],
+  "P42771": [
+   3,
+   12,
+   22,
+   28,
+   45,
+   75,
+   76
+  ],
+  "P63000": [
+   4
+  ],
+  "P04637": [
+   5,
+   43
+  ],
+  "P01112": [
+   7,
+   13,
+   36,
+   50,
+   61
+  ],
+  "P21802": [
+   8,
+   78
+  ],
+  "O00743": [
+   10
+  ],
+  "P10721": [
+   14,
+   29,
+   33,
+   38,
+   80
+  ],
+  "Q02750": [
+   15,
+   51
+  ],
+  "P60484": [
+   16,
+   26,
+   39,
+   40,
+   41,
+   54,
+   64,
+   83,
+   84,
+   85
+  ],
+  "P61586": [
+   17,
+   67,
+   88
+  ],
+  "P15056": [
+   18,
+   59,
+   60,
+   71,
+   72,
+   73,
+   74
+  ],
+  "O43791": [
+   19,
+   24,
+   35,
+   42,
+   58,
+   68,
+   69,
+   91
+  ],
+  "P36888": [
+   20
+  ],
+  "P01111": [
+   21,
+   23,
+   53,
+   63
+  ],
+  "P00533": [
+   25,
+   32,
+   77
+  ],
+  "Q15831": [
+   27,
+   92,
+   93,
+   94
+  ],
+  "Q13485": [
+   30,
+   31,
+   57,
+   90
+  ],
+  "Q14145": [
+   37,
+   62
+  ],
+  "P40337": [
+   44,
+   70,
+   95,
+   96,
+   97
+  ],
+  "P22455": [
+   46
+  ],
+  "P55317": [
+   47,
+   48
+  ],
+  "Q9H334": [
+   49
+  ],
+  "P08581": [
+   52,
+   82
+  ],
+  "Q06124": [
+   55,
+   56,
+   86
+  ],
+  "P10276": [
+   65,
+   87
+  ],
+  "Q15382": [
+   66
+  ],
+  "P23458": [
+   79
+  ],
+  "Q92963": [
+   89
+  ]
+ }
+}

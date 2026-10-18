@@ -1,25 +1,42 @@
 {
  "_meta": {
-  "generated": "2026-10-10",
-  "audit_table": "audit_numbers_20261010.csv",
-  "dir": "TRIB1complex_20261009",
-  "ns": 20,
-  "replicas_per_system": 3,
+  "generated": "2026-10-14",
+  "audit_table": "audit_numbers_20261014.csv",
+  "dir": "TRIB1complex2_20261014",
+  "ns": 30,
+  "replicas_per_system": 4,
   "frame_ps": 20,
   "ligand_resn": "LIG",
-  "source": "TRIB1_Complex_MD_Results_2026-10-10.md (audit rows CX9 to CX13); frames by code/md/site_complex_frames_vm.py, checked against the readout's own displacement (max difference 0.0 A over the nine ligand simulations)",
+  "control_cavity_distance_A": 35,
+  "neutral_pool": 7,
+  "source": "TRIB1_Complex_MD_v2_Results_2026-10-14.md (audit rows V2R1 to V2R10); frames by code/md/site_complex2_frames_vm.py, checked against the readout's own displacement (max difference 0.01 A over the twenty ligand simulations)",
   "rules": {
    "stays": "the molecule's centre stays within 6 A of its docked position in at least 80 % of the frames and never goes beyond 10 A for more than 1 ns",
+   "holds": "the median distance of the molecule's atoms from the docked pose, after fitting the protein on the pocket residues, is under 3 A",
    "rmsd": "the median distance of the molecule's atoms from the docked pose after fitting the protein on the pocket residues (A)"
   },
-  "shown_rule": "for each of the two molecules shown, the simulation whose molecule stayed closest to its docked pose (the lowest median distance); all nine ligand simulations are in the table",
-  "not_shown": "F03 (stays in 1 of 3) and the empty pocket are in the table and the text, not in the viewer",
-  "empty_pocket_start_volume_A3": 123.8,
-  "empty_pocket_replica_medians_A3": [
-   95,
-   113,
-   116
-  ]
+  "shown_rule": "mebendazole in the simulation where it kept closest to its docked pose and in the one where it moved furthest (the lowest and the highest median distance); flutamide in the one where it kept closest; all twenty ligand simulations are in the table",
+  "not_shown": "propranolol, ibuprofen and mebendazole in the other cavity are in the table and the text, not in the viewer",
+  "earlier_round": {
+   "ns": 20,
+   "replicas_per_system": 3,
+   "stays": {
+    "F03": [
+     1,
+     3
+    ],
+    "MBZ": [
+     3,
+     3
+    ],
+    "PRP": [
+     2,
+     3
+    ]
+   },
+   "frame": "a different opened frame (A_02), without the C-terminal tail",
+   "source": "TRIB1_Complex_MD_Results_2026-10-10.md (audit row CX10); the page's data of 2026-10-10 is kept in Documents/run_logs/md_complex_site_data_20261010.json"
+  }
  },
  "pocket": [
   104,
@@ -49,194 +66,353 @@
  ],
  "systems": [
   {
-   "id": "F03",
-   "label": "F03",
-   "role": "the search's best docked molecule",
-   "what": "the best-scoring molecule of the docking search (a small benzimidazole carbamate)",
-   "stays": 1,
-   "holds": 0,
-   "n": 3,
-   "median_site_volume_A3": 120,
-   "ligand_sized_share": 0.33
-  },
-  {
    "id": "MBZ",
    "label": "Mebendazole",
    "role": "candidate",
-   "what": "an approved drug of the same chemical family as the molecules the search proposed",
-   "stays": 3,
-   "holds": 2,
-   "n": 3,
-   "median_site_volume_A3": 111,
-   "ligand_sized_share": 0.16
+   "what": "an approved drug of the same chemical family as the molecules the docking search proposed",
+   "stays": 2,
+   "holds": 1,
+   "n": 4
   },
   {
    "id": "PRP",
    "label": "Propranolol",
    "role": "control",
-   "what": "an unrelated approved drug that docks about as well, used as the control",
-   "stays": 2,
+   "what": "an unrelated approved drug that docks about as well, positively charged",
+   "stays": 4,
    "holds": 0,
-   "n": 3,
-   "median_site_volume_A3": 123,
-   "ligand_sized_share": 0.43
+   "n": 4
   },
   {
-   "id": "apo",
-   "label": "Empty pocket",
-   "role": "empty",
-   "what": "the same protein frame with no molecule in the pocket",
-   "stays": null,
-   "holds": null,
-   "n": 3,
-   "median_site_volume_A3": 113,
-   "ligand_sized_share": 0.26
+   "id": "IBU",
+   "label": "Ibuprofen",
+   "role": "control",
+   "what": "an unrelated approved drug, negatively charged",
+   "stays": 2,
+   "holds": 1,
+   "n": 4
+  },
+  {
+   "id": "NDC",
+   "label": "Flutamide",
+   "role": "control",
+   "what": "an unrelated approved drug, neutral, chosen before the simulations by a fixed rule: the best-docking of the neutral drugs of mebendazole's size and polarity",
+   "stays": 4,
+   "holds": 4,
+   "n": 4
+  },
+  {
+   "id": "MBX",
+   "label": "Mebendazole in another cavity",
+   "role": "control cavity",
+   "what": "mebendazole placed in a small surface cavity 35 A from the pocket that none of the pocket's residues line",
+   "stays": 2,
+   "holds": 0,
+   "n": 4
   }
  ],
  "replicas": [
   {
-   "system": "F03",
+   "system": "MBZ",
    "run": 1,
-   "replica": 4,
+   "replica": 2,
+   "stays": true,
+   "holds": false,
+   "median_rmsd_A": 3.5,
+   "share_within_6A": 1.0,
+   "longest_beyond_10A_ps": 0,
+   "median_pocket_contacts": 8,
+   "end_shift_A": 1.68
+  },
+  {
+   "system": "MBZ",
+   "run": 2,
+   "replica": 2,
    "stays": false,
+   "holds": false,
+   "median_rmsd_A": 12.24,
+   "share_within_6A": 0.43,
+   "longest_beyond_10A_ps": 7160,
+   "median_pocket_contacts": 1,
+   "end_shift_A": 20.91
+  },
+  {
+   "system": "MBZ",
+   "run": 3,
+   "replica": 2,
+   "stays": false,
+   "holds": false,
+   "median_rmsd_A": 6.99,
+   "share_within_6A": 0.258,
+   "longest_beyond_10A_ps": 20,
+   "median_pocket_contacts": 6,
+   "end_shift_A": 6.15
+  },
+  {
+   "system": "MBZ",
+   "run": 4,
+   "replica": 2,
+   "stays": true,
+   "holds": true,
+   "median_rmsd_A": 2.9,
+   "share_within_6A": 1.0,
+   "longest_beyond_10A_ps": 0,
+   "median_pocket_contacts": 8,
+   "end_shift_A": 0.99
+  },
+  {
+   "system": "PRP",
+   "run": 1,
+   "replica": 3,
+   "stays": true,
+   "holds": false,
+   "median_rmsd_A": 3.31,
+   "share_within_6A": 1.0,
+   "longest_beyond_10A_ps": 0,
+   "median_pocket_contacts": 7,
+   "end_shift_A": 4.2
+  },
+  {
+   "system": "PRP",
+   "run": 2,
+   "replica": 3,
+   "stays": true,
    "holds": false,
    "median_rmsd_A": 5.14,
-   "share_within_6A": 0.55,
-   "longest_beyond_10A_ps": 3220,
-   "median_pocket_contacts": 3,
-   "end_shift_A": 22.13
+   "share_within_6A": 0.98,
+   "longest_beyond_10A_ps": 0,
+   "median_pocket_contacts": 8,
+   "end_shift_A": 4.11
   },
   {
-   "system": "F03",
-   "run": 2,
-   "replica": 5,
+   "system": "PRP",
+   "run": 3,
+   "replica": 3,
    "stays": true,
    "holds": false,
-   "median_rmsd_A": 4.35,
-   "share_within_6A": 1.0,
+   "median_rmsd_A": 4.38,
+   "share_within_6A": 0.989,
    "longest_beyond_10A_ps": 0,
-   "median_pocket_contacts": 3,
-   "end_shift_A": 2.63
+   "median_pocket_contacts": 7,
+   "end_shift_A": 4.12
   },
   {
-   "system": "F03",
-   "run": 3,
-   "replica": 6,
-   "stays": false,
+   "system": "PRP",
+   "run": 4,
+   "replica": 3,
+   "stays": true,
    "holds": false,
-   "median_rmsd_A": 10.89,
-   "share_within_6A": 0.34,
-   "longest_beyond_10A_ps": 2960,
-   "median_pocket_contacts": 1,
-   "end_shift_A": 9.38
+   "median_rmsd_A": 5.1,
+   "share_within_6A": 0.991,
+   "longest_beyond_10A_ps": 0,
+   "median_pocket_contacts": 7,
+   "end_shift_A": 3.2
   },
   {
-   "system": "MBZ",
+   "system": "IBU",
    "run": 1,
-   "replica": 7,
-   "stays": true,
-   "holds": false,
-   "median_rmsd_A": 3.68,
-   "share_within_6A": 1.0,
-   "longest_beyond_10A_ps": 0,
-   "median_pocket_contacts": 3,
-   "end_shift_A": 3.51
-  },
-  {
-   "system": "MBZ",
-   "run": 2,
-   "replica": 8,
+   "replica": 4,
    "stays": true,
    "holds": true,
-   "median_rmsd_A": 2.02,
-   "share_within_6A": 1.0,
-   "longest_beyond_10A_ps": 0,
-   "median_pocket_contacts": 6,
-   "end_shift_A": 1.73
-  },
-  {
-   "system": "MBZ",
-   "run": 3,
-   "replica": 9,
-   "stays": true,
-   "holds": true,
-   "median_rmsd_A": 2.18,
+   "median_rmsd_A": 2.59,
    "share_within_6A": 1.0,
    "longest_beyond_10A_ps": 0,
    "median_pocket_contacts": 5,
-   "end_shift_A": 2.75
+   "end_shift_A": 1.76
   },
   {
-   "system": "PRP",
-   "run": 1,
-   "replica": 10,
-   "stays": true,
-   "holds": false,
-   "median_rmsd_A": 4.89,
-   "share_within_6A": 1.0,
-   "longest_beyond_10A_ps": 0,
-   "median_pocket_contacts": 4,
-   "end_shift_A": 4.59
-  },
-  {
-   "system": "PRP",
+   "system": "IBU",
    "run": 2,
-   "replica": 11,
+   "replica": 4,
    "stays": true,
    "holds": false,
-   "median_rmsd_A": 4.79,
+   "median_rmsd_A": 3.51,
    "share_within_6A": 1.0,
    "longest_beyond_10A_ps": 0,
-   "median_pocket_contacts": 4,
-   "end_shift_A": 4.66
+   "median_pocket_contacts": 7,
+   "end_shift_A": 1.87
   },
   {
-   "system": "PRP",
+   "system": "IBU",
    "run": 3,
-   "replica": 12,
+   "replica": 4,
    "stays": false,
    "holds": false,
-   "median_rmsd_A": 8.21,
-   "share_within_6A": 0.03,
-   "longest_beyond_10A_ps": 60,
+   "median_rmsd_A": 29.46,
+   "share_within_6A": 0.138,
+   "longest_beyond_10A_ps": 25640,
    "median_pocket_contacts": 0,
-   "end_shift_A": 7.08
+   "end_shift_A": 25.5
+  },
+  {
+   "system": "IBU",
+   "run": 4,
+   "replica": 4,
+   "stays": false,
+   "holds": false,
+   "median_rmsd_A": 6.99,
+   "share_within_6A": 0.625,
+   "longest_beyond_10A_ps": 0,
+   "median_pocket_contacts": 5,
+   "end_shift_A": 5.11
+  },
+  {
+   "system": "NDC",
+   "run": 1,
+   "replica": 5,
+   "stays": true,
+   "holds": true,
+   "median_rmsd_A": 1.74,
+   "share_within_6A": 1.0,
+   "longest_beyond_10A_ps": 0,
+   "median_pocket_contacts": 9,
+   "end_shift_A": 1.12
+  },
+  {
+   "system": "NDC",
+   "run": 2,
+   "replica": 5,
+   "stays": true,
+   "holds": true,
+   "median_rmsd_A": 1.79,
+   "share_within_6A": 1.0,
+   "longest_beyond_10A_ps": 0,
+   "median_pocket_contacts": 8,
+   "end_shift_A": 0.74
+  },
+  {
+   "system": "NDC",
+   "run": 3,
+   "replica": 5,
+   "stays": true,
+   "holds": true,
+   "median_rmsd_A": 1.72,
+   "share_within_6A": 1.0,
+   "longest_beyond_10A_ps": 0,
+   "median_pocket_contacts": 9,
+   "end_shift_A": 0.34
+  },
+  {
+   "system": "NDC",
+   "run": 4,
+   "replica": 5,
+   "stays": true,
+   "holds": true,
+   "median_rmsd_A": 2.2,
+   "share_within_6A": 1.0,
+   "longest_beyond_10A_ps": 0,
+   "median_pocket_contacts": 8,
+   "end_shift_A": 0.98
+  },
+  {
+   "system": "MBX",
+   "run": 1,
+   "replica": 6,
+   "stays": false,
+   "holds": false,
+   "median_rmsd_A": 10.15,
+   "share_within_6A": 0.187,
+   "longest_beyond_10A_ps": 1500,
+   "median_pocket_contacts": 0,
+   "end_shift_A": 8.34
+  },
+  {
+   "system": "MBX",
+   "run": 2,
+   "replica": 6,
+   "stays": true,
+   "holds": false,
+   "median_rmsd_A": 4.62,
+   "share_within_6A": 0.976,
+   "longest_beyond_10A_ps": 0,
+   "median_pocket_contacts": 0,
+   "end_shift_A": 3.6
+  },
+  {
+   "system": "MBX",
+   "run": 3,
+   "replica": 6,
+   "stays": true,
+   "holds": false,
+   "median_rmsd_A": 4.77,
+   "share_within_6A": 0.979,
+   "longest_beyond_10A_ps": 0,
+   "median_pocket_contacts": 0,
+   "end_shift_A": 5.29
+  },
+  {
+   "system": "MBX",
+   "run": 4,
+   "replica": 6,
+   "stays": false,
+   "holds": false,
+   "median_rmsd_A": 42.66,
+   "share_within_6A": 0.049,
+   "longest_beyond_10A_ps": 21780,
+   "median_pocket_contacts": 0,
+   "end_shift_A": 48.06
   }
  ],
  "shown": [
   {
    "system": "MBZ",
-   "run": 2,
-   "replica": 8,
+   "run": 4,
+   "replica": 2,
+   "how": "kept closest to its docked pose",
+   "hint": "stayed",
+   "view": "pocket",
    "start": {
-    "file": "MBZ_rep08_start.pdb",
+    "file": "MBZ_s4_start.pdb",
     "time_ns": 0.0
    },
    "end": {
-    "file": "MBZ_rep08_end.pdb",
-    "time_ns": 20.0
+    "file": "MBZ_s4_end.pdb",
+    "time_ns": 30.0
    },
-   "atoms": 2084,
+   "atoms": 2258,
    "ligand_atoms": 22,
-   "start_shift_A": 0.71,
-   "end_shift_A": 1.73
+   "start_shift_A": 0.47,
+   "end_shift_A": 0.99
   },
   {
-   "system": "PRP",
+   "system": "MBZ",
    "run": 2,
-   "replica": 11,
+   "replica": 2,
+   "how": "moved furthest from its docked pose",
+   "hint": "did not stay",
+   "view": "whole",
    "start": {
-    "file": "PRP_rep11_start.pdb",
+    "file": "MBZ_s2_start.pdb",
     "time_ns": 0.0
    },
    "end": {
-    "file": "PRP_rep11_end.pdb",
-    "time_ns": 20.0
+    "file": "MBZ_s2_end.pdb",
+    "time_ns": 30.0
    },
-   "atoms": 2081,
+   "atoms": 2258,
+   "ligand_atoms": 22,
+   "start_shift_A": 0.32,
+   "end_shift_A": 20.91
+  },
+  {
+   "system": "NDC",
+   "run": 3,
+   "replica": 5,
+   "how": "kept closest to its docked pose",
+   "hint": "control, stayed",
+   "view": "pocket",
+   "start": {
+    "file": "NDC_s3_start.pdb",
+    "time_ns": 0.0
+   },
+   "end": {
+    "file": "NDC_s3_end.pdb",
+    "time_ns": 30.0
+   },
+   "atoms": 2255,
    "ligand_atoms": 19,
-   "start_shift_A": 0.45,
-   "end_shift_A": 4.66
+   "start_shift_A": 0.49,
+   "end_shift_A": 0.34
   }
  ]
 }
