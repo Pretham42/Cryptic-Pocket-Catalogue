@@ -10,7 +10,7 @@ A website that shows where proteins may hide a drug pocket. A cryptic pocket is 
 
 ## What you can do
 
-- **Narrow the list like a funnel.** Pick a starting list (the hidden pockets, the disease-linked proteins, or everything), then switch on filters.
+- **Narrow the list like a funnel.** Pick a starting list (the hidden pockets, hidden pockets or any confident site with a cysteine in reach, the disease-linked proteins, or everything), then switch on filters.
   - **Confidence** is how sure the model is that the site is a pocket.
   - **Pocket** is whether the site is closed (no cavity yet), open (a cavity is already visible) or already holds a drug-like molecule.
   - **Strong disease link** keeps proteins whose gene is strongly tied to a disease.

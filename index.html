@@ -121,6 +121,7 @@ section.tool{padding-top:60px;padding-bottom:20px}
 .pst[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-pale);box-shadow:inset 0 0 0 1px var(--accent)}
 .pst[aria-pressed="true"] .pn1{color:var(--accent)}
 .searching .presets .pst,.searching .gates{opacity:.45}
+@media (max-width:1000px){.presets{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:700px){.presets{grid-template-columns:1fr}.pst .pc{font-size:22px}}
 
 .gateboard{display:grid;gap:18px;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);align-items:start;margin:0 0 6px}
@@ -523,6 +524,9 @@ details.dd .dsec{padding:0;border:0}
 
     <div class="presets" id="presets" role="group" aria-label="Starting points">
       <button class="pst" data-p="hidden" aria-pressed="true"><span class="pn1">Hidden pockets</span><span class="pc" id="cnt_hidden"></span><span class="pd">confident, closed and empty</span></button>
+      <button class="pst" data-p="hidden_cys" aria-pressed="false"><span class="pn1">Hidden, with a cysteine in reach</span><span class="pc" id="cnt_hidden_cys"></span><span class="pd">for a lab test</span></button>
+      <button class="pst" data-p="sites" aria-pressed="false"><span class="pn1">Ligand sites in general</span><span class="pc" id="cnt_sites"></span><span class="pd">confident sites in any state</span></button>
+      <button class="pst" data-p="sites_cys" aria-pressed="false"><span class="pn1">Any site, with a cysteine in reach</span><span class="pc" id="cnt_sites_cys"></span><span class="pd">for a covalent ligand</span></button>
       <button class="pst" data-p="impact" aria-pressed="false"><span class="pn1">Disease-linked, high confidence</span><span class="pc" id="cnt_impact"></span><span class="pd">high confidence and a strong disease link, nothing else asked</span></button>
       <button class="pst" data-p="all" aria-pressed="false"><span class="pn1">Everything</span><span class="pc" id="cnt_all"></span><span class="pd">every protein scored</span></button>
     </div>
@@ -556,7 +560,7 @@ details.dd .dsec{padding:0;border:0}
         </div>
         <div class="gate">
           <div class="gtop"><span class="gt">A cysteine in reach</span><button class="sw" data-c="cys" role="switch" aria-checked="false" aria-label="A cysteine in reach"></button></div>
-          <p class="gw">A cysteine the protein already has sits in or near the pocket: a handle for labelling, tethering or a covalent drug.</p>
+          <p class="gw">A free cysteine sits in or near the pocket: a handle for thiol labeling or a covalent ligand. Geometry only, not reactivity.</p>
           <span class="gf" id="gf_cys"></span>
         </div>
       </div>
@@ -759,10 +763,13 @@ const EV = {
 /* the starting points: each is just a setting of the gates (the reader can change any of them afterwards) */
 const PRESETS = {
   hidden: { label: "Hidden pockets",                 band: 3, state: "closed", checks: [], note: "Confident, closed and empty: the cryptic-pocket candidates." },
+  hidden_cys: { label: "Hidden, with a cysteine in reach", band: 3, state: "closed", checks: ["cys"], note: "Confident, closed and empty, with a cysteine near the pocket: a pocket a lab could test." },
+  sites:  { label: "Ligand sites in general",         band: 3, state: "any",    checks: [], note: "Every confident predicted site, whether closed, open or already holding a ligand." },
+  sites_cys: { label: "Any site, with a cysteine in reach", band: 3, state: "any", checks: ["cys"], note: "Every confident site, closed, open or holding a ligand, with a cysteine near the pocket: a site a covalent ligand could use." },
   impact: { label: "Disease-linked, high confidence", band: 4, state: "any",    checks: ["dz"], note: "High confidence and a strong disease link, nothing else asked." },
   all:    { label: "Everything",                      band: 0, state: "any",    checks: [], note: "Every protein." }
 };
-const PRESET_ORDER = ["hidden", "impact", "all"];
+const PRESET_ORDER = ["hidden", "hidden_cys", "sites", "sites_cys", "impact", "all"];
 const CHECK_ORDER = ["dz", "rec", "tdl", "cys"];
 
 function context(parts) {
