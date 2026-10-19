@@ -56,7 +56,12 @@ a{color:var(--accent);text-underline-offset:3px}
 .nav nav a:hover{background:var(--surface);color:var(--ink)}
 .chip-ver{font-size:13px;color:var(--ink-3);white-space:nowrap}
 @media (max-width:760px){.chip-ver{display:none}}
-@media (max-width:560px){.nav .wrap{gap:12px}.nav nav a:not([href="#screen"]){display:none}}
+.nav nav a[aria-current]{color:var(--ink);background:var(--accent-pale);box-shadow:inset 0 -2px 0 var(--accent)}
+@media (prefers-color-scheme:dark){.nav nav a[aria-current]{background:color-mix(in srgb,var(--accent) 22%,transparent)}}
+/* a part of the page that is not on show: it keeps its width (so 3D players built inside have a size) and loses its height */
+.simseg{margin:0 0 22px}
+.tab-off{visibility:hidden;height:0!important;overflow:hidden;padding-top:0!important;padding-bottom:0!important;margin:0!important;border:0!important;pointer-events:none}
+@media (max-width:560px){.nav .wrap{gap:10px}.brand{display:none}.nav nav a{padding:6px 8px;font-size:14px}}
 
 /* ── hero ────────────────────────────────────────────────────────────────── */
 .hero{padding:44px 0 34px;border-bottom:1px solid var(--line);background:radial-gradient(900px 300px at 100% -20%,color-mix(in srgb,var(--pocket) 9%,transparent),transparent 70%)}
@@ -468,7 +473,7 @@ details.dd .dsec{padding:0;border:0}
 <a class="skip" href="#screen">Skip to the screening tool</a>
 <header class="nav">
   <div class="wrap">
-    <a class="brand" href="#top"><span class="logo" aria-hidden="true"></span>Cryptic Pocket Catalogue</a>
+    <a class="brand" href="#top" aria-label="Cryptic Pocket Catalogue, home"><span class="logo" aria-hidden="true"></span><span class="bn">Cryptic Pocket Catalogue</span></a>
     <nav aria-label="Sections">
       <a href="#screen">Screen</a>
       <a href="#mut" id="navmut" hidden>Mutations</a>
@@ -627,6 +632,8 @@ details.dd .dsec{padding:0;border:0}
   <div class="wrap">
     <h2 class="sec">Does the pocket open? Ask a simulation.</h2>
     <p class="sub">A prediction says where a pocket might be. A simulation lets the protein move in water and shows whether it opens on its own.</p>
+    <div class="seg simseg" id="simseg" role="group" aria-label="Which simulations"><button type="button" data-s="open" aria-pressed="true">Ten pockets</button><button type="button" data-s="mol" aria-pressed="false" id="simsegmol" hidden>A docked molecule</button></div>
+    <div id="simA">
     <ol class="steps3">
       <li><b>Shake it.</b> Put the protein in water at body temperature and let it move for 40 nanoseconds. Do this ten times from the same start.</li>
       <li><b>Watch the pocket.</b> Count it as open when a cavity next to its residues grows by 40 &Aring;&sup3; or more.</li>
@@ -641,6 +648,8 @@ details.dd .dsec{padding:0;border:0}
     </div>
     <div class="tw-res"><table class="mdsimple" id="mdtable"><thead><tr><th>Protein</th><th>The pocket opened in</th><th title="Other patches of the same protein with the same number of residues, as buried and as empty at the start as the pocket, that do not touch it">Against similar patches of the same protein</th><th>What it says</th></tr></thead><tbody id="mdrows"></tbody></table></div>
     <p class="foot-note" id="mdnote"></p>
+    <details class="acc"><summary>The same results as the statistics (for readers who want them)</summary><div class="in" id="mdstats"></div></details>
+    </div>
     <div class="mdc" id="mdc" hidden>
       <h3 class="mdch">Does a molecule stay in the pocket? <span class="mdex">exploratory</span></h3>
       <p class="sub" id="mdcintro"></p>
@@ -654,7 +663,6 @@ details.dd .dsec{padding:0;border:0}
         <p class="foot-note" id="mdcmore"></p>
       </div></details>
     </div>
-    <details class="acc"><summary>The same results as the statistics (for readers who want them)</summary><div class="in" id="mdstats"></div></details>
   </div>
 </section>
 
@@ -1593,7 +1601,7 @@ function drawerClose(){
   if(!DRAWER)return;
   DRAWER=false;mdStopCard();$("scrim").hidden=true;$("side").hidden=true;document.body.classList.remove("drawer-open");
   if(V.spin&&V.v){V.v.spin(false);V.spin=false;$("v_spin").setAttribute("aria-pressed","false");}
-  try{history.replaceState(null,"",location.pathname+location.search);}catch(e){}
+  try{history.replaceState(null,"",location.pathname+location.search+(TAB==="screen"?"":"#"+TAB));}catch(e){}
   const tr=document.querySelector('#tbody tr[aria-selected="true"]');if(tr)tr.focus({preventScroll:false});
 }
 function updateNav(){
@@ -2201,7 +2209,7 @@ function mdCardInit(r){
   MDLIVE.forEach(p=>p.pause());MDCLIVE.forEach(p=>p.pause());mdStopCard();const L=mdFor(r);if(!L.length||!$("mdcardview"))return;      /* the section's player stops while the drawer is over it */
   const m=L[0];
   requestAnimationFrame(()=>mdPlayer($("mdcardview"),m,mdUi("mdcard"),MDCARD));
-  const a=document.querySelector(".mdjump");if(a)a.addEventListener("click",ev=>{ev.preventDefault();drawerClose();mdSelect(mdRuns().indexOf(m));scrollTo($("sim"));});
+  const a=document.querySelector(".mdjump");if(a)a.addEventListener("click",ev=>{ev.preventDefault();drawerClose();showTab("sim",true);showSim("open");mdSelect(mdRuns().indexOf(m));});
 }
 const WORD={"2":"Opens in most simulations and more than its neighbours","1":"Opens, but not clearly more than similar patches","descriptive":"Opens, but so do similar patches of the protein","0":"Rarely opens, and so do its neighbours"};
 const mdGroupName=g=>({registered:"Predicted pockets",exploratory:"Exploratory",control:"Controls"}[g]||g);
@@ -2351,7 +2359,7 @@ function renderMDC(){
     esc(sysBy.MBZ.label)+" is an approved drug of the same chemical family as the molecules the docking search proposed. The controls are unrelated approved drugs: "+lc("PRP")+" (positively charged), "+lc("IBU")+" (negatively charged) and "+lc("NDC")+" (neutral, chosen before the simulations by a fixed rule: the best-docking of "+M.neutral_pool+" neutral drugs of mebendazole's size and polarity). The other cavity is a small surface cavity "+M.control_cavity_distance_A+" &Aring; from the pocket, lined by none of its residues. "+
     n+" simulations of "+M.ns+" nanoseconds for each molecule, one force field, molecules placed by docking. Staying that long is weak evidence of anything"+(full.length?": "+full.join(" and ")+" stay"+(full.length===1?"s":"")+" in "+n+" of "+n:"")+". Shown: "+lc("MBZ")+" in the simulation where it kept closest to the docked pose and in the one where it moved furthest, and "+lc("NDC")+" in the one where it kept closest; the start and the end frame are real, the path between them is a straight line, not the simulation. "+
     "An earlier round, in a different opened frame without the C-terminal tail, ran "+E.replicas_per_system+" simulations of "+E.ns+" nanoseconds: mebendazole stayed in "+es.MBZ[0]+" of "+es.MBZ[1]+", F03 (the docking search's best-scoring molecule) in "+es.F03[0]+" of "+es.F03[1]+", propranolol in "+es.PRP[0]+" of "+es.PRP[1]+".";
-  box.hidden=false;
+  box.hidden=false;$("simsegmol").hidden=false;
   mdcSelect(MDCSEL);
 }
 
@@ -2396,6 +2404,7 @@ function renderMut(){
     "<b>What it does not show.</b> Positions outside the structure the catalogue scored were not tested ("+Math.round(100*m.not_tested.outside_structure_share)+"% of the pairs); the pocket of KRAS here is the nucleotide site, which holds G12, not the switch II pocket; "+c.genes_no_ligand_tumour_suppressor+" of the "+c.genes_no_ligand+" proteins with no ligand at the site are tumour suppressors, where a covalent inhibitor would be the wrong direction. "+
     "Acquired cysteines in cancer were listed before by Visscher, Arkin and Dansen (2016).";
   box.hidden=false;$("navmut").hidden=false;
+  if(WANTMUT)showTab("mut",false);
 }
 function mutChips(r){                                             /* the pocket residues of this structure that carry a cancer substitution: {residue number in the structure: text} */
   const M=PARTS.mut,out={};if(!M||!M.by_uniprot)return out;
@@ -2486,6 +2495,9 @@ function openRow(u,gene){
   select(r);
 }
 function fromHash(){
+  const h=(location.hash||"").slice(1);
+  if(TABHASH[h]){showTab(TABHASH[h],false);return;}
+  if(h===""&&TAB!=="screen"){showTab("screen",false);return;}      /* the back button from a tab to the page's first entry */
   const m=/[#&]p=([^&]+)/.exec(location.hash||"");
   if(m){const u=decodeURIComponent(m[1]);const r=BYU[u];if(r)openRow(u,r.gene);}
 }
@@ -2535,6 +2547,34 @@ window.addEventListener("hashchange",fromHash);
 let _ui=false;["wheel","touchstart","keydown","mousedown"].forEach(e=>addEventListener(e,()=>{_ui=true;},{once:true,passive:true}));
 function sectionFromHash(){const h=(location.hash||"").slice(1);if(!h||/(^|&)p=/.test(h)||_ui)return;const el=document.getElementById(h);if(el&&Math.abs(el.getBoundingClientRect().top)>70)window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-64,behavior:"instant"});}
 window.addEventListener("load",()=>[250,1500,3500].forEach(ms=>setTimeout(sectionFromHash,ms)));
+/* the page's parts are four tabs, switched from the header: Screen (the title and the gates), Simulations, Mutations, Trust. A part that is not on show keeps its width and loses its height, so the
+   3D players built while it was hidden still have a size. A link to #sim, #mut or #trust opens its tab; with no script every part shows. */
+const TABS={screen:["top","screen"],sim:["sim"],mut:["mut"],trust:["trust"]};
+const TABHASH={top:"screen",screen:"screen",sim:"sim",mut:"mut",trust:"trust"};
+let TAB="screen",WANTMUT=false;
+function showTab(name,push){
+  if(!TABS[name])name="screen";
+  WANTMUT=name==="mut";
+  if(name==="mut"&&$("mut").hidden)name="screen";                  /* until the data is in: renderMut opens it */
+  const changed=name!==TAB;TAB=name;
+  Object.keys(TABS).forEach(k=>TABS[k].forEach(id=>{const el=$(id);if(el)el.classList.toggle("tab-off",k!==name);}));
+  document.querySelectorAll(".nav nav a").forEach(a=>{if(TABHASH[a.getAttribute("href").slice(1)]===name)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");});
+  if(push){try{history.pushState(null,"",name==="screen"?location.pathname+location.search:"#"+name);}catch(e){}window.scrollTo({top:0,behavior:"instant"});}
+  else if(changed)window.scrollTo({top:0,behavior:"instant"});
+}
+document.querySelectorAll(".nav nav a,.nav .brand").forEach(a=>a.addEventListener("click",ev=>{
+  const t=TABHASH[a.getAttribute("href").slice(1)];if(!t)return;
+  ev.preventDefault();showTab(t,true);
+}));
+showTab(TABHASH[(location.hash||"").slice(1)]||"screen",false);
+/* inside Simulations: the ten pockets, or the docked molecule (the same trick: the part not on show keeps its width) */
+function showSim(which){
+  if(which==="mol"&&$("mdc").hidden)which="open";
+  $("simA").classList.toggle("tab-off",which!=="open");$("mdc").classList.toggle("tab-off",which!=="mol");
+  document.querySelectorAll("#simseg button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.s===which)));
+}
+$("simseg").addEventListener("click",ev=>{const b=ev.target.closest("button");if(b)showSim(b.dataset.s);});
+showSim("open");
 boot();
 })();
 </script>

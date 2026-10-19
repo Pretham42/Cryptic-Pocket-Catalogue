@@ -18,6 +18,7 @@ A website that shows where proteins may hide a drug pocket. A cryptic pocket is 
   - **Not already drugged** keeps proteins with no approved drug or potent compound yet.
   - **A cysteine in reach** keeps proteins with a free native cysteine whose sulfur lies within 4.5 angstroms of a pocket residue. A lab can use it to test the pocket, and a chemist can aim a covalent drug at it. It is geometry only. The KRAS drug sotorasib bonds to a cysteine that a cancer mutation creates, so this filter does not look for that kind.
   - **A cysteine measured ligandable** keeps those where a cysteine in reach was found ligandable in lysate chemoproteomics (CysDB). About a quarter of cysteines were measured; the rest are unknown, not unreactive.
+- Use the tabs at the top: Screen (the title and the filters), Mutations (cancer mutations that add a reactive residue at a pocket), Simulations and Trust.
 - Click a row to open the protein in 3D. The predicted pocket is violet.
 - Watch real simulations of ten runs. Each one shows the pocket at the start and at its most open moment.
 - Look at an exploratory docking example for TRIB1, a protein linked to acute myeloid leukaemia.
