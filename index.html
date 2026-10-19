@@ -345,6 +345,10 @@ footer .wrap>div{max-width:96ch;margin:0 0 6px}
 .pos-chip.nat{border-color:#a86a12;background:color-mix(in srgb,#a86a12 12%,var(--bg))}
 .pos-chip.nat.ss{border-style:dashed}
 .pos-chip.nat small{font-family:var(--sans);font-size:10.5px;opacity:.75;margin-left:5px}
+.pos-chip.reach{display:inline-flex;flex-direction:column;align-items:flex-start;gap:1px;border-color:#5b7fbf;background:color-mix(in srgb,#5b7fbf 11%,var(--bg))}
+.pos-chip.reach small{font-family:var(--sans);font-size:10.5px;opacity:.75}
+.pos-chip.reach em{font-family:var(--sans);font-style:normal;font-size:10.5px;color:var(--ink-3)}
+.pos-chip.reach.lig em{color:var(--accent);font-weight:600}
 .pos-chip:hover{outline:2px solid var(--accent);outline-offset:1px}
 .mdx .mdview{margin-top:2px}
 
@@ -560,8 +564,13 @@ details.dd .dsec{padding:0;border:0}
         </div>
         <div class="gate">
           <div class="gtop"><span class="gt">A cysteine in reach</span><button class="sw" data-c="cys" role="switch" aria-checked="false" aria-label="A cysteine in reach"></button></div>
-          <p class="gw">A free cysteine sits in or near the pocket: a handle for thiol labeling or a covalent ligand. Geometry only, not reactivity.</p>
+          <p class="gw">A free native cysteine has its sulfur within 4.5 &Aring; of a pocket residue: a handle for labeling, tethering or a covalent ligand. Geometry only.</p>
           <span class="gf" id="gf_cys"></span>
+        </div>
+        <div class="gate">
+          <div class="gtop"><span class="gt">A cysteine measured ligandable</span><button class="sw" data-c="lig" role="switch" aria-checked="false" aria-label="A cysteine measured ligandable"></button></div>
+          <p class="gw">A cysteine in reach that CysDB, a lysate screen, found ligandable. A quarter of cysteines were measured; the rest are unknown.</p>
+          <span class="gf" id="gf_lig"></span>
         </div>
       </div>
 
@@ -763,14 +772,14 @@ const EV = {
 /* the starting points: each is just a setting of the gates (the reader can change any of them afterwards) */
 const PRESETS = {
   hidden: { label: "Hidden pockets",                 band: 3, state: "closed", checks: [], note: "Confident, closed and empty: the cryptic-pocket candidates." },
-  hidden_cys: { label: "Hidden, with a cysteine in reach", band: 3, state: "closed", checks: ["cys"], note: "Confident, closed and empty, with a cysteine near the pocket: a pocket a lab could test." },
+  hidden_cys: { label: "Hidden, with a cysteine in reach", band: 3, state: "closed", checks: ["cys"], note: "Confident, closed and empty, with a free native cysteine within 4.5 A of the pocket: a pocket a lab could test." },
   sites:  { label: "Ligand sites in general",         band: 3, state: "any",    checks: [], note: "Every confident predicted site, whether closed, open or already holding a ligand." },
-  sites_cys: { label: "Any site, with a cysteine in reach", band: 3, state: "any", checks: ["cys"], note: "Every confident site, closed, open or holding a ligand, with a cysteine near the pocket: a site a covalent ligand could use." },
+  sites_cys: { label: "Any site, with a cysteine in reach", band: 3, state: "any", checks: ["cys"], note: "Every confident site, closed, open or holding a ligand, with a free native cysteine within 4.5 A of the pocket: a site a covalent ligand could use." },
   impact: { label: "Disease-linked, high confidence", band: 4, state: "any",    checks: ["dz"], note: "High confidence and a strong disease link, nothing else asked." },
   all:    { label: "Everything",                      band: 0, state: "any",    checks: [], note: "Every protein." }
 };
 const PRESET_ORDER = ["hidden", "hidden_cys", "sites", "sites_cys", "impact", "all"];
-const CHECK_ORDER = ["dz", "rec", "tdl", "cys"];
+const CHECK_ORDER = ["dz", "rec", "tdl", "cys", "lig"];
 
 function context(parts) {
   const cat = parts.catalogue || {};
@@ -779,9 +788,11 @@ function context(parts) {
   const S = (parts.state && parts.state.by_uniprot) || {};
   const DZ = (parts.disease && parts.disease.by_uniprot) || {};
   const PO = (parts.positions && parts.positions.by_uniprot) || {};
-  const have = { state: Object.keys(S).length > 0, disease: Object.keys(DZ).length > 0, positions: Object.keys(PO).length > 0 };
-  const meta = { catalogue: cat._meta || {}, state: (parts.state && parts.state._meta) || {}, disease: (parts.disease && parts.disease._meta) || {}, positions: (parts.positions && parts.positions._meta) || {} };
-  const C = { rows, quart, S, DZ, PO, have, meta };
+  const RE = (parts.reach && parts.reach.by_uniprot) || {};
+  const CD = (parts.cysdb && parts.cysdb.by_uniprot) || {};
+  const have = { state: Object.keys(S).length > 0, disease: Object.keys(DZ).length > 0, positions: Object.keys(PO).length > 0, reach: Object.keys(RE).length > 0, cysdb: Object.keys(CD).length > 0 && Object.keys(RE).length > 0 };
+  const meta = { catalogue: cat._meta || {}, state: (parts.state && parts.state._meta) || {}, disease: (parts.disease && parts.disease._meta) || {}, positions: (parts.positions && parts.positions._meta) || {}, reach: (parts.reach && parts.reach._meta) || {}, cysdb: (parts.cysdb && parts.cysdb._meta) || {} };
+  const C = { rows, quart, S, DZ, PO, RE, CD, have, meta };
 
   /* ── row facts ─────────────────────────────────────────────────────────── */
   C.hasRes = r => !!(r && r.pocket_resids && r.pocket_resids.length);
@@ -813,6 +824,19 @@ function context(parts) {
   };
   C.bandIdx = r => { const q = C.qOf(r); return q ? q.quartile : 0; };
 
+  /* the shared core (code/utils/shared_core.py, data/cys_reach.json): a free native cysteine (no other sulfur within 2.5 A, no metal within 3.0 A) whose sulfur lies within REACH_A of a heavy atom of a pocket residue, on the
+     structure the row names. [[residue, distance in A, buried, in the pocket], ...] holds those within 6 A; a protein that is not in the file was not analyzed. Geometry only. */
+  const REACH_A = 4.5;
+  C.REACH_A = REACH_A;
+  C.reachAll = r => RE[r.u] || null;
+  C.reachList = r => { const l = RE[r.u]; return l ? l.filter(x => x[1] <= REACH_A) : null; };
+  C.reachCys = r => { const l = C.reachList(r); return !!(l && l.length); };
+  /* CysDB (lysate chemoproteomics): [hyperreactive, ligandable, R10:1] for each cysteine it identified; a cysteine that is not listed was not measured, which is not the same as unreactive */
+  C.cysdb = (u, res) => { const m = CD[u]; return (m && m[res]) || null; };
+  C.measWord = f => !f ? "not measured" : ([f[1] ? "ligandable" : "", f[0] ? "hyperreactive" : "", f[2] != null ? "R10:1 " + f[2] : ""].filter(Boolean).join(", ") || "identified, not ligandable");
+  C.ligReach = r => { const l = C.reachList(r); return !!(l && l.some(x => { const f = C.cysdb(r.u, x[0]); return !!(f && f[1]); })); };
+  C.reachText = r => { const l = C.reachList(r); return l ? l.map(x => "Cys" + x[0] + " " + (x[3] ? "in the pocket" : x[1].toFixed(1) + " A") + (x[2] ? ", buried" : ", exposed")).join("; ") : ""; };
+  C.chemText = r => { const l = C.reachList(r); return l ? l.map(x => "Cys" + x[0] + " " + C.measWord(C.cysdb(r.u, x[0]))).join("; ") : ""; };
   /* ── the gates a reader can switch on (the order is fixed, so the bars always read the same way) ─ */
   C.CHECKS = [
     { id: "dz",  needs: "disease", label: "Strong disease link", stage: "a strong disease link",
@@ -821,8 +845,10 @@ function context(parts) {
       test: r => { const d = C.dz(r); return !!d && d.inh !== "r"; } },
     { id: "tdl", needs: null,      label: "Not already drugged", stage: "not already drugged",
       test: r => r.tdl === "Tbio" || r.tdl === "Tdark" },
-    { id: "cys", needs: null,      label: "A cysteine in reach", stage: "a cysteine in reach",
-      test: r => C.hasCys(r) || (C.tetherCys(r) || 0) > 0 }
+    { id: "cys", needs: "reach",    label: "A cysteine in reach", stage: "a cysteine in reach",
+      test: r => C.reachCys(r) },
+    { id: "lig", needs: "cysdb",    label: "A cysteine measured ligandable", stage: "a cysteine in reach that CysDB found ligandable",
+      test: r => C.ligReach(r) }
   ];
   C.checkById = {}; C.CHECKS.forEach(c => { C.checkById[c.id] = c; });
   C.available = id => { const c = C.checkById[id]; return !!c && (!c.needs || have[c.needs]); };
@@ -938,13 +964,13 @@ function context(parts) {
   const csvCell = v => { const s = v == null ? "" : String(v); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
   const bandName = r => { const i = C.bandIdx(r); return i ? ["Lowest", "Low", "Moderate", "High"][i - 1] : ""; };
   C.CSV_COLUMNS = ["gene", "uniprot", "protein_name", "structure", "n_residues", "confidence_band", "confidence", "pocket_state", "site_volume_A3", "pocket_residues", "cysteine", "cysteine_distance_angstrom",
-    "cysteines_to_tether", "strongest_disease", "disease_score", "genetic_score", "recessive_disease", "pharos_level", "known_chemistry", "other_structures_of_the_protein"];
+    "cysteines_to_tether", "cysteines_in_reach", "cysteine_chemistry", "strongest_disease", "disease_score", "genetic_score", "recessive_disease", "pharos_level", "known_chemistry", "other_structures_of_the_protein"];
   const CH = { a: "approved drug", c: "clinical-stage compound", p: "chemical probe", l: "ligand-bound structures", n: "none" };
   C.chemWord = d => (d && CH[d.ch]) || null;
   C.csvRow = r => {
     const s = C.sr(r), d = C.dz(r), x = C.evOf(r);
     return [r.gene, r.u, r.protein_name, r.tier === "afdb" ? "AlphaFold model" : (r.pdb || ""), r.n_res, bandName(r), r.conf == null ? "" : r.conf.toFixed(4), C.stateOf(r), s && s.v != null ? s.v : "",
-      C.hasRes(r) ? r.pocket_resids.join(" ") : "", C.cysNum(r) ? "Cys" + r.cys_resid : "", r.cys_dist == null ? "" : r.cys_dist, C.tetherList(r),
+      C.hasRes(r) ? r.pocket_resids.join(" ") : "", C.cysNum(r) ? "Cys" + r.cys_resid : "", r.cys_dist == null ? "" : r.cys_dist, C.tetherList(r), C.reachText(r), C.chemText(r),
       d && d.d ? d.d : "", d && d.s != null ? d.s : "", d && d.g != null ? d.g : "", d ? (d.inh === "r" ? "yes" : (d.inh === "d" ? "no (dominant)" : "not annotated")) : "not looked up",
       r.tdl || "", d ? C.chemWord(d) : "", x ? EV[x].word : "not checked"].map(csvCell).join(",");
   };
@@ -1384,7 +1410,7 @@ function rebuild(){
 function boot(){
   $("tblempty").hidden=false;$("tblempty").innerHTML="Loading the catalogue (18,336 proteins, about 14 MB)&hellip;";
   const get=(file,key)=>fetch("data/"+file).then(r=>{if(!r.ok)throw new Error("HTTP "+r.status);return r.json();}).then(d=>{PARTS[key]=d;return true;},()=>false);
-  Promise.all([get("catalogue.json","catalogue"),get("state.json","state"),get("disease.json","disease"),get("positions.json","positions"),get("md_examples.json","md"),get("md_cavity.json","cav"),get("md_complex.json","mdc"),get("mutations.json","mut")]).then(ok=>{
+  Promise.all([get("catalogue.json","catalogue"),get("state.json","state"),get("disease.json","disease"),get("positions.json","positions"),get("cys_reach.json","reach"),get("cysdb.json","cysdb"),get("md_examples.json","md"),get("md_cavity.json","cav"),get("md_complex.json","mdc"),get("mutations.json","mut")]).then(ok=>{
     if(!ok[0]){PARTS.catalogue=jget("embedded-sample");}
     if(!PARTS.catalogue){$("tblempty").innerHTML="The catalogue could not be loaded. Serve the <b>website</b> folder over HTTP (<code>python3 -m http.server --directory website 8777</code>) and open <code>http://localhost:8777</code>.";return;}
     install(!ok[0]);
@@ -1481,7 +1507,7 @@ function notes(res){
     const b=$("clearq");if(b)b.addEventListener("click",()=>{leaveSearch();sync();});return;
   }
   if(UI.checks.tdl){const nt=res.base.filter(r=>r.tdl==null).length;if(nt)bits.push(fmt(nt)+" proteins have no Pharos level recorded and are removed by Not already drugged.");}
-  if(UI.checks.cys&&C.have.positions){const nt=res.base.filter(r=>C.pr(r)==null&&!hasCys(r)).length;if(nt)bits.push(fmt(nt)+" proteins have no structure analysis (no pocket residues or a structure too large to scan) and are removed by A cysteine in reach.");}
+  if((UI.checks.cys||UI.checks.lig)&&C.have.reach){const nt=res.base.filter(r=>C.reachAll(r)==null).length;if(nt)bits.push(fmt(nt)+" proteins have no cysteine analysis (fewer than three pocket residues in the structure, or a structure that could not be read) and are removed by the cysteine gates.");}
   if(res.unknown)bits.push(fmt(res.unknown)+" in this list have no site volume (the numbering of their structure does not convert, or it was not computed).");
   $("covnote").textContent=bits.join(" ");
 }
@@ -1918,6 +1944,20 @@ function selText(r){
   return {pymol:"select pocket, chain "+ch+" and resi "+r.pocket_resids.join("+")+(cysNum(r)?"\nselect cys, chain "+ch+" and resi "+r.cys_resid+" and name SG":""),
           chimera:"select /"+ch+":"+r.pocket_resids.join(",")+(cysNum(r)?"\nselect /"+ch+":"+r.cys_resid+"@SG":"")};
 }
+function reachChip(r,x){
+  const f=C.cysdb(r.u,x[0]),where=x[3]?"in the pocket":x[1].toFixed(1)+" \u00c5";
+  const tip="Cys "+x[0]+": the sulfur is "+(x[3]?"in the pocket":x[1].toFixed(1)+" \u00c5 from an atom of a pocket residue")+"; "+(x[2]?"buried (the lowest quarter of this chain's residue accessibility)":"exposed")+". CysDB: "+C.measWord(f)+".";
+  return '<button class="pos-chip reach'+(x[2]?" buried":"")+(f&&f[1]?" lig":"")+'" data-resi="'+x[0]+'" title="'+esc(tip)+'">C'+x[0]+'<small>'+where+", "+(x[2]?"buried":"exposed")+'</small><em>'+esc(C.measWord(f))+'</em></button>';
+}
+function reachHtml(r){
+  if(!C.have.reach)return "";
+  const all=C.reachAll(r);
+  let h='<div class="dsec"><h4>Cysteines in reach of the pocket</h4>';
+  if(all==null)return h+'<p class="hint" style="margin:0">Not analyzed: fewer than three pocket residues were found in the structure, or it could not be read.</p></div>';
+  const near=all.filter(x=>x[1]<=C.REACH_A);
+  h+=near.length?'<div class="chipsr">'+near.map(x=>reachChip(r,x)).join("")+'</div>':'<p class="hint" style="margin:0">No free native cysteine has its sulfur within '+C.REACH_A+' &Aring; of an atom of a pocket residue'+(all.length?" (the nearest is "+all[0][1].toFixed(1)+" &Aring; away).":".")+'</p>';
+  return h+'<p class="note">Free native cysteines (no disulfide, no metal) whose sulfur lies within '+C.REACH_A+' &Aring; of an atom of a pocket residue, from the structure the row names. Buried: protected until the pocket opens, so a labelling test can report it. Measured: CysDB, lysate chemoproteomics, which covers about a quarter of cysteines; not measured is not unreactive. Geometry only: nothing here says a compound will bond.</p></div>';
+}
 function detail(r){
   const s=srcFor(r);
   $("dhead").innerHTML=headHtml(r);
@@ -1930,12 +1970,13 @@ function detail(r){
        '<div class="acts"><button class="mini" data-act="res">Copy residue numbers</button><button class="mini" data-act="pymol">Copy PyMOL selection</button><button class="mini" data-act="chimera">Copy ChimeraX selection</button></div>'+
        '<p class="note">'+r.pocket_resids.length+' residues, numbered as in '+esc(structName(r))+'.</p>';
   }else h+='<p class="hint" style="margin:0">'+(r.cluster_size!=null?'The model groups '+r.cluster_size+' residues into this pocket, but their residue numbers are not in the current export.':'The pocket residue numbers are not in the current export.')+'</p>';
-  h+='</div>'+mutHtml(r)+'<div class="dsec"><h4>Cysteines near the pocket</h4>';
+  h+='</div>'+mutHtml(r)+reachHtml(r)+'<div class="dsec"><h4>Cysteines near the pocket</h4>';
   h+=(hasCys(r)?'<p class="note" style="margin:0 0 8px">The catalogue\'s labelling cysteine (buried, unpaired, not bound to a metal, within 6 &Aring;): <b>'+(cysNum(r)?"Cys"+r.cys_resid:"number pending")+'</b>, '+(r.cys_dist===0?"inside the pocket":r.cys_dist.toFixed(1)+" &Aring; away")+'.</p>':'<p class="note" style="margin:0 0 8px">No eligible labelling cysteine (buried, unpaired, not bound to a metal) lies within 6 &Aring; of the pocket.</p>');
   h+='<div id="nat_body"><p class="hint" style="margin:0">Working out from the structure...</p></div></div>';
   h+='<details class="dd"><summary>Disease and drugs</summary><div class="in">'+diseaseHtml(r)+'</div></details>';
   h+='<details class="dd"><summary>Measurements and structure</summary><div class="in">'+measureHtml(r)+'</div></details>';
   $("detail").innerHTML=h;$("copy").hidden=false;
+  $("detail").querySelectorAll(".pos-chip.reach").forEach(b=>b.addEventListener("click",()=>focusRes(+b.dataset.resi,"Cys"+b.dataset.resi,COL.nat)));
   $("detail").querySelectorAll("[data-act]").forEach(btn=>btn.addEventListener("click",()=>{
     const t=selText(r);const a=btn.dataset.act;
     copyText(a==="res"?r.pocket_resids.join(","):(a==="pymol"?t.pymol:t.chimera),btn);
