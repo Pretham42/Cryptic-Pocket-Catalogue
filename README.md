@@ -14,7 +14,7 @@ A website that shows where proteins may hide a drug pocket. A cryptic pocket is 
   - **Confidence** is how sure the model is that the site is a pocket.
   - **Pocket** is whether the site is closed (no cavity yet), open (a cavity is already visible) or already holds a drug-like molecule.
   - **Strong disease link** keeps proteins whose gene is strongly tied to a disease.
-  - **Not a recessive-disease gene** drops proteins behind recessive diseases, which usually come from a missing or broken protein that a pocket drug rarely fixes.
+  - **Not a recessive-disease gene** drops proteins whose strongest disease is recessive, which usually comes from a missing or broken protein that a pocket drug rarely fixes (a gene whose strongest disease also has dominant forms stays).
   - **Not already drugged** keeps proteins with no approved drug or potent compound yet.
   - **A cysteine in reach** keeps proteins with a free native cysteine whose sulfur lies within 4.5 angstroms of a pocket residue. A lab can use it to test the pocket, and a chemist can aim a covalent drug at it. It is geometry only. The KRAS drug sotorasib bonds to a cysteine that a cancer mutation creates, so this filter does not look for that kind.
   - **A cysteine measured ligandable** keeps those where a cysteine in reach was found ligandable in lysate chemoproteomics (CysDB). About a quarter of cysteines were measured; the rest are unknown, not unreactive.

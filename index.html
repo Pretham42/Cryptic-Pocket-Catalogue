@@ -76,10 +76,8 @@ a{color:var(--accent);text-underline-offset:3px}
 .hero-spin:hover:not(:disabled),.hero-reset:hover{border-color:var(--accent);color:var(--ink)}
 .hero-spin:disabled{cursor:default}
 .hero-spin{position:absolute;right:10px;bottom:10px;z-index:2}
-.hero-ctl{position:absolute;left:10px;right:10px;bottom:10px;z-index:2;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 8px}
+.hero-ctl{position:absolute;left:10px;right:10px;bottom:10px;z-index:2;display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:6px 8px}
 .hero-ctl[hidden],.hero-spin[hidden]{display:none}
-.hero-ctl .seg{box-shadow:var(--shadow)}
-.hero-ctl .seg button{font-size:13px;padding:5px 10px}
 .hero-fig figcaption{padding:11px 16px 13px;font-size:13.5px;line-height:1.45;color:var(--ink-3);border-top:1px solid var(--line)}
 @media (max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-fig{display:none}}
 .hero h1{font-size:clamp(21px,2.3vw,28px);line-height:1.25;font-weight:700;letter-spacing:-.015em;margin:0 0 12px;max-width:48ch;text-wrap:balance}
@@ -426,6 +424,8 @@ body.drawer-open{overflow:hidden}
 .tag.a{background:var(--warn-pale);color:var(--warn);border-color:transparent}
 .tag.r{background:var(--bad-pale);color:var(--bad);border-color:transparent}
 .tag.b{background:var(--accent-pale);color:var(--accent);border-color:transparent}
+a.tag.sl{text-decoration:none}
+a.tag.sl:hover,a.tag.sl:focus-visible{border-color:var(--accent);color:var(--accent)}
 .vd{margin:12px 22px 0;border-radius:10px;padding:12px 14px;background:var(--surface);border-left:3px solid var(--line-2)}
 .vd.g{background:var(--good-pale);border-left-color:var(--good)}
 .vd.a{background:var(--warn-pale);border-left-color:var(--warn)}
@@ -498,22 +498,21 @@ details.dd .dsec{padding:0;border:0}
           <input id="hq" type="search" placeholder="Search a gene, accession or protein name" aria-label="Search the catalogue">
           <button class="btn" type="submit">Search</button>
         </form>
-        <p class="try">Try <button type="button" class="tryq" data-q="KRAS" title="A drug-like ligand already sits at the predicted site">KRAS</button><button type="button" class="tryq" data-q="MCL1" title="Closed here; another structure shows a cavity at the site">MCL1</button><button type="button" class="tryq" data-q="PARK7" title="A flat groove: other structures show no enclosed cavity">PARK7</button>
+        <p class="try">Try <button type="button" class="tryq" data-q="ARHGDIB" title="Closed here; a later structure shows a compound at the site">ARHGDIB</button><button type="button" class="tryq" data-q="KRAS" title="A drug-like ligand already sits at the predicted site">KRAS</button><button type="button" class="tryq" data-q="MCL1" title="Closed here; another structure shows a cavity at the site">MCL1</button><button type="button" class="tryq" data-q="PARK7" title="A flat groove: other structures show no enclosed cavity">PARK7</button>
           or <a href="#screen" id="browselink">browse the hidden pockets</a></p>
         <div class="stats" id="stats"></div>
       </div>
       <figure class="hero-fig" id="herofig">
         <div class="hero-stage" id="herostage">
-          <picture id="heropic"><source media="(prefers-color-scheme: dark)" srcset="img/hero_kras_sotorasib_dark.webp"><img src="img/hero_kras_sotorasib_light.webp" width="440" height="340" loading="lazy" decoding="async" alt="The surface of the protein KRAS in grey-blue, with the drug sotorasib in green lying in a pocket shown in violet"></picture>
-          <div class="hero-live" id="herov" tabindex="0" role="img" aria-label="Live 3D view of KRAS with sotorasib. Drag to rotate, or use the arrow keys."></div>
+          <picture id="heropic"><source media="(prefers-color-scheme: dark)" srcset="img/hero_arhgdib_dark.webp"><img src="img/hero_arhgdib_light.webp" width="440" height="340" loading="lazy" decoding="async" alt="The surface of the protein ARHGDIB in grey-blue, with a small pocket in violet and a compound in green lying across it"></picture>
+          <div class="hero-live" id="herov" tabindex="0" role="img" aria-label="Live 3D view of ARHGDIB with a compound bound. Drag to rotate, or use the arrow keys."></div>
           <div class="vbusy" id="herobusy" hidden>Building the surface&hellip;</div>
           <button type="button" class="hero-spin" id="herospin">Rotate in 3D</button>
           <div class="hero-ctl" id="heroctl" hidden>
-            <div class="seg" id="heroseg" role="group" aria-label="What the violet patch shows"><button type="button" data-m="drug" aria-pressed="true">Where the drug binds</button><button type="button" data-m="model" aria-pressed="false">Predicted pocket</button></div>
             <button type="button" class="hero-reset" id="heroreset">Reset</button>
           </div>
         </div>
-        <figcaption id="herocap">KRAS bound to sotorasib (green), an approved drug for KRAS G12C lung cancer. It sits in a pocket (violet) that is much smaller in structures without the drug. PDB 6OIM.</figcaption>
+        <figcaption id="herocap">The pocket the catalogue predicts in ARHGDIB (violet), from PDB 5H1D, where it is closed. In PDB 9X59 (2025) a compound (green) sits there and touches 8 of the 9 residues.</figcaption>
       </figure>
     </div>
 
@@ -559,7 +558,7 @@ details.dd .dsec{padding:0;border:0}
         </div>
         <div class="gate">
           <div class="gtop"><span class="gt">Not a recessive-disease gene</span><button class="sw" data-c="rec" role="switch" aria-checked="false" aria-label="Not a recessive-disease gene"></button></div>
-          <p class="gw">Recessive disease usually means both copies of the gene are broken, so a drug would have to restore the protein, not block it.</p>
+          <p class="gw">Its strongest disease is recessive: usually both copies are broken, so a drug would have to restore the protein, not block it.</p>
           <span class="gf" id="gf_rec"></span>
         </div>
         <div class="gate">
@@ -599,7 +598,7 @@ details.dd .dsec{padding:0;border:0}
         <th data-k="gene" class="w-gene" title="Gene symbol and protein name">Protein</th>
         <th data-k="conf" class="w-conf" aria-sort="descending" title="How sure the model is that the site is a pocket">Confidence</th>
         <th data-k="state" class="w-site" title="Closed, open, or a ligand already there, with the empty volume in cubic angstroms">Pocket</th>
-        <th data-k="cys_dist" class="w-cys" title="Cysteines the protein already has near the pocket">Cysteine</th>
+        <th data-k="cys_dist" class="w-cys" title="Free native cysteines within 4.5 Å of an atom of a pocket residue, nearest first">Cysteine</th>
         <th data-k="dz" class="w-dz" title="The strongest disease link of the gene (Open Targets, 0 to 1)">Disease link</th>
         <th data-k="tdl" class="w-drug" title="Pharos development level: how much chemistry exists for this protein">Drugged?</th>
       </tr></thead><tbody id="tbody"></tbody></table>
@@ -682,7 +681,7 @@ details.dd .dsec{padding:0;border:0}
           <div class="big"><b>13%</b><span>of 2,313 annotated cryptic pockets</span></div>
           <div class="waffle" id="waffle" role="img" aria-label="13 of 100 squares filled: 13 percent of annotated cryptic pockets already contain a cysteine that a thiol-labelling assay can reach without engineering the protein"></div>
         </div>
-        <p>Only about 1 in 8 known pockets already has a cysteine the standard labelling test can use. For the rest, a cysteine would have to be engineered in.</p>
+        <p>About 1 in 8 known pockets has a cysteine that thiol labelling, one common test, can reach without engineering. For the rest, one would have to be introduced.</p>
       </div>
       <div class="tcard">
         <h3>Most ligand sites are already open</h3>
@@ -735,7 +734,7 @@ details.dd .dsec{padding:0;border:0}
           </select></div>
         <div class="vgrp"><span class="vlab" id="lab_hl">Highlight</span>
           <button id="v_pocket" aria-pressed="false" disabled title="The residues of the predicted pocket">Pocket</button>
-          <button id="v_cys" aria-pressed="false" disabled title="The cysteine nearest the pocket">Cysteine</button>
+          <button id="v_cys" aria-pressed="false" disabled title="The cysteines in reach of the pocket">Cysteine</button>
           <button id="v_lig" aria-pressed="false" disabled title="Drug-like ligands in this structure">Ligands</button></div>
       </div>
     </div>
@@ -759,10 +758,10 @@ details.dd .dsec{padding:0;border:0}
      pocket       V0 is the LIGSITE pocket volume at the predicted site in the structure the row was scored from, ligand removed.
                   closed: under 40 cubic angstroms and empty; open: 40 or more and empty; ligand: a drug-like ligand already sits at the site; unknown: no volume
      dz           a strong disease link: the strongest Open Targets association with a disease, overall or genetic, is 0.5 or more (only proteins that were looked up have one)
-     rec          not a recessive-disease gene (Open Targets lists autosomal recessive or biallelic inheritance for its disease: usually both copies of the gene are broken, so a drug would have to restore the protein)
+     rec          not a recessive-disease gene (Open Targets lists recessive or biallelic inheritance for the gene's strongest-link disease: usually both copies of the gene are broken, so a drug would have to restore the protein)
      tdl          not already drugged: Pharos level Tbio or Tdark (no approved drug, no potent small molecule)
-     cys          a cysteine in reach: the catalogue's eligible cysteine (buried, unpaired, not metal-bound, within 6 angstroms of the pocket) or a cysteine the protein already has in the pocket or in the
-                  tethering window (exposed, CB 4 to 8 angstroms from the pocket) that is not bonded to another cysteine in the structure
+     cys          a cysteine in reach: a free native cysteine (no other sulfur within 2.5 angstroms, no metal within 3.0) whose sulfur lies within 4.5 angstroms of a heavy atom of a pocket residue (the shared core, data/cys_reach.json)
+     lig          a cysteine in reach that CysDB found engaged by an electrophile (data/cysdb.json)
    Only two gates were audited as defaults (band 3 or better, and closed and empty); every other gate is a choice the reader makes. */
 (function (root) {
 "use strict";
@@ -795,24 +794,15 @@ function context(parts) {
   const quart = cat.precision_quartiles || [];
   const S = (parts.state && parts.state.by_uniprot) || {};
   const DZ = (parts.disease && parts.disease.by_uniprot) || {};
-  const PO = (parts.positions && parts.positions.by_uniprot) || {};
   const RE = (parts.reach && parts.reach.by_uniprot) || {};
   const CD = (parts.cysdb && parts.cysdb.by_uniprot) || {};
-  const have = { state: Object.keys(S).length > 0, disease: Object.keys(DZ).length > 0, positions: Object.keys(PO).length > 0, reach: Object.keys(RE).length > 0, cysdb: Object.keys(CD).length > 0 && Object.keys(RE).length > 0 };
-  const meta = { catalogue: cat._meta || {}, state: (parts.state && parts.state._meta) || {}, disease: (parts.disease && parts.disease._meta) || {}, positions: (parts.positions && parts.positions._meta) || {}, reach: (parts.reach && parts.reach._meta) || {}, cysdb: (parts.cysdb && parts.cysdb._meta) || {} };
-  const C = { rows, quart, S, DZ, PO, RE, CD, have, meta };
+  const have = { state: Object.keys(S).length > 0, disease: Object.keys(DZ).length > 0, reach: Object.keys(RE).length > 0, cysdb: Object.keys(CD).length > 0 && Object.keys(RE).length > 0 };
+  const meta = { catalogue: cat._meta || {}, state: (parts.state && parts.state._meta) || {}, disease: (parts.disease && parts.disease._meta) || {}, reach: (parts.reach && parts.reach._meta) || {}, cysdb: (parts.cysdb && parts.cysdb._meta) || {} };
+  const C = { rows, quart, S, DZ, RE, CD, have, meta };
 
   /* ── row facts ─────────────────────────────────────────────────────────── */
   C.hasRes = r => !!(r && r.pocket_resids && r.pocket_resids.length);
-  C.hasCys = r => !!(r && r.cys_dist != null);
-  C.cysNum = r => !!(r && r.cys_resid != null);
   C.sr = r => S[r.u] || null;
-  /* the scan of the cysteines the chain already has (code/md/tether_scan.py): [[residue, class p pocket / w window / l label reach, 1 if bonded to another cysteine], ...], label positions, tether positions */
-  C.pr = r => PO[r.u] || null;
-  const free = r => { const p = C.pr(r); return p ? p[0].filter(x => (x[1] === "p" || x[1] === "w") && !x[2]) : null; };
-  C.tetherCys = r => { const f = free(r); return f ? f.length : null; };
-  C.tetherList = r => { const f = free(r); return f ? f.map(x => "C" + x[0] + ":" + (x[1] === "p" ? "pocket" : "window")).join(" ") : ""; };
-  C.tetherEntries = r => { const f = free(r); return f ? f.map(x => ({ resi: x[0], kind: x[1] === "p" ? "pocket" : "window" })) : []; };
   C.stateOf = r => {
     const s = C.sr(r);
     if (!s || s.v == null) return "unknown";
@@ -839,6 +829,8 @@ function context(parts) {
   C.reachAll = r => RE[r.u] || null;
   C.reachList = r => { const l = RE[r.u]; return l ? l.filter(x => x[1] <= REACH_A) : null; };
   C.reachCys = r => { const l = C.reachList(r); return !!(l && l.length); };
+  /* the cysteine in reach whose sulfur is nearest the pocket: [residue, distance, buried, in the pocket], or null */
+  C.nearCys = r => { const l = C.reachList(r); return l && l.length ? l.reduce((a, b) => (b[1] < a[1] ? b : a)) : null; };
   /* CysDB (lysate chemoproteomics): [hyperreactive, ligandable, R10:1] for each cysteine it identified; a cysteine that is not listed was not measured, which is not the same as unreactive */
   C.cysdb = (u, res) => { const m = CD[u]; return (m && m[res]) || null; };
   C.measWord = f => !f ? "not measured" : ([f[1] ? "ligandable" : "", f[0] ? "hyperreactive" : "", f[2] != null ? "R10:1 " + f[2] : ""].filter(Boolean).join(", ") || "identified, not ligandable");
@@ -931,7 +923,7 @@ function context(parts) {
 
   /* ── sorting: a missing value always goes last ───────────────────────────── */
   C.sortKeys = {
-    gene: r => r.gene, conf: r => r.conf, cys_dist: r => r.cys_dist, tdl: r => r.tdl,
+    gene: r => r.gene, conf: r => r.conf, cys_dist: r => { const n = C.nearCys(r); return n ? n[1] : null; }, tdl: r => r.tdl,
     dz: r => C.dzScore(r),
     state: r => { const s = C.sr(r); return s && s.v != null ? s.v : null; }
   };
@@ -971,15 +963,15 @@ function context(parts) {
   /* ── the CSV a reader downloads ──────────────────────────────────────────── */
   const csvCell = v => { const s = v == null ? "" : String(v); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
   const bandName = r => { const i = C.bandIdx(r); return i ? ["Lowest", "Low", "Moderate", "High"][i - 1] : ""; };
-  C.CSV_COLUMNS = ["gene", "uniprot", "protein_name", "structure", "n_residues", "confidence_band", "confidence", "pocket_state", "site_volume_A3", "pocket_residues", "cysteine", "cysteine_distance_angstrom",
-    "cysteines_to_tether", "cysteines_in_reach", "cysteine_chemistry", "strongest_disease", "disease_score", "genetic_score", "recessive_disease", "pharos_level", "known_chemistry", "other_structures_of_the_protein"];
+  C.CSV_COLUMNS = ["gene", "uniprot", "protein_name", "structure", "n_residues", "confidence_band", "confidence", "pocket_state", "site_volume_A3", "pocket_residues",
+    "cysteines_in_reach", "cysteine_chemistry", "strongest_disease", "disease_score", "genetic_score", "recessive_disease", "pharos_level", "known_chemistry", "other_structures_of_the_protein"];
   const CH = { a: "approved drug", c: "clinical-stage compound", p: "chemical probe", l: "ligand-bound structures", n: "none" };
   C.chemWord = d => (d && CH[d.ch]) || null;
   C.csvRow = r => {
     const s = C.sr(r), d = C.dz(r), x = C.evOf(r);
     return [r.gene, r.u, r.protein_name, r.tier === "afdb" ? "AlphaFold model" : (r.pdb || ""), r.n_res, bandName(r), r.conf == null ? "" : r.conf.toFixed(4), C.stateOf(r), s && s.v != null ? s.v : "",
-      C.hasRes(r) ? r.pocket_resids.join(" ") : "", C.cysNum(r) ? "Cys" + r.cys_resid : "", r.cys_dist == null ? "" : r.cys_dist, C.tetherList(r), C.reachText(r), C.chemText(r),
-      d && d.d ? d.d : "", d && d.s != null ? d.s : "", d && d.g != null ? d.g : "", d ? (d.inh === "r" ? "yes" : (d.inh === "d" ? "no (dominant)" : "not annotated")) : "not looked up",
+      C.hasRes(r) ? r.pocket_resids.join(" ") : "", C.reachText(r), C.chemText(r),
+      d && d.d ? d.d : "", d && d.s != null ? d.s : "", d && d.g != null ? d.g : "", d ? (d.inh === "r" ? "yes" : (d.inh === "d" ? "no (dominant)" : (d.inh === "m" ? "no (recessive and dominant forms)" : "not annotated"))) : "not looked up",
       r.tdl || "", d ? C.chemWord(d) : "", x ? EV[x].word : "not checked"].map(csvCell).join(",");
   };
   C.csv = list => [C.CSV_COLUMNS.join(",")].concat(list.map(C.csvRow)).join("\n") + "\n";
@@ -1279,31 +1271,33 @@ CPC.geom = { PAL, CONTACT, BURIAL_PCT, RSA_EXPOSED, TETHER_MIN, TETHER_MAX, PROB
              pocketCysteines, analyse, paint };
 })(typeof globalThis !== "undefined" ? globalThis : this);
 
-/* The figure at the top of the page: the surface of KRAS (chain A of PDB 6OIM) with the drug sotorasib in its pocket.
+/* The figure at the top of the page: the surface of ARHGDIB (Rho GDP-dissociation inhibitor 2, chain A of PDB 9X59) with the predicted pocket in violet and a compound that binds there in green.
 
-   The page shows two finished pictures of it (website/img/hero_kras_sotorasib_{light,dark}.webp, drawn from this file by src/make_hero_figure.py) and, when the reader asks to rotate it, builds the same scene live from the same
-   code, so the picture and the live view are one scene. The file it draws, website/data/hero_kras_sotorasib.pdb, is chain A of 6OIM with every atom, sotorasib ("MOV"), GDP and one Mg.
+   What the figure is. The catalogue scored ARHGDIB from PDB 5H1D (released 2016), a structure with no ligand at the site, where the predicted pocket (9 residues, 127, 129 to 132, 134, 172, 174 and 193) holds 10 A^3 of
+   empty space: closed. Five structures of the same protein with a compound at that site (9X53, 9X54, 9X55, 9X56 and 9X59, each "RhoGDI2 in complex with Compound ...") were released on 2025-10-29, after the date from which the project
+   counts a structure as later than its data (2025-08-12).
+   This figure draws one of them, 9X59 (1.65 A, Compound 2102, component "A1EY2", 19 heavy atoms, written as the three-letter name LIG in the file because PDB format has no room for five). Eight of the nine predicted residues touch the compound
+   (127, 129, 130, 131, 134, 172, 174, 193); the compound's other eight contact residues are outside the prediction. It is a search result, not a validation, and one example out of many that do not look like it:
+   Documents/Showcase_Search_Results_2026-10-19.md (of the six label-clean pockets there that are closed in the scored structure and open in a later structure, four hold a nucleotide or a cofactor and two a screening
+   compound, this one and NUDT14, whose predicted pocket matches less well: precision 0.46 against 0.89).
 
-   Two readings of the violet patch (the same violet as every pocket in the drawer, PAL.pocket):
-   drug   the 21 residues within 4.5 A of sotorasib in 6OIM, the pocket the drug opened (the switch II pocket). In structures without a drug it is much smaller.
-   model  the 16 residues of the pocket the catalogue predicts for KRAS (P01116): 12 to 18, 55 to 59, 117 and 145 to 147, the nucleotide site where GDP sits. It is next to the drug's pocket and shares 5 residues
-          with it (12, 13, 16, 58, 59), so the catalogue's prediction for KRAS is not sotorasib's pocket.
+   The page shows two finished pictures (website/img/hero_arhgdib_{light,dark}.webp, drawn from this file by src/make_hero_figure.py) and, when the reader asks to rotate it, builds the same scene live from the same code,
+   so the picture and the live view are one scene. The file it draws, website/data/hero_arhgdib_9x59.pdb, is made by src/make_hero_pdb.py: the protein atoms of chain A and one copy of the compound.
 
-   The view. The line of sight (VIEW.dir, from the centre of the protein toward the viewer) was chosen by casting rays from every heavy atom of the drug (and of GDP) outward through the other protein atoms
-   (radius 1.5 to 1.8 A) for 600 directions spread over a sphere: from this direction 98 % of the drug's atoms and 96 % of GDP's have a clear line out of the protein, against 44 % of the drug's atoms for the view
-   the page used before (the direction of the pocket's centre), which is why the drug looked blocked. src/make_hero_figure.py repeats the count and test_geom.py checks it. The picture is then turned about the line
-   of sight so that the drug's long axis lies across (the long axis of its atoms laid along the horizontal, plus VIEW.roll degrees), and centred on the drug (on the drug and GDP together in the model reading, which shows both ligands).
+   CONFIG below is the single source of everything that belongs to this protein (the page's text, the tests and make_hero_figure.py read it from here):
+   resi     the catalogue's predicted pocket in the numbering of the file (the same as the UniProt numbers for this chain), painted in the page's pocket violet (PAL.pocket)
+   contact  the residues of the chain within 4.5 A of the compound
+   view     the line of sight (dir, from the centre of the protein toward the viewer) is the best of 600 directions on a sphere for the share of the compound's heavy atoms with a clear line out of the protein (rays from every
+            heavy atom through the other protein atoms, radius 1.5 to 1.8 A): from there 100 % of its atoms are visible, against 22 % on average over all directions. The picture is then turned about the line of sight so
+            that the compound's long axis lies across (the long axis of its atoms laid along the horizontal, plus view.roll degrees), and centred on the compound. src/make_hero_figure.py repeats the count and test_geom.py checks it.
 
    Pure scene building: no page, no network. Needs 3Dmol and CPC.geom.PAL (geom.js).
 */
 (function (root) {
 "use strict";
 const CPC = root.CPC, PAL = CPC.geom.PAL;
-const SITES = {
-  drug:  { resi: [9, 10, 11, 12, 13, 16, 34, 58, 59, 60, 61, 62, 63, 68, 69, 72, 95, 96, 99, 100, 103], ligands: ["MOV"], centre: ["MOV"], zoom: 1.6 },
-  model: { resi: [12, 13, 14, 15, 16, 17, 18, 55, 56, 57, 58, 59, 117, 145, 146, 147], ligands: ["MOV", "GDP"], centre: ["MOV", "GDP"], zoom: 1.15 }
-};
-const VIEW = { dir: [-0.82, -0.543, -0.182], roll: 165, opacity: 1 };         /* opacity of the pocket's surface: opaque, so the pocket is exactly PAL.pocket in both colour schemes (the drug is in front of it from this side) */
+/*HERO_CONFIG*/const CONFIG = {"gene":"ARHGDIB","slug":"arhgdib","protein":"Rho GDP-dissociation inhibitor 2","accession":"P52566","pdb":"data/hero_arhgdib_9x59.pdb","entry":"9X59","chain":"A","ligand":"LIG","ligand_id":"A1EY2","scored":"5H1D","resi":[127,129,130,131,132,134,172,174,193],"contact":[74,101,107,109,127,129,130,131,134,135,137,163,172,174,191,193],"view":{"dir":[0.712,-0.407,0.572],"roll":0},"zoom":2.0}/*END_HERO_CONFIG*/;
+const VIEW = { dir: CONFIG.view.dir, roll: CONFIG.view.roll, opacity: 1 };         /* opacity of the pocket's surface: opaque, so the pocket is exactly PAL.pocket in both colour schemes */
 
 const xyz = l => [+l.slice(30, 38), +l.slice(38, 46), +l.slice(46, 54)];
 function rotTo(f, t) {                                         /* the rotation that turns the unit vector f onto t (Rodrigues) */
@@ -1325,7 +1319,7 @@ function orient(text, view) {
   const c = [0, 1, 2].map(a => P.reduce((s, p, i) => s + (prot[i] ? p[a] : 0), 0) / np);
   const L = Math.hypot(...view.dir), d = view.dir.map(x => x / L);
   let R = rotTo(d, [0, 0, 1]);
-  const drug = P.filter((p, i) => lines[i].slice(17, 20) === "MOV").map(p => apply(R, [p[0] - c[0], p[1] - c[1], p[2] - c[2]]));
+  const drug = P.filter((p, i) => lines[i].slice(17, 20) === CONFIG.ligand).map(p => apply(R, [p[0] - c[0], p[1] - c[1], p[2] - c[2]]));
   const mx = drug.reduce((s, p) => s + p[0], 0) / drug.length, my = drug.reduce((s, p) => s + p[1], 0) / drug.length;
   let sxx = 0, syy = 0, sxy = 0; drug.forEach(p => { sxx += (p[0] - mx) ** 2; syy += (p[1] - my) ** 2; sxy += (p[0] - mx) * (p[1] - my); });
   const roll = -0.5 * Math.atan2(2 * sxy, sxx - syy) + view.roll * Math.PI / 180;
@@ -1335,9 +1329,9 @@ function orient(text, view) {
 
 const ligColor = a => a.elem === "C" ? PAL.ligand : ((root.$3Dmol && root.$3Dmol.elementColors.Jmol[a.elem]) || "#888888");
 
-/* draw the scene into the 3Dmol viewer v (clearing it first): the surface of the protein alone in PAL.protein, the residues of the chosen site in PAL.pocket, the ligands as sticks. Resolves when the surfaces exist. */
-async function build(v, text, mode) {
-  const site = SITES[mode] || SITES.drug, want = {}; site.resi.forEach(r => { want[r] = 1; });
+/* draw the scene into the 3Dmol viewer v (clearing it first): the surface of the protein alone in PAL.protein, the predicted pocket's residues in PAL.pocket, the compound as sticks. Resolves when the surfaces exist. */
+async function build(v, text) {
+  const want = {}; CONFIG.resi.forEach(r => { want[r] = 1; });
   const pdb = orient(text);
   const inSite = [], rest = [], seen = {};
   pdb.split("\n").forEach(l => { if (!l.startsWith("ATOM")) return; const r = +l.slice(22, 26); if (seen[r]) return; seen[r] = 1; (want[r] ? inSite : rest).push(r); });
@@ -1345,14 +1339,14 @@ async function build(v, text, mode) {
   v.setView([0, 0, 0, 0, 0, 0, 0, 1]);                          /* no rotation: the atoms are already turned (orient), so a reader's earlier drag does not carry over */
   v.addModel(pdb, "pdb");
   v.setStyle({}, {});
-  v.addStyle({ resn: site.ligands }, { stick: { radius: 0.34, colorfunc: ligColor }, sphere: { scale: 0.3, colorfunc: ligColor } });
+  v.addStyle({ resn: [CONFIG.ligand] }, { stick: { radius: 0.34, colorfunc: ligColor }, sphere: { scale: 0.3, colorfunc: ligColor } });
   await v.addSurface(root.$3Dmol.SurfaceType.MS, { opacity: 1, colorfunc: () => PAL.protein }, { hetflag: false, resi: rest }, { hetflag: false });
   await v.addSurface(root.$3Dmol.SurfaceType.MS, { opacity: VIEW.opacity, colorfunc: () => PAL.pocket }, { hetflag: false, resi: inSite }, { hetflag: false });
-  v.zoomTo(); v.center({ resn: site.centre }); v.zoom(site.zoom); v.render();
-  return { atoms: pdb.split("\n").length, site: site.resi.length };
+  v.zoomTo(); v.center({ resn: CONFIG.ligand }); v.zoom(CONFIG.zoom); v.render();
+  return { atoms: pdb.split("\n").length, site: CONFIG.resi.length };
 }
 
-CPC.hero = { SITES, VIEW, orient, build };
+CPC.hero = { CONFIG, VIEW, orient, build };
 })(typeof window !== "undefined" ? window : globalThis);
 
 (function(){
@@ -1363,7 +1357,7 @@ CPC.hero = { SITES, VIEW, orient, build };
 const $=id=>document.getElementById(id);
 const CPC=window.CPC;
 const BANDS=[{n:"Lowest",k:"b1"},{n:"Low",k:"b2"},{n:"Moderate",k:"b3"},{n:"High",k:"b4"}];
-const PARTS={catalogue:null,state:null,disease:null,positions:null,md:null,cav:null};
+const PARTS={catalogue:null,state:null,disease:null,md:null,cav:null};
 const PAGE=50;      /* rows shown at a time: the table is long, and the simulations below it should not be a long scroll away */
 let C=null,DOC=null,ROWS=[],BYU={},SEL=null,VIEW=[],CAP=PAGE,READY=false,DRAWER=false,ALONE=null,PCOUNT={};
 const DEFAULT_PRESET="hidden";
@@ -1389,8 +1383,6 @@ function copyText(txt,btn,ok){
   (navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(()=>done(ok||"Copied"),()=>done("Clipboard not available"));
 }
 const hasRes=r=>!!(r&&r.pocket_resids&&r.pocket_resids.length);
-const hasCys=r=>!!(r&&r.cys_dist!=null);
-const cysNum=r=>!!(r&&r.cys_resid!=null);
 const shortName=r=>String(r&&r.protein_name||"").replace(/\s*\(.*$/,"").trim();
 const scrollTo=(el,smooth)=>{if(el)el.scrollIntoView({behavior:smooth===false?"instant":"smooth",block:"start"});};
 const fmt=n=>Number(n).toLocaleString();
@@ -1402,7 +1394,7 @@ const WHY={
   "state:open":"Closed pockets and known ligand sites are set aside; what is left is open and empty already.",
   "state:occupied":"Only sites where a drug-like ligand already sits in the structure scored.",
   "check:dz":"No strong link to a disease, or not looked up (only proteins above the lowest confidence band were).",
-  "check:rec":"Recessive disease usually means both copies of the gene are broken, so a drug would have to restore the protein, not block it, which is harder.",
+  "check:rec":"Its strongest disease is recessive: usually both copies are broken, so a drug would have to restore the protein, not block it, which is harder.",
   "check:tdl":"Pharos lists an approved drug or a potent compound for it (Tclin or Tchem), or records no level.",
   "check:cys":"No cysteine within reach, so labelling, tethering or a covalent drug would need one engineered in."
 };
@@ -1418,7 +1410,7 @@ function rebuild(){
 function boot(){
   $("tblempty").hidden=false;$("tblempty").innerHTML="Loading the catalogue (18,336 proteins, about 14 MB)&hellip;";
   const get=(file,key)=>fetch("data/"+file).then(r=>{if(!r.ok)throw new Error("HTTP "+r.status);return r.json();}).then(d=>{PARTS[key]=d;return true;},()=>false);
-  Promise.all([get("catalogue.json","catalogue"),get("state.json","state"),get("disease.json","disease"),get("positions.json","positions"),get("cys_reach.json","reach"),get("cysdb.json","cysdb"),get("md_examples.json","md"),get("md_cavity.json","cav"),get("md_complex.json","mdc"),get("mutations.json","mut")]).then(ok=>{
+  Promise.all([get("catalogue.json","catalogue"),get("state.json","state"),get("disease.json","disease"),get("cys_reach.json","reach"),get("cysdb.json","cysdb"),get("md_examples.json","md"),get("md_cavity.json","cav"),get("md_complex.json","mdc"),get("mutations.json","mut")]).then(ok=>{
     if(!ok[0]){PARTS.catalogue=jget("embedded-sample");}
     if(!PARTS.catalogue){$("tblempty").innerHTML="The catalogue could not be loaded. Serve the <b>website</b> folder over HTTP (<code>python3 -m http.server --directory website 8777</code>) and open <code>http://localhost:8777</code>.";return;}
     install(!ok[0]);
@@ -1456,7 +1448,7 @@ function setSeg(id,attr,val){document.querySelectorAll("#"+id+" button").forEach
 function leaveSearch(){if(UI.query){UI.query="";$("q").value="";$("hq").value="";}}
 function isDefault(){const p=CPC.PRESETS[DEFAULT_PRESET];return !UI.query&&UI.band===p.band&&UI.state===p.state&&!checkIds().length;}
 function renderControls(){
-  const have=C?C.have:{state:false,disease:false,positions:false};
+  const have=C?C.have:{state:false,disease:false};
   const cur=C?C.matchPreset({band:UI.band,state:UI.state,checks:checkIds()}):null;
   document.querySelectorAll("#presets .pst").forEach(b=>{
     const k=b.dataset.p;b.setAttribute("aria-pressed",String(!UI.query&&k===cur));
@@ -1525,17 +1517,17 @@ function siteCell(r){
   return '<span class="st '+t+'"><i></i>'+({closed:"Closed",open:"Open",occupied:"Ligand there"}[t])+'</span><span class="vol tnum">'+Math.round(s.v)+' &Aring;&sup3;</span>';
 }
 function cysCell(r){
-  const es=[];
-  if(hasCys(r))es.push({l:cysNum(r)?"Cys"+r.cys_resid:"Cys",n:r.cys_dist===0?"in pocket":r.cys_dist.toFixed(1)+" Å",in:r.cys_dist===0,id:r.cys_resid});
-  C.tetherEntries(r).forEach(t=>{if(!(hasCys(r)&&t.resi===r.cys_resid))es.push({l:"Cys"+t.resi,n:t.kind==="pocket"?"in pocket":"exposed",in:t.kind==="pocket"});});
-  if(!es.length)return '<span class="dim">none</span>';
-  return es.slice(0,2).map(e=>'<span class="cyc">'+e.l+'<span class="'+(e.in?"in":"dim")+'">'+e.n+'</span></span>').join("")+(es.length>2?'<span class="dim more1">+'+(es.length-2)+' more</span>':"");
+  const l=C.reachList(r);
+  if(l==null)return '<span class="dim">not analyzed</span>';
+  if(!l.length)return '<span class="dim">none</span>';
+  const e=l.slice().sort((a,b)=>a[1]-b[1]);
+  return e.slice(0,2).map(x=>'<span class="cyc">Cys'+x[0]+'<span class="'+(x[3]?"in":"dim")+'">'+(x[3]?"in pocket":x[1].toFixed(1)+" Å")+'</span></span>').join("")+(e.length>2?'<span class="dim more1">+'+(e.length-2)+' more</span>':"");
 }
 function disCell(r){
   const d=C.dz(r);if(!d)return '<span class="pend">not looked up</span>';
   const sc=C.dzScore(r);
   if(!d.d&&sc==null)return '<span class="dim">none found</span>';
-  return '<span class="dim">'+esc((d.d||"").length>34?d.d.slice(0,33)+"...":(d.d||""))+'</span> <span class="tnum"><b>'+(sc==null?"":sc.toFixed(2))+'</b></span>'+(d.inh==="r"?'<span class="rec" title="Recessive disease: usually both copies of the gene are broken, so a drug would have to restore the protein">recessive</span>':"");
+  return '<span class="dim">'+esc((d.d||"").length>34?d.d.slice(0,33)+"...":(d.d||""))+'</span> <span class="tnum"><b>'+(sc==null?"":sc.toFixed(2))+'</b></span>'+(d.inh==="r"?'<span class="rec" title="Strongest disease is recessive: usually both copies of the gene are broken, so a drug would have to restore the protein">recessive</span>':"");
 }
 function drugCell(r){
   const t=r.tdl;if(!t)return '<span class="pend">no level</span>';
@@ -1591,6 +1583,13 @@ function srcFor(r){
   if(r.tier==="afdb"||!r.pdb)return{url:AFDB.replace("{acc}",r.u),kind:"afdb",label:"AlphaFold model of "+r.u};
   return{url:RCSB.replace("{id}",String(r.pdb).toUpperCase()),kind:"pdb",label:"PDB entry "+String(r.pdb).toUpperCase()+(r.chain?", chain "+r.chain:"")};
 }
+/* the structure's own page at the database that holds it: the tag in the drawer's header is the link (nothing is fetched until it is clicked) */
+function structTag(r){
+  const s=srcFor(r),word=r.tier==="afdb"?"AlphaFold model":"Experimental structure";let href=null,tip="";
+  if(s.kind==="afdb"&&/^[A-Z0-9]{6,10}$/i.test(String(r.u))){href="https://alphafold.ebi.ac.uk/entry/"+encodeURIComponent(r.u);tip="Open the AlphaFold Database page of "+r.u;}
+  else if(s.kind==="pdb"&&/^[0-9][A-Za-z0-9]{3}$/.test(String(r.pdb))){href="https://www.rcsb.org/structure/"+String(r.pdb).toUpperCase();tip="Open PDB entry "+String(r.pdb).toUpperCase()+" at the RCSB PDB";}
+  return href?'<a class="tag sl" href="'+href+'" target="_blank" rel="noopener noreferrer" title="'+esc(tip)+' (new tab)">'+word+' &#8599;</a>':'<span class="tag">'+word+'</span>';
+}
 /* the protein view is a large drawer: the structure on the left, the facts on the right */
 const FOCUSABLE='button:not([disabled]),a[href],input:not([disabled]),select:not([disabled]),summary,[tabindex]:not([tabindex="-1"])';
 function drawerOpen(){
@@ -1619,9 +1618,9 @@ function stepProtein(delta){
 }
 function select(r,keepFocus){
   if(!r)return;
-  SEL=r;V.row=r;V.libWait=0;V.contact=null;V.ligs=[];V.cif=null;V.geo=null;V.focus=null;
+  SEL=r;V.row=r;V.libWait=0;V.contact=null;V.ligs=[];V.cif=null;V.focus=null;
   drawerOpen();
-  V.pocket=hasRes(r);V.cys=cysNum(r);V.lig=false;
+  V.pocket=hasRes(r);V.cys=C.reachCys(r);V.lig=false;
   detail(r);
   document.querySelectorAll("#tbody tr").forEach((tr,i)=>tr.setAttribute("aria-selected",String(!!VIEW[i]&&VIEW[i].u===r.u)));
   $("v_pocket").disabled=!V.pocket;$("v_pocket").setAttribute("aria-pressed",String(V.pocket));
@@ -1649,7 +1648,7 @@ function load(r){
   const s=srcFor(r);vmsg("Loading "+esc(s.label)+".");
   const done=t=>{
     if(V.row!==r)return;
-    try{v.resize();v.clear();v.addModel(CPC.geom.firstModelCif(t),"cif");V.surfId=null;V.baseKey=null;V.hov={};hoverLabels(v);V.cifLen=t.length;chainFacts(r);analyseLigands(r);V.cif=t;colourOptions();style();zoom();v.render();vmsg("");setTimeout(()=>analysePositions(r),30);}
+    try{v.resize();v.clear();v.addModel(CPC.geom.firstModelCif(t),"cif");V.surfId=null;V.baseKey=null;V.hov={};hoverLabels(v);V.cifLen=t.length;chainFacts(r);analyseLigands(r);V.cif=t;colourOptions();style();zoom();v.render();vmsg("");}
     catch(e){vmsg("The structure downloaded but could not be drawn ("+esc(e.message)+").");}
   };
   if(V.cache[s.url]){done(V.cache[s.url]);return;}
@@ -1824,10 +1823,10 @@ function style(){
     const st={stick:{radius:0.3,color:POCKET}};if(rep.cartoon)st.cartoon={color:POCKET};
     v.addStyle(p,st);
   }
-  if(V.cys&&cysNum(r)){
-    const c=Object.assign({},sel);c.resi=[r.cys_resid];
+  if(V.cys&&C.reachCys(r)){                                  /* the cysteines in reach of the pocket (the gate's rule) */
+    const rl=C.reachList(r),c=Object.assign({},sel);c.resi=rl.map(x=>x[0]);
     v.addStyle(c,{stick:{radius:0.35,color:PAL.cys},sphere:{radius:0.62,color:PAL.cys}});
-    v.addLabel("Cys"+r.cys_resid,{backgroundColor:PAL.cys,backgroundOpacity:0.92,fontColor:"#fff",fontSize:11},c);
+    rl.forEach(x=>{const q=Object.assign({},sel);q.resi=[x[0]];v.addLabel("Cys"+x[0],{backgroundColor:PAL.cys,backgroundOpacity:0.92,fontColor:"#fff",fontSize:11},q);});
   }
   if(V.lig&&V.ligs.length)V.ligs.forEach(g=>{v.addStyle({chain:g.chain,resi:g.resi,resn:g.resn},{stick:{radius:0.26,colorfunc:ligColor},sphere:{scale:0.26,colorfunc:ligColor}});});
   if(V.focus!=null){const q=Object.assign({},sel);q.resi=[V.focus.resi];v.addStyle(q,{stick:{radius:0.34,color:"#111"},sphere:{radius:0.55,color:V.focus.color}});v.addLabel(V.focus.text,{backgroundColor:"#222",backgroundOpacity:0.9,fontColor:"#fff",fontSize:11},q);}
@@ -1845,7 +1844,7 @@ function modeLegend(){
   return "";
 }
 function legendExtra(){                                    /* the legend lists only what is on the screen */
-  const r=V.row,p=!!(V.pocket&&r&&hasRes(r)),c=!!(V.cys&&r&&cysNum(r)),l=!!(V.lig&&V.ligs.length),h=modeLegend();
+  const r=V.row,p=!!(V.pocket&&r&&hasRes(r)),c=!!(V.cys&&r&&C.reachCys(r)),l=!!(V.lig&&V.ligs.length),h=modeLegend();
   $("vl_p").hidden=!p;$("vl_c").hidden=!c;$("vl_l").hidden=!l;
   const e=$("vl_mode");e.hidden=!h;e.innerHTML=h;
   const loc=V.rep!=="cartoon"&&V.local;$("vl_note").hidden=!loc;
@@ -1862,38 +1861,13 @@ $("v_reset").addEventListener("click",()=>{if(V.v){zoom();V.v.render();}});
 $("v_zoomp").addEventListener("click",()=>{if(V.v){zoomPocket();V.v.render();}});
 
 
-/* ── the cysteines the protein already has near the pocket: measured here, from the file the viewer loaded ─────────────────────────────────────────────────────── */
+/* ── showing one cysteine in the 3D view (a chip in the drawer, a click in the table's drawer) ─────────────────────────────────────────────────────── */
 function structName(r){const s=srcFor(r);return s.kind==="afdb"?"the AlphaFold model (UniProt numbering)":"PDB entry "+String(r.pdb).toUpperCase()+(r.chain?" chain "+r.chain:"");}
-function analysePositions(r){
-  if(V.row!==r||!V.cif)return;
-  const kind=srcFor(r).kind,chain=(kind==="pdb"&&r.chain)?String(r.chain):null;
-  let a=null;
-  try{a=CPC.geom.analyse(V.cif,chain,hasRes(r)?r.pocket_resids:[]);}catch(e){a=null;}
-  if(V.row!==r)return;
-  V.geo=a;
-  renderNatives(r);
-}
 function focusRes(resi,text,color){
   if(!V.v||!V.row)return;
   V.focus={resi,text,color};restyle();
   try{const z=chainSel(V.row);z.resi=[resi];V.v.zoomTo(z);V.v.zoom(0.5);V.v.render();}catch(e){}
 }
-const NATKIND={pocket:"in the pocket",window:"in the tethering window",label:"buried, within labelling reach"};
-function natChip(c){
-  const tip=c.kind==="pocket"?"a pocket residue":(c.kind==="window"?(c.dist.toFixed(1)+" Å from the pocket (CB), "+Math.round(c.rsa*100)+"% of its side chain exposed"):(c.distCa.toFixed(1)+" Å from the nearest pocket residue (CA to CA), buried"));
-  return '<button class="pos-chip nat '+c.kind+(c.ss?" ss":"")+'" data-resi="'+c.resi+'" title="'+esc("Cys "+c.resi+": "+NATKIND[c.kind]+"; "+tip+(c.ss?"; bonded to another cysteine in this structure (a disulfide), so not a free thiol here":""))+'">C'+c.resi+'<small>'+(c.kind==="pocket"?"pocket":(c.kind==="window"?"window":"buried"))+'</small></button>';
-}
-function renderNatives(r){
-  const el=$("nat_body");if(!el||V.row!==r)return;
-  if(!hasRes(r)){el.innerHTML='<p class="hint" style="margin:0">The pocket residue numbers are not in the current export.</p>';return;}
-  const g=V.geo;
-  if(!g){el.innerHTML='<p class="hint" style="margin:0">'+(V.cif?"The structure could not be read, so the cysteines were not worked out.":"Working out from the structure...")+'</p>';return;}
-  const nt=g.native||[];
-  el.innerHTML=(nt.length?'<div class="chipsr">'+nt.map(natChip).join("")+'</div>':'<p class="hint" style="margin:0">None of this chain\'s cysteines is in the pocket, exposed 4 to 8 &Aring; from it, or buried within 6 &Aring; of it.</p>')+
-    '<p class="note">'+(nt.length?'Click one to find it in the structure. ':'')+'Pocket: lines it. Window: exposed, 4 to 8 &Aring; away, where a tethered fragment can reach. Buried: within 6 &Aring;, protected until the pocket opens (the labelling test). Dashed: bonded to another cysteine here. Metal binding is not checked.</p>';
-  el.querySelectorAll(".pos-chip").forEach(b=>b.addEventListener("click",()=>focusRes(+b.dataset.resi,"Cys"+b.dataset.resi,COL.nat)));
-}
-
 /* ── the protein panel ────────────────────────────────────────────────────── */
 function answerHtml(r){
   const k=C.classify(r),e=C.evOf(r),cov=C.covOf(r);
@@ -1909,10 +1883,10 @@ function answerHtml(r){
 }
 function headHtml(r){
   const b=bandOf(r),d=C.dz(r),sc=C.dzScore(r);
-  const cys=hasCys(r)?(cysNum(r)?"Cys"+r.cys_resid:"pending")+(r.cys_dist===0?' <small>in pocket</small>':' <small>'+r.cys_dist.toFixed(1)+' &Aring;</small>'):'none';
+  const nc=C.nearCys(r),cys=nc?"Cys"+nc[0]+(nc[3]?' <small>in pocket</small>':' <small>'+nc[1].toFixed(1)+' &Aring;</small>'):(C.reachList(r)==null?'<small class="ink">not analyzed</small>':'none');
   const dis=d?(sc!=null?sc.toFixed(2):"-")+(d.d?'<small class="ink">'+esc(d.d.length>26?d.d.slice(0,25)+"...":d.d)+'</small>':""):'<small class="ink">not looked up</small>';
   return '<div class="dh"><h3>'+esc(r.gene||"unnamed")+'</h3><div class="pn" title="'+esc(r.protein_name||"")+'">'+esc(shortName(r))+" &middot; "+esc(r.u)+'</div><div class="row">'+
-    (b?'<span class="tag b">'+b.n+' confidence</span>':"")+'<span class="tag">'+(r.tier==="afdb"?"AlphaFold model":"Experimental structure")+'</span>'+
+    (b?'<span class="tag b">'+b.n+' confidence</span>':"")+structTag(r)+
     (r.tdl?'<span class="tag '+((r.tdl==="Tbio"||r.tdl==="Tdark")?"g":"a")+'">'+esc(PHAROS[r.tdl]||r.tdl)+'</span>':"")+'</div></div>'+
     answerHtml(r)+
     '<div class="qf"><div><span class="k">Cysteine</span><div class="v">'+cys+'</div></div>'+
@@ -1926,7 +1900,7 @@ function diseaseHtml(r){
   const sc=C.dzScore(r);let h="";
   h+=kv("Strongest disease link",d.d?esc(d.d)+(d.s!=null?" ("+d.s.toFixed(2)+")":""):"none found");
   if(d.g!=null)h+=kv("Genetic evidence",d.g.toFixed(2));
-  h+=kv("Inheritance",d.inh==="r"?"recessive: usually both copies of the gene are broken, so a drug would have to restore the protein":(d.inh==="d"?"dominant":"not annotated"));
+  h+=kv("Inheritance",d.inh==="r"?"strongest disease is recessive: usually both copies of the gene are broken, so a drug would have to restore the protein":(d.inh==="d"?"dominant":(d.inh==="m"?"recessive and dominant forms":"not annotated")));
   if(d.sd)h+=kv("Cancer driver","somatic-driver evidence in Open Targets");
   h+=kv("Chemistry that exists",esc(C.chemWord(d)||"none")+(d.nd?" ("+d.nd+" drug"+(d.nd===1?"":"s")+" or candidate"+(d.nd===1?"":"s")+")":""));
   h+=kv("Pharos level",r.tdl?esc(r.tdl)+" ("+esc(PHAROS[r.tdl]||"")+")":"not recorded");
@@ -1948,9 +1922,9 @@ function measureHtml(r){
   return h+'<p class="note">Volumes use the same pocket-grid method as the simulation test, one chain at a time. Shallow grooves read near zero in every state.</p>';
 }
 function selText(r){
-  const ch=(r.tier!=="afdb"&&r.chain)?String(r.chain):"A";
-  return {pymol:"select pocket, chain "+ch+" and resi "+r.pocket_resids.join("+")+(cysNum(r)?"\nselect cys, chain "+ch+" and resi "+r.cys_resid+" and name SG":""),
-          chimera:"select /"+ch+":"+r.pocket_resids.join(",")+(cysNum(r)?"\nselect /"+ch+":"+r.cys_resid+"@SG":"")};
+  const ch=(r.tier!=="afdb"&&r.chain)?String(r.chain):"A",rs=(C.reachList(r)||[]).map(x=>x[0]);
+  return {pymol:"select pocket, chain "+ch+" and resi "+r.pocket_resids.join("+")+(rs.length?"\nselect cys, chain "+ch+" and resi "+rs.join("+")+" and name SG":""),
+          chimera:"select /"+ch+":"+r.pocket_resids.join(",")+(rs.length?"\nselect /"+ch+":"+rs.join(",")+"@SG":"")};
 }
 function reachChip(r,x){
   const f=C.cysdb(r.u,x[0]),where=x[3]?"in the pocket":x[1].toFixed(1)+" \u00c5";
@@ -1973,14 +1947,12 @@ function detail(r){
   h+=mdCardHtml(r);
   h+='<div class="dsec"><h4>Predicted pocket</h4>';
   if(hasRes(r)){
-    const mp=mutChips(r);
-    h+='<div class="chipsr">'+r.pocket_resids.map(x=>'<span class="res-chip'+((cysNum(r)&&x===r.cys_resid)?" cys":"")+(mp[x]?" mut":"")+'"'+(mp[x]?' title="'+esc(mp[x])+'"':"")+'>'+x+'</span>').join("")+'</div>'+
+    const mp=mutChips(r),rc=new Set((C.reachList(r)||[]).map(x=>x[0]));
+    h+='<div class="chipsr">'+r.pocket_resids.map(x=>'<span class="res-chip'+(rc.has(x)?" cys":"")+(mp[x]?" mut":"")+'"'+(mp[x]?' title="'+esc(mp[x])+'"':"")+'>'+x+'</span>').join("")+'</div>'+
        '<div class="acts"><button class="mini" data-act="res">Copy residue numbers</button><button class="mini" data-act="pymol">Copy PyMOL selection</button><button class="mini" data-act="chimera">Copy ChimeraX selection</button></div>'+
        '<p class="note">'+r.pocket_resids.length+' residues, numbered as in '+esc(structName(r))+'.</p>';
   }else h+='<p class="hint" style="margin:0">'+(r.cluster_size!=null?'The model groups '+r.cluster_size+' residues into this pocket, but their residue numbers are not in the current export.':'The pocket residue numbers are not in the current export.')+'</p>';
-  h+='</div>'+mutHtml(r)+reachHtml(r)+'<div class="dsec"><h4>Cysteines near the pocket</h4>';
-  h+=(hasCys(r)?'<p class="note" style="margin:0 0 8px">The catalogue\'s labelling cysteine (buried, unpaired, not bound to a metal, within 6 &Aring;): <b>'+(cysNum(r)?"Cys"+r.cys_resid:"number pending")+'</b>, '+(r.cys_dist===0?"inside the pocket":r.cys_dist.toFixed(1)+" &Aring; away")+'.</p>':'<p class="note" style="margin:0 0 8px">No eligible labelling cysteine (buried, unpaired, not bound to a metal) lies within 6 &Aring; of the pocket.</p>');
-  h+='<div id="nat_body"><p class="hint" style="margin:0">Working out from the structure...</p></div></div>';
+  h+='</div>'+mutHtml(r)+reachHtml(r);
   h+='<details class="dd"><summary>Disease and drugs</summary><div class="in">'+diseaseHtml(r)+'</div></details>';
   h+='<details class="dd"><summary>Measurements and structure</summary><div class="in">'+measureHtml(r)+'</div></details>';
   $("detail").innerHTML=h;$("copy").hidden=false;
@@ -1989,19 +1961,18 @@ function detail(r){
     const t=selText(r);const a=btn.dataset.act;
     copyText(a==="res"?r.pocket_resids.join(","):(a==="pymol"?t.pymol:t.chimera),btn);
   }));
-  renderNatives(r);mdCardInit(r);
+  mdCardInit(r);
   if(V.contact)setLig(r,V.contact);
 }
 $("copy").addEventListener("click",function(){
   const r=SEL;if(!r)return;
-  const s=srcFor(r),q=C.qOf(r),b=bandOf(r),d=C.dz(r),nat=V.geo&&V.geo.native?V.geo.native.map(c=>"C"+c.resi+":"+c.kind+(c.ss?":disulfide":"")).join(" "):"";
+  const s=srcFor(r),q=C.qOf(r),b=bandOf(r),d=C.dz(r);
   const t=["gene\t"+(r.gene||"unnamed"),"uniprot\t"+r.u,"structure\t"+s.label,"structure_url\t"+s.url,
     "confidence_band\t"+(b?b.n:"not banded"),"confidence_value\t"+num(r.conf,4),
     "band_precision_pct\t"+(q?pct(q.precision).replace("%",""):"NA"),
     "pocket_residues\t"+(hasRes(r)?r.pocket_resids.join(","):"NOT IN THE CURRENT EXPORT"),
-    "labelling_cysteine\t"+(cysNum(r)?("Cys"+r.cys_resid):(hasCys(r)?"NUMBER PENDING":"NONE WITHIN 6 A")),
-    "labelling_cysteine_distance_angstrom\t"+(r.cys_dist==null?"NA":num(r.cys_dist,2)),
-    "cysteines_near_pocket\t"+(nat||"NOT WORKED OUT"),
+    "cysteines_in_reach\t"+(C.reachList(r)==null?"NOT ANALYZED":(C.reachText(r)||"NONE WITHIN "+C.REACH_A+" A")),
+    "cysteine_chemistry\t"+(C.reachList(r)==null?"NOT ANALYZED":(C.chemText(r)||"NONE")),
     "pharos_level\t"+(r.tdl||"NA"),
     "strongest_disease\t"+(d&&d.d?d.d+" ("+(C.dzScore(r)==null?"NA":C.dzScore(r).toFixed(2))+")":"NA"),
     "# The band precision is measured on held-out proteins. No probability is asserted for this row."].join("\n");
@@ -2208,7 +2179,7 @@ function mdCardHtml(r){
 function mdCardInit(r){
   MDLIVE.forEach(p=>p.pause());MDCLIVE.forEach(p=>p.pause());mdStopCard();const L=mdFor(r);if(!L.length||!$("mdcardview"))return;      /* the section's player stops while the drawer is over it */
   const m=L[0];
-  requestAnimationFrame(()=>mdPlayer($("mdcardview"),m,mdUi("mdcard"),MDCARD));
+  requestAnimationFrame(()=>{const h=$("mdcardview");if(h)mdPlayer(h,m,mdUi("mdcard"),MDCARD);});      /* the drawer may have moved to another protein within the frame */
   const a=document.querySelector(".mdjump");if(a)a.addEventListener("click",ev=>{ev.preventDefault();drawerClose();showTab("sim",true);showSim("open");mdSelect(mdRuns().indexOf(m));});
 }
 const WORD={"2":"Opens in most simulations and more than its neighbours","1":"Opens, but not clearly more than similar patches","descriptive":"Opens, but so do similar patches of the protein","0":"Rarely opens, and so do its neighbours"};
@@ -2439,11 +2410,7 @@ function renderTrust(){
 }
 
 /* ── the figure at the top: a picture first; "Rotate in 3D" builds the same scene live (src/hero.js) ─────────────────────────────────────────────── */
-const HERO={v:null,mode:"drug",text:null,busy:false,view:null};
-const HERO_CAP={
-  drug:"KRAS bound to sotorasib (green), an approved drug for KRAS G12C lung cancer. It sits in a pocket (violet) that is much smaller in structures without the drug. PDB 6OIM.",
-  model:"The pocket this catalogue predicts for KRAS (violet) is the site where the nucleotide GDP binds, next to the drug's pocket. GDP and sotorasib are green. PDB 6OIM."
-};
+const HERO={v:null,text:null,busy:false,view:null};
 const viewerBg=()=>getComputedStyle(document.documentElement).getPropertyValue("--viewer").trim()||"#f3f5f8";
 async function heroLive(){
   if(HERO.v||HERO.busy)return;
@@ -2451,10 +2418,10 @@ async function heroLive(){
   try{
     for(let i=0;i<80&&typeof window.$3Dmol==="undefined";i++)await new Promise(r=>setTimeout(r,250));
     if(typeof window.$3Dmol==="undefined")throw new Error("The 3D viewer did not load");
-    if(!HERO.text)HERO.text=await fetch("data/hero_kras_sotorasib.pdb").then(r=>{if(!r.ok)throw new Error("HTTP "+r.status);return r.text();});
+    if(!HERO.text)HERO.text=await fetch(CPC.hero.CONFIG.pdb).then(r=>{if(!r.ok)throw new Error("HTTP "+r.status);return r.text();});
     const host=$("herov");
     const v=window.$3Dmol.createViewer(host,{backgroundColor:viewerBg()});
-    await CPC.hero.build(v,HERO.text,HERO.mode);
+    await CPC.hero.build(v,HERO.text);
     HERO.v=v;HERO.view=v.getView();
     host.addEventListener("wheel",e=>e.stopPropagation(),{capture:true,passive:true});      /* the page keeps scrolling when the pointer is over the figure */
     host.classList.add("on");$("heropic").hidden=true;btn.hidden=true;$("heroctl").hidden=false;
@@ -2462,14 +2429,6 @@ async function heroLive(){
     btn.disabled=false;btn.textContent="The 3D view did not load. Try again";
   }
   HERO.busy=false;
-}
-async function heroMode(m){
-  if(!HERO.v||HERO.busy||m===HERO.mode)return;
-  HERO.busy=true;HERO.mode=m;
-  document.querySelectorAll("#heroseg button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.m===m)));
-  $("herocap").textContent=HERO_CAP[m];$("herobusy").hidden=false;
-  try{await CPC.hero.build(HERO.v,HERO.text,m);HERO.view=HERO.v.getView();}catch(e){}
-  $("herobusy").hidden=true;HERO.busy=false;
 }
 function heroRotate(e){
   const k={ArrowLeft:[-12,"y"],ArrowRight:[12,"y"],ArrowUp:[-12,"x"],ArrowDown:[12,"x"]}[e.key];
@@ -2482,7 +2441,6 @@ function retheme(){                                            /* the colour sch
 }
 $("herospin").addEventListener("click",heroLive);
 $("heroreset").addEventListener("click",()=>{if(HERO.v&&HERO.view){HERO.v.setView(HERO.view);HERO.v.render();}});
-document.querySelectorAll("#heroseg button").forEach(b=>b.addEventListener("click",()=>heroMode(b.dataset.m)));
 $("herov").addEventListener("keydown",heroRotate);
 if(window.matchMedia){const mq=window.matchMedia("(prefers-color-scheme: dark)");if(mq.addEventListener)mq.addEventListener("change",retheme);}
 
