@@ -500,7 +500,7 @@ details.dd .dsec{padding:0;border:0}
           <button class="btn" type="submit">Search</button>
         </form>
         <p class="try">Try <button type="button" class="tryq" data-q="ARHGDIB" title="Closed here; a later structure shows a compound at the site">ARHGDIB</button><button type="button" class="tryq" data-q="KRAS" title="A drug-like ligand already sits at the predicted site">KRAS</button><button type="button" class="tryq" data-q="MCL1" title="Closed here; another structure shows a cavity at the site">MCL1</button><button type="button" class="tryq" data-q="PARK7" title="A flat groove: other structures show no enclosed cavity">PARK7</button>
-          or <a href="#screen" id="browselink">browse the hidden pockets</a></p>
+          or <a href="#screen" id="browselink">browse the closed, empty pockets</a></p>
         <div class="stats" id="stats"></div>
       </div>
       <figure class="hero-fig" id="herofig">
@@ -532,8 +532,8 @@ details.dd .dsec{padding:0;border:0}
     </div>
 
     <div class="presets" id="presets" role="group" aria-label="Starting points">
-      <button class="pst" data-p="hidden" aria-pressed="true"><span class="pn1">Hidden pockets</span><span class="pc" id="cnt_hidden"></span><span class="pd">confident, closed and empty</span></button>
-      <button class="pst" data-p="hidden_cys" aria-pressed="false"><span class="pn1">Hidden, with a cysteine in reach</span><span class="pc" id="cnt_hidden_cys"></span><span class="pd">for a lab test</span></button>
+      <button class="pst" data-p="hidden" aria-pressed="true"><span class="pn1">Closed and empty</span><span class="pc" id="cnt_hidden"></span><span class="pd">confident, no cavity yet, no ligand</span></button>
+      <button class="pst" data-p="hidden_cys" aria-pressed="false"><span class="pn1">Closed and empty, with a cysteine</span><span class="pc" id="cnt_hidden_cys"></span><span class="pd">for a lab test</span></button>
       <button class="pst" data-p="sites" aria-pressed="false"><span class="pn1">Ligand sites in general</span><span class="pc" id="cnt_sites"></span><span class="pd">confident sites in any state</span></button>
       <button class="pst" data-p="sites_cys" aria-pressed="false"><span class="pn1">Any site, with a cysteine in reach</span><span class="pc" id="cnt_sites_cys"></span><span class="pd">for a covalent ligand</span></button>
       <button class="pst" data-p="impact" aria-pressed="false"><span class="pn1">Disease-linked, high confidence</span><span class="pc" id="cnt_impact"></span><span class="pd">high confidence and a strong disease link, nothing else asked</span></button>
@@ -550,7 +550,7 @@ details.dd .dsec{padding:0;border:0}
         <div class="gate">
           <div class="gtop"><span class="gt">Pocket</span>
             <span class="seg" id="stateseg" role="group" aria-label="State of the predicted site"><button data-s="any" aria-pressed="false">Any</button><button data-s="closed" aria-pressed="true">Closed</button><button data-s="open" aria-pressed="false">Open</button><button data-s="occupied" aria-pressed="false">Ligand there</button></span></div>
-          <p class="gw">Closed: no cavity there yet (under 40 &Aring;&sup3;). Open: a cavity is already visible. Ligand there: a drug-like molecule already sits at the site.</p>
+          <p class="gw">What this structure shows. Closed: no cavity there yet (under 40 &Aring;&sup3;, a convention). Open: a cavity is already visible. Ligand there: a drug-like molecule already sits at the site. Whether the site is already known is the annotation gate below.</p>
         </div>
         <div class="gate">
           <div class="gtop"><span class="gt">Structure</span>
@@ -576,6 +576,11 @@ details.dd .dsec{padding:0;border:0}
           <div class="gtop"><span class="gt">Not already drugged</span><button class="sw" data-c="tdl" role="switch" aria-checked="false" aria-label="Not already drugged"></button></div>
           <p class="gw">No approved drug and no potent compound has been reported for it yet (Pharos level Tbio or Tdark).</p>
           <span class="gf" id="gf_tdl"></span>
+        </div>
+        <div class="gate">
+          <div class="gtop"><span class="gt">No annotated site</span><button class="sw" data-c="ns" role="switch" aria-checked="false" aria-label="No annotated site"></button></div>
+          <p class="gw">No pocket residue lies on a UniProt active, binding, metal or nucleotide site. That means none is annotated, not that nothing is known; entries that could not be mapped are left out.</p>
+          <span class="gf" id="gf_ns"></span>
         </div>
         <div class="gate">
           <div class="gtop"><span class="gt">A cysteine in reach</span><button class="sw" data-c="cys" role="switch" aria-checked="false" aria-label="A cysteine in reach"></button></div>
@@ -704,7 +709,7 @@ details.dd .dsec{padding:0;border:0}
     <h3 class="sub2">What it cannot do</h3>
     <ul class="limits">
       <li><b>It sees one protein chain at a time.</b> If a pocket forms only where two chains meet, the model cannot see it. In eIF2B beta, for example, none of the 32 residues it predicts is within 10 &Aring; of the drug ISRIB, which binds between two subunits.</li>
-      <li><b>A prediction is a place to test, not a result.</b> A closed site with high confidence makes a hidden pocket more likely, not certain: in the High band about half of the residues the model names are right on proteins it never saw. No drug is predicted.</li>
+      <li><b>A prediction is a place to test, not a result.</b> A closed, empty site at high confidence makes a cryptic pocket more likely, not certain: in the High band about half of the residues the model names are right on proteins it never saw. No drug is predicted.</li>
       <li><b>A disease link describes the gene, not the pocket.</b> It says the gene matters in a disease, not whether a drug should block the protein or boost it.</li>
       <li><b>The simulations show that a pocket can open, not that a drug fits.</b> They have no drug in them, use one force field, and run ten times for 40 ns per protein.</li>
     </ul>
@@ -771,6 +776,7 @@ details.dd .dsec{padding:0;border:0}
      dz           a strong disease link: the strongest Open Targets association with a disease, overall or genetic, is 0.5 or more (only proteins that were looked up have one)
      rec          not a recessive-disease gene (Open Targets lists recessive or biallelic inheritance for the gene's strongest-link disease: usually both copies of the gene are broken, so a drug would have to restore the protein)
      tdl          not already drugged: Pharos level Tbio or Tdark (no approved drug, no potent small molecule)
+     ns           no annotated site: no pocket residue lies on a UniProt functional-site feature (active, binding, metal, DNA, nucleotide or zinc-finger site), read through the entry's own numbering (SIFTS); a row whose entry could not be mapped is left out, because nothing was checked for it (data/known_site.json)
      cys          a cysteine in reach: a free native cysteine (no other sulfur within 2.5 angstroms, no metal within 3.0) whose sulfur lies within 4.5 angstroms of a heavy atom of a pocket residue (the shared core, data/cys_reach.json)
      lig          a cysteine in reach that CysDB found engaged by an electrophile (data/cysdb.json)
    Two scope filters narrow the list before the gates: the structure a row was scored on (experimental or AlphaFold) and its highest identity to a training protein.
@@ -790,15 +796,15 @@ const EV = {
 
 /* the starting points: each is just a setting of the gates (the reader can change any of them afterward) */
 const PRESETS = {
-  hidden: { label: "Hidden pockets",                 band: 3, state: "closed", checks: [], note: "Confident, closed and empty: the cryptic-pocket candidates." },
-  hidden_cys: { label: "Hidden, with a cysteine in reach", band: 3, state: "closed", checks: ["cys"], note: "Confident, closed and empty, with a free native cysteine within 4.5 A of the pocket: a pocket a lab could test." },
+  hidden: { label: "Closed and empty",               band: 3, state: "closed", checks: [], note: "Confident, with no cavity at the predicted site yet and no ligand there. Closed is a fact about this structure, not about what is known: the annotation gate asks that." },
+  hidden_cys: { label: "Closed and empty, with a cysteine in reach", band: 3, state: "closed", checks: ["cys"], note: "Confident, closed and empty, with a free native cysteine within 4.5 A of the pocket: a pocket a lab could test." },
   sites:  { label: "Ligand sites in general",         band: 3, state: "any",    checks: [], note: "Every confident predicted site, whether closed, open or already holding a ligand." },
   sites_cys: { label: "Any site, with a cysteine in reach", band: 3, state: "any", checks: ["cys"], note: "Every confident site, closed, open or holding a ligand, with a free native cysteine within 4.5 A of the pocket: a site a covalent ligand could use." },
   impact: { label: "Disease-linked, high confidence", band: 4, state: "any",    checks: ["dz"], note: "High confidence and a strong disease link, nothing else asked." },
   all:    { label: "Everything",                      band: 0, state: "any",    checks: [], note: "Every protein." }
 };
 const PRESET_ORDER = ["hidden", "hidden_cys", "sites", "sites_cys", "impact", "all"];
-const CHECK_ORDER = ["dz", "rec", "tdl", "cys", "lig"];
+const CHECK_ORDER = ["dz", "rec", "tdl", "ns", "cys", "lig"];
 
 function context(parts) {
   const cat = parts.catalogue || {};
@@ -808,9 +814,10 @@ function context(parts) {
   const DZ = (parts.disease && parts.disease.by_uniprot) || {};
   const RE = (parts.reach && parts.reach.by_uniprot) || {};
   const CD = (parts.cysdb && parts.cysdb.by_uniprot) || {};
-  const have = { state: Object.keys(S).length > 0, disease: Object.keys(DZ).length > 0, reach: Object.keys(RE).length > 0, cysdb: Object.keys(CD).length > 0 && Object.keys(RE).length > 0 };
+  const KN = (parts.known && parts.known.by_uniprot) || {};
+  const have = { state: Object.keys(S).length > 0, known: Object.keys(KN).length > 0, disease: Object.keys(DZ).length > 0, reach: Object.keys(RE).length > 0, cysdb: Object.keys(CD).length > 0 && Object.keys(RE).length > 0 };
   const meta = { catalogue: cat._meta || {}, state: (parts.state && parts.state._meta) || {}, disease: (parts.disease && parts.disease._meta) || {}, reach: (parts.reach && parts.reach._meta) || {}, cysdb: (parts.cysdb && parts.cysdb._meta) || {} };
-  const C = { rows, quart, S, DZ, RE, CD, have, meta };
+  const C = { rows, quart, S, DZ, RE, CD, KN, have, meta };
 
   /* ── row facts ─────────────────────────────────────────────────────────── */
   C.hasRes = r => !!(r && r.pocket_resids && r.pocket_resids.length);
@@ -821,6 +828,9 @@ function context(parts) {
     if (s.o) return "occupied";
     return s.v < FLOOR ? "closed" : "open";
   };
+  /* what is known at the site, from data/known_site.json: "annotated" (a pocket residue lies on a UniProt site feature), "none" (checked, no feature), "unmapped" (the entry could not be mapped to UniProt numbering, so nothing was checked), "unchecked" (no record) */
+  C.kn = r => KN[r.u] || null;
+  C.knownOf = r => { const k = KN[r.u]; if (!k) return "unchecked"; if (k.s && k.s.length) return "annotated"; return k.x ? "unmapped" : "none"; };
   C.evOf = r => { const s = C.sr(r); return s && s.ev ? s.ev : null; };
   C.covOf = r => { const s = C.sr(r); return (s && s.len && r.n_res != null) ? Math.min(1, r.n_res / s.len) : null; };
   C.dz = r => DZ[r.u] || null;
@@ -859,6 +869,8 @@ function context(parts) {
       test: r => { const d = C.dz(r); return !!d && d.inh !== "r"; } },
     { id: "tdl", needs: null,      label: "Not already drugged", stage: "not already drugged",
       test: r => r.tdl === "Tbio" || r.tdl === "Tdark" },
+    { id: "ns",  needs: "known",    label: "No annotated site", stage: "no UniProt-annotated site",
+      test: r => C.knownOf(r) === "none" },
     { id: "cys", needs: "reach",    label: "A cysteine in reach", stage: "a cysteine in reach",
       test: r => C.reachCys(r) },
     { id: "lig", needs: "cysdb",    label: "A cysteine measured ligandable", stage: "a cysteine in reach that CysDB found ligandable",
@@ -981,13 +993,13 @@ function context(parts) {
   /* ── the CSV a reader downloads ──────────────────────────────────────────── */
   const csvCell = v => { const s = v == null ? "" : String(v); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
   const bandName = r => { const i = C.bandIdx(r); return i ? ["Lowest", "Low", "Moderate", "High"][i - 1] : ""; };
-  C.CSV_COLUMNS = ["gene", "uniprot", "protein_name", "structure", "n_residues", "confidence_band", "confidence", "pocket_state", "site_volume_A3", "pocket_residues",
+  C.CSV_COLUMNS = ["gene", "uniprot", "protein_name", "structure", "n_residues", "confidence_band", "confidence", "pocket_state", "site_volume_A3", "annotated_site", "pocket_residues",
     "cysteines_in_reach", "cysteine_chemistry", "strongest_disease", "disease_score", "genetic_score", "recessive_disease", "pharos_level", "known_chemistry", "other_structures_of_the_protein", "identity_to_training_pct"];
   const CH = { a: "approved drug", c: "clinical-stage compound", p: "chemical probe", l: "ligand-bound structures", n: "none" };
   C.chemWord = d => (d && CH[d.ch]) || null;
   C.csvRow = r => {
     const s = C.sr(r), d = C.dz(r), x = C.evOf(r);
-    return [r.gene, r.u, r.protein_name, r.tier === "afdb" ? "AlphaFold model" : (r.pdb || ""), r.n_res, bandName(r), r.conf == null ? "" : r.conf.toFixed(4), C.stateOf(r), s && s.v != null ? s.v : "",
+    return [r.gene, r.u, r.protein_name, r.tier === "afdb" ? "AlphaFold model" : (r.pdb || ""), r.n_res, bandName(r), r.conf == null ? "" : r.conf.toFixed(4), C.stateOf(r), s && s.v != null ? s.v : "", ({ annotated: "yes", none: "no", unmapped: "not checked (entry not mapped)", unchecked: "not checked" })[C.knownOf(r)],
       C.hasRes(r) ? r.pocket_resids.join(" ") : "", C.reachText(r), C.chemText(r),
       d && d.d ? d.d : "", d && d.s != null ? d.s : "", d && d.g != null ? d.g : "", d ? (d.inh === "r" ? "yes" : (d.inh === "d" ? "no (dominant)" : (d.inh === "m" ? "no (recessive and dominant forms)" : "not annotated"))) : "not looked up",
       r.tdl || "", d ? C.chemWord(d) : "", x ? EV[x].word : "not checked", C.idTrain(r) == null ? "" : C.idTrain(r)].map(csvCell).join(",");
@@ -1414,6 +1426,7 @@ const WHY={
   "check:dz":"No strong link to a disease, or not looked up (only proteins above the lowest confidence band were).",
   "check:rec":"Its strongest disease is recessive: usually both copies are broken, so a drug would have to restore the protein, not block it, which is harder.",
   "check:tdl":"Pharos lists an approved drug or a potent compound for it (Tclin or Tchem), or records no level.",
+  "check:ns":"A pocket residue lies on a UniProt-annotated site (active, binding, metal or nucleotide), or the entry could not be mapped, so nothing was checked.",
   "check:cys":"No cysteine within reach, so labeling, tethering or a covalent drug would need one engineered in."
 };
 const PHAROS={Tclin:"approved drug",Tchem:"potent compounds",Tbio:"studied, none yet",Tdark:"little studied"};
@@ -1428,7 +1441,7 @@ function rebuild(){
 function boot(){
   $("tblempty").hidden=false;$("tblempty").innerHTML="Loading the catalog (18,336 proteins, about 14 MB)&hellip;";
   const get=(file,key)=>fetch("data/"+file).then(r=>{if(!r.ok)throw new Error("HTTP "+r.status);return r.json();}).then(d=>{PARTS[key]=d;return true;},()=>false);
-  Promise.all([get("catalogue.json","catalogue"),get("state.json","state"),get("disease.json","disease"),get("cys_reach.json","reach"),get("cysdb.json","cysdb"),get("md_examples.json","md"),get("md_cavity.json","cav"),get("md_complex.json","mdc"),get("mutations.json","mut")]).then(ok=>{
+  Promise.all([get("catalogue.json","catalogue"),get("state.json","state"),get("disease.json","disease"),get("cys_reach.json","reach"),get("cysdb.json","cysdb"),get("md_examples.json","md"),get("md_cavity.json","cav"),get("md_complex.json","mdc"),get("mutations.json","mut"),get("known_site.json","known")]).then(ok=>{
     if(!ok[0]){PARTS.catalogue=jget("embedded-sample");}
     if(!PARTS.catalogue){$("tblempty").innerHTML="The catalog could not be loaded. Serve the <b>website</b> folder over HTTP (<code>python3 -m http.server --directory website 8777</code>) and open <code>http://localhost:8777</code>.";return;}
     install(!ok[0]);
@@ -1452,7 +1465,7 @@ function install(isSample){
 function renderStats(){
   if(!C)return;
   const h=C.headline(),st=[[h.all,"proteins scored"],[h.confident,"confident predictions"]];
-  if(C.have.state)st.push([h.hidden,"hidden pockets: confident, closed and empty"]);
+  if(C.have.state)st.push([h.hidden,"closed and empty: confident, no cavity yet, no ligand"]);
   if(C.have.disease)st.push([h.impact,"high-confidence proteins with a strong disease link"]);
   $("stats").innerHTML=st.map(s=>'<div class="stat"><div class="v">'+fmt(s[0])+'</div><div class="l">'+s[1]+'</div></div>').join("");
 }
@@ -1892,12 +1905,29 @@ function answerHtml(r){
   const T={unknown:["a","The state of the predicted site was not measured for this protein."],
     known:["b","A drug-like ligand already sits at the predicted site in this structure."],
     visible:["g","The predicted site is already open and empty here, so nothing has to open: a ligandability call, not a cryptic one."],
-    hidden:["a","Closed and empty here: a cryptic-pocket candidate."],
+    hidden:["a","Closed and empty here: no cavity at the predicted site yet, and no ligand."],
     confirmed:["g","Closed and empty here, and another structure of this protein shows a pocket at this site."]}[k];
   const bits=[];
   if(k==="hidden"&&e)bits.push(CPC.EV[e].sentence);
   if(cov!=null&&cov<0.30)bits.push("The structure covers "+Math.round(cov*100)+"% of the protein.");
-  return '<div class="vd '+T[0]+'"><h4>What the structures say</h4><p class="vd-t">'+esc(T[1])+'</p>'+(bits.length?'<p class="vd-s">'+esc(bits.join(" "))+'</p>':"")+'</div>';
+  return '<div class="vd '+T[0]+'"><h4>What this structure shows</h4><p class="vd-t">'+esc(T[1])+'</p>'+(bits.length?'<p class="vd-s">'+esc(bits.join(" "))+'</p>':"")+'</div>';
+}
+const SITE_T={"Active site":"active site","Binding site":"binding site","Site":"site","Metal binding":"metal site","DNA binding":"DNA-binding region","Nucleotide binding":"nucleotide-binding region","Zinc finger":"zinc finger"};
+/* what is known at the predicted site (data/known_site.json: UniProt functional-site features through the entry's own numbering, engineered changes in the entry, nucleic acid at the pocket) */
+function knownHtml(r){
+  if(!C.have.known)return "";
+  const kn=C.kn(r),st=C.knownOf(r),bits=[];let cls="b",t;
+  if(st==="annotated"){
+    const m=hasRes(r)?r.pocket_resids.length:0;
+    const rng=nums=>{const o=[];let i=0;while(i<nums.length){let j=i;while(j+1<nums.length&&nums[j+1]===nums[j]+1)j++;o.push(j>i+1?nums[i]+" to "+nums[j]:nums.slice(i,j+1).join(", "));i=j+1;}return o.join(", ");};
+    const parts=(kn.t||[]).slice(0,3).map(x=>(SITE_T[x[0]]||x[0])+" "+rng(x[1]));
+    t="UniProt marks "+kn.s.length+(m?" of the "+m:"")+" pocket residues as part of a functional site ("+parts.join("; ")+((kn.t||[]).length>3?"; and more":"")+").";
+  }else if(st==="none")t="No UniProt site feature overlaps the pocket. That means none is annotated, not that nothing is known.";
+  else if(st==="unmapped"){cls="a";t="Not checked: this entry could not be mapped to UniProt numbering.";}
+  else{cls="a";t="Not checked for this protein.";}
+  if(kn&&kn.m&&kn.m.length)bits.push("The scored entry carries engineered changes at pocket residues: "+kn.m.join(", ")+".");
+  if(kn&&kn.d)bits.push("DNA or RNA lies within 4.5 \u00c5 of the pocket in this entry.");
+  return '<div class="vd '+cls+'"><h4>What is known at the site</h4><p class="vd-t">'+esc(t)+'</p>'+(bits.length?'<p class="vd-s">'+esc(bits.join(" "))+'</p>':"")+'</div>';
 }
 function headHtml(r){
   const b=bandOf(r),d=C.dz(r),sc=C.dzScore(r);
@@ -1906,7 +1936,7 @@ function headHtml(r){
   return '<div class="dh"><h3>'+esc(r.gene||"unnamed")+'</h3><div class="pn" title="'+esc(r.protein_name||"")+'">'+esc(shortName(r))+" &middot; "+esc(r.u)+'</div><div class="row">'+
     (b?'<span class="tag b">'+b.n+' confidence</span>':"")+structTag(r)+
     (r.tdl?'<span class="tag '+((r.tdl==="Tbio"||r.tdl==="Tdark")?"g":"a")+'">'+esc(PHAROS[r.tdl]||r.tdl)+'</span>':"")+'</div></div>'+
-    answerHtml(r)+
+    answerHtml(r)+knownHtml(r)+
     '<div class="qf"><div><span class="k">Cysteine</span><div class="v">'+cys+'</div></div>'+
     '<div><span class="k">Pocket</span><div class="v">'+(hasRes(r)?r.pocket_resids.length+" residues":(r.cluster_size!=null?r.cluster_size+", not listed":"pending"))+'</div></div>'+
     '<div><span class="k">Disease link</span><div class="v">'+dis+'</div></div></div>';

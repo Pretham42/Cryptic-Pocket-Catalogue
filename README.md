@@ -2,9 +2,9 @@
 
 **Live site: https://pretham42.github.io/Cryptic-Pocket-Catalogue/**
 
-![The catalog with its gates, and one protein in 3D](img/overview.png)
+![The catalog's gates and one protein in 3D](img/overview.png)
 
-*The catalog with its starting lists, gates and the waterfall of who is left (a), and one protein in 3D with its predicted pocket in violet and a cysteine in reach in amber, as a surface (b) and as a cartoon (c).*
+*The catalog's waterfall of who is left after a starting list and five gates (a), and one protein, KRAS, looked up by name: its predicted pocket in violet with the GDP already at the site and a free cysteine in reach in amber, as a surface (b) and as a cartoon (c).*
 
 A website that shows where proteins may hide a drug pocket. A cryptic pocket is closed in the structures we have and only opens when a drug arrives, so docking and screening usually miss it. This catalog predicts where such pockets are in 18,336 human proteins and helps you find the ones worth a closer look. Everything on it is a prediction or a simulation. It points to places worth testing, and nothing here shows that a pocket is real or that a molecule binds.
 
