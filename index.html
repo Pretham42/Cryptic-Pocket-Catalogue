@@ -468,6 +468,7 @@ details.dd .dsec{padding:0;border:0}
 
 .qf .v small.ink{color:var(--ink-3);font-weight:500;font-size:12px}
 .vd.vd-s{margin:6px 0 0}
+.gsub{padding:10px 18px;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3);background:var(--surface);border-top:1px solid var(--line-2)}
 </style>
 </head>
 <body>
@@ -573,19 +574,20 @@ details.dd .dsec{padding:0;border:0}
           <span class="gf" id="gf_rec"></span>
         </div>
         <div class="gate">
-          <div class="gtop"><span class="gt">Not already drugged</span><button class="sw" data-c="tdl" role="switch" aria-checked="false" aria-label="Not already drugged"></button></div>
-          <p class="gw">No approved drug and no potent compound has been reported for it yet (Pharos level Tbio or Tdark).</p>
-          <span class="gf" id="gf_tdl"></span>
-        </div>
-        <div class="gate">
-          <div class="gtop"><span class="gt">No annotated site</span><button class="sw" data-c="ns" role="switch" aria-checked="false" aria-label="No annotated site"></button></div>
-          <p class="gw">No pocket residue lies on a UniProt active, binding, metal or nucleotide site. That means none is annotated, not that nothing is known; entries that could not be mapped are left out.</p>
+          <div class="gtop"><span class="gt">Not a UniProt-annotated site</span><button class="sw" data-c="ns" role="switch" aria-checked="false" aria-label="Not a UniProt-annotated site"></button></div>
+          <p class="gw">No pocket residue lies on a UniProt active, binding, metal or nucleotide site. The protein can still have other functional sites; entries that could not be mapped are left out.</p>
           <span class="gf" id="gf_ns"></span>
         </div>
         <div class="gate">
           <div class="gtop"><span class="gt">A cysteine in reach</span><button class="sw" data-c="cys" role="switch" aria-checked="false" aria-label="A cysteine in reach"></button></div>
           <p class="gw">A free native cysteine has its sulfur within 4.5 &Aring; of a pocket residue: a handle for labeling, tethering or a covalent ligand. Geometry only.</p>
           <span class="gf" id="gf_cys"></span>
+        </div>
+        <div class="gsub">Optional extras, not part of the main funnel</div>
+        <div class="gate">
+          <div class="gtop"><span class="gt">Protein not already drugged</span><button class="sw" data-c="tdl" role="switch" aria-checked="false" aria-label="Protein not already drugged"></button></div>
+          <p class="gw">No approved drug or potent compound is known for the protein anywhere (Pharos Tbio or Tdark). It says nothing about this pocket.</p>
+          <span class="gf" id="gf_tdl"></span>
         </div>
         <div class="gate">
           <div class="gtop"><span class="gt">A cysteine measured ligandable</span><button class="sw" data-c="lig" role="switch" aria-checked="false" aria-label="A cysteine measured ligandable"></button></div>
@@ -776,7 +778,7 @@ details.dd .dsec{padding:0;border:0}
      dz           a strong disease link: the strongest Open Targets association with a disease, overall or genetic, is 0.5 or more (only proteins that were looked up have one)
      rec          not a recessive-disease gene (Open Targets lists recessive or biallelic inheritance for the gene's strongest-link disease: usually both copies of the gene are broken, so a drug would have to restore the protein)
      tdl          not already drugged: Pharos level Tbio or Tdark (no approved drug, no potent small molecule)
-     ns           no annotated site: no pocket residue lies on a UniProt functional-site feature (active, binding, metal, DNA, nucleotide or zinc-finger site), read through the entry's own numbering (SIFTS); a row whose entry could not be mapped is left out, because nothing was checked for it (data/known_site.json)
+     ns           not a UniProt-annotated site: no pocket residue lies on a UniProt functional-site feature (active, binding, metal, DNA, nucleotide or zinc-finger site), read through the entry's own numbering (SIFTS); a row whose entry could not be mapped is left out, because nothing was checked for it (data/known_site.json)
      cys          a cysteine in reach: a free native cysteine (no other sulfur within 2.5 angstroms, no metal within 3.0) whose sulfur lies within 4.5 angstroms of a heavy atom of a pocket residue (the shared core, data/cys_reach.json)
      lig          a cysteine in reach that CysDB found engaged by an electrophile (data/cysdb.json)
    Two scope filters narrow the list before the gates: the structure a row was scored on (experimental or AlphaFold) and its highest identity to a training protein.
@@ -804,7 +806,7 @@ const PRESETS = {
   all:    { label: "Everything",                      band: 0, state: "any",    checks: [], note: "Every protein." }
 };
 const PRESET_ORDER = ["hidden", "hidden_cys", "sites", "sites_cys", "impact", "all"];
-const CHECK_ORDER = ["dz", "rec", "tdl", "ns", "cys", "lig"];
+const CHECK_ORDER = ["dz", "rec", "ns", "cys", "tdl", "lig"];
 
 function context(parts) {
   const cat = parts.catalogue || {};
@@ -867,12 +869,12 @@ function context(parts) {
       test: r => { const s = C.dzScore(r); return s != null && s >= DZ_MIN; } },
     { id: "rec", needs: "disease", label: "Not a recessive-disease gene", stage: "not a recessive-disease gene",
       test: r => { const d = C.dz(r); return !!d && d.inh !== "r"; } },
-    { id: "tdl", needs: null,      label: "Not already drugged", stage: "not already drugged",
-      test: r => r.tdl === "Tbio" || r.tdl === "Tdark" },
-    { id: "ns",  needs: "known",    label: "No annotated site", stage: "no UniProt-annotated site",
+    { id: "ns",  needs: "known",    label: "Not a UniProt-annotated site", stage: "pocket not on a UniProt-annotated site",
       test: r => C.knownOf(r) === "none" },
     { id: "cys", needs: "reach",    label: "A cysteine in reach", stage: "a cysteine in reach",
       test: r => C.reachCys(r) },
+    { id: "tdl", needs: null,      label: "Protein not already drugged", stage: "protein not already drugged (Pharos)",
+      test: r => r.tdl === "Tbio" || r.tdl === "Tdark" },
     { id: "lig", needs: "cysdb",    label: "A cysteine measured ligandable", stage: "a cysteine in reach that CysDB found ligandable",
       test: r => C.ligReach(r) }
   ];
@@ -1425,7 +1427,7 @@ const WHY={
   "state:occupied":"Only sites where a drug-like ligand already sits in the structure scored.",
   "check:dz":"No strong link to a disease, or not looked up (only proteins above the lowest confidence band were).",
   "check:rec":"Its strongest disease is recessive: usually both copies are broken, so a drug would have to restore the protein, not block it, which is harder.",
-  "check:tdl":"Pharos lists an approved drug or a potent compound for it (Tclin or Tchem), or records no level.",
+  "check:tdl":"Pharos lists an approved drug or a potent compound for the protein (Tclin or Tchem), or records no level. A fact about the protein, not this pocket.",
   "check:ns":"A pocket residue lies on a UniProt-annotated site (active, binding, metal or nucleotide), or the entry could not be mapped, so nothing was checked.",
   "check:cys":"No cysteine within reach, so labeling, tethering or a covalent drug would need one engineered in."
 };
