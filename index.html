@@ -564,8 +564,14 @@ details.dd .dsec{padding:0;border:0}
           <p class="gw">Highest sequence identity to any protein the model learned from. Confidence rises with it, so low values are the strictest test.</p>
         </div>
         <div class="gate">
+          <div class="gtop"><span class="gt">A cysteine in reach</span><button class="sw" data-c="cys" role="switch" aria-checked="false" aria-label="A cysteine in reach"></button></div>
+          <p class="gw">A free native cysteine has its sulfur within 4.5 &Aring; of a pocket residue: a handle for labeling, tethering or a covalent ligand. Geometry only.</p>
+          <span class="gf" id="gf_cys"></span>
+        </div>
+        <div class="gsub">Optional extras, not part of the main funnel</div>
+        <div class="gate">
           <div class="gtop"><span class="gt">Strong disease link</span><button class="sw" data-c="dz" role="switch" aria-checked="false" aria-label="Strong disease link"></button></div>
-          <p class="gw">The gene has a strong link to a disease (Open Targets score of 0.5 or more). Only proteins above the lowest confidence band, with a usable structure, were looked up.</p>
+          <p class="gw">The gene has a strong link to a disease (Open Targets score of 0.5 or more). Nearly all proteins at band 3 or better were looked up; fewer below.</p>
           <span class="gf" id="gf_dz"></span>
         </div>
         <div class="gate">
@@ -575,15 +581,9 @@ details.dd .dsec{padding:0;border:0}
         </div>
         <div class="gate">
           <div class="gtop"><span class="gt">Not a UniProt-annotated site</span><button class="sw" data-c="ns" role="switch" aria-checked="false" aria-label="Not a UniProt-annotated site"></button></div>
-          <p class="gw">No pocket residue lies on a UniProt active, binding, metal or nucleotide site. The protein can still have other functional sites; entries that could not be mapped are left out.</p>
+          <p class="gw">No pocket residue lies on a UniProt active, binding, metal or nucleotide site. The protein can have other functional sites. Unmapped entries, all experimental structures, are left out.</p>
           <span class="gf" id="gf_ns"></span>
         </div>
-        <div class="gate">
-          <div class="gtop"><span class="gt">A cysteine in reach</span><button class="sw" data-c="cys" role="switch" aria-checked="false" aria-label="A cysteine in reach"></button></div>
-          <p class="gw">A free native cysteine has its sulfur within 4.5 &Aring; of a pocket residue: a handle for labeling, tethering or a covalent ligand. Geometry only.</p>
-          <span class="gf" id="gf_cys"></span>
-        </div>
-        <div class="gsub">Optional extras, not part of the main funnel</div>
         <div class="gate">
           <div class="gtop"><span class="gt">Protein not already drugged</span><button class="sw" data-c="tdl" role="switch" aria-checked="false" aria-label="Protein not already drugged"></button></div>
           <p class="gw">No approved drug or potent compound is known for the protein anywhere (Pharos Tbio or Tdark). It says nothing about this pocket.</p>
@@ -806,7 +806,7 @@ const PRESETS = {
   all:    { label: "Everything",                      band: 0, state: "any",    checks: [], note: "Every protein." }
 };
 const PRESET_ORDER = ["hidden", "hidden_cys", "sites", "sites_cys", "impact", "all"];
-const CHECK_ORDER = ["dz", "rec", "ns", "cys", "tdl", "lig"];
+const CHECK_ORDER = ["cys", "dz", "rec", "ns", "tdl", "lig"];   /* only the cysteine gate is in the main funnel (P, 2026-10-27: "cysteine gate is kinda supposed to be the only main filter, everything else was supposed to be add on"); dz, rec, ns, tdl and lig are optional extras */
 
 function context(parts) {
   const cat = parts.catalogue || {};
