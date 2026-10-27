@@ -193,6 +193,7 @@ table.cat tbody tr[aria-selected="true"] td{background:var(--accent-pale)}
 table.cat tbody tr[aria-selected="true"] td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
 td.gene b{font-weight:700;font-size:15.5px;letter-spacing:-.005em}
 td.gene .pn{display:block;font-size:13px;color:var(--ink-3);max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+td.gene .src{display:inline-block;margin-top:2px;padding:0 6px;font-size:11px;line-height:16px;color:var(--ink-3);border:1px solid currentColor;border-radius:8px;opacity:.8}
 td.gene .mbd{display:none;font-size:13px;margin-left:8px;vertical-align:1px}
 td.gene .mbd .bd{font-weight:500;color:var(--ink-2)}
 .dim{color:var(--ink-2)}
@@ -552,6 +553,16 @@ details.dd .dsec{padding:0;border:0}
           <p class="gw">Closed: no cavity there yet (under 40 &Aring;&sup3;). Open: a cavity is already visible. Ligand there: a drug-like molecule already sits at the site.</p>
         </div>
         <div class="gate">
+          <div class="gtop"><span class="gt">Structure</span>
+            <span class="seg" id="srcseg" role="group" aria-label="The structure the row was scored on"><button data-v="any" aria-pressed="true">Any</button><button data-v="pdb" aria-pressed="false">Experimental</button><button data-v="afdb" aria-pressed="false">AlphaFold</button></span></div>
+          <p class="gw">The structure a row was scored on. AlphaFold models reach the top confidence bands less often.</p>
+        </div>
+        <div class="gate">
+          <div class="gtop"><span class="gt">Unlike training proteins</span>
+            <span class="seg" id="idseg" role="group" aria-label="Highest identity to a protein the model was trained on"><button data-v="any" aria-pressed="true">Any</button><button data-v="10" aria-pressed="false">&lt; 10 %</button><button data-v="30" aria-pressed="false">&lt; 30 %</button><button data-v="50" aria-pressed="false">&lt; 50 %</button><button data-v="75" aria-pressed="false">&lt; 75 %</button></span></div>
+          <p class="gw">Highest sequence identity to any protein the model learned from. Confidence rises with it, so low values are the strictest test.</p>
+        </div>
+        <div class="gate">
           <div class="gtop"><span class="gt">Strong disease link</span><button class="sw" data-c="dz" role="switch" aria-checked="false" aria-label="Strong disease link"></button></div>
           <p class="gw">The gene has a strong link to a disease (Open Targets score of 0.5 or more). Only proteins above the lowest confidence band, with a usable structure, were looked up.</p>
           <span class="gf" id="gf_dz"></span>
@@ -762,6 +773,7 @@ details.dd .dsec{padding:0;border:0}
      tdl          not already drugged: Pharos level Tbio or Tdark (no approved drug, no potent small molecule)
      cys          a cysteine in reach: a free native cysteine (no other sulfur within 2.5 angstroms, no metal within 3.0) whose sulfur lies within 4.5 angstroms of a heavy atom of a pocket residue (the shared core, data/cys_reach.json)
      lig          a cysteine in reach that CysDB found engaged by an electrophile (data/cysdb.json)
+   Two scope filters narrow the list before the gates: the structure a row was scored on (experimental or AlphaFold) and its highest identity to a training protein.
    Only two gates were audited as defaults (band 3 or better, and closed and empty); every other gate is a choice the reader makes. */
 (function (root) {
 "use strict";
@@ -812,6 +824,8 @@ function context(parts) {
   C.evOf = r => { const s = C.sr(r); return s && s.ev ? s.ev : null; };
   C.covOf = r => { const s = C.sr(r); return (s && s.len && r.n_res != null) ? Math.min(1, r.n_res / s.len) : null; };
   C.dz = r => DZ[r.u] || null;
+  /* the highest sequence identity (percent) of this protein to any protein whose pocket labels the model was trained on (mmseqs; 0 means no alignment was found; null means no value) */
+  C.idTrain = r => (r.max_id_to_labels == null ? null : r.max_id_to_labels);
   C.dzScore = r => { const d = C.dz(r); if (!d) return null; const a = d.s == null ? null : d.s, b = d.g == null ? null : d.g; return a == null && b == null ? null : Math.max(a == null ? 0 : a, b == null ? 0 : b); };
 
   /* ── bands: the measured quartiles of the held-out precision curve ──────── */
@@ -874,7 +888,7 @@ function context(parts) {
   };
 
   /* ── one call decides a list: confidence, then the pocket, then each gate that is on, always in the same order ─ */
-  const BASE = { query: "", band: 0, state: "any", checks: [] };
+  const BASE = { query: "", band: 0, state: "any", checks: [], src: "any", idmax: null };
   const STATE_LABEL = { closed: "closed and empty at the site", open: "open and empty at the site", occupied: "a ligand already at the site" };
   const BAND_LABEL = { 3: "confidence moderate or better", 4: "confidence high" };
   C.run = params => {
@@ -885,6 +899,10 @@ function context(parts) {
     const stages = [{ key: "all", label: "proteins scored", n: base.length, on: true }];
     let cur = base;
     const step = (key, label, f, why) => { const before = cur.length; cur = cur.filter(f); stages.push({ key, label, n: cur.length, on: true, removed: before - cur.length, why: why || null }); };
+    /* two scope filters (2026-10-26, P: "a column that says if it's alphafolded or experimental and a filter", and the identity to the training proteins): they narrow the list BEFORE the gates and are not gates themselves, so every default list is unchanged */
+    if (p.src === "pdb") step("src", "scored on an experimental structure", r => r.tier !== "afdb");
+    else if (p.src === "afdb") step("src", "scored on an AlphaFold model", r => r.tier === "afdb");
+    if (p.idmax != null) step("idmax", "under " + p.idmax + " % identity to any training protein", r => { const v = C.idTrain(r); return v != null && v < p.idmax; });
     if (p.band) step("band", BAND_LABEL[p.band] || ("band " + p.band + " or better"), r => C.bandIdx(r) >= p.band);
     if (p.state !== "any") {
       if (have.state) step("state", STATE_LABEL[p.state], r => C.stateOf(r) === p.state);
@@ -964,7 +982,7 @@ function context(parts) {
   const csvCell = v => { const s = v == null ? "" : String(v); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
   const bandName = r => { const i = C.bandIdx(r); return i ? ["Lowest", "Low", "Moderate", "High"][i - 1] : ""; };
   C.CSV_COLUMNS = ["gene", "uniprot", "protein_name", "structure", "n_residues", "confidence_band", "confidence", "pocket_state", "site_volume_A3", "pocket_residues",
-    "cysteines_in_reach", "cysteine_chemistry", "strongest_disease", "disease_score", "genetic_score", "recessive_disease", "pharos_level", "known_chemistry", "other_structures_of_the_protein"];
+    "cysteines_in_reach", "cysteine_chemistry", "strongest_disease", "disease_score", "genetic_score", "recessive_disease", "pharos_level", "known_chemistry", "other_structures_of_the_protein", "identity_to_training_pct"];
   const CH = { a: "approved drug", c: "clinical-stage compound", p: "chemical probe", l: "ligand-bound structures", n: "none" };
   C.chemWord = d => (d && CH[d.ch]) || null;
   C.csvRow = r => {
@@ -972,7 +990,7 @@ function context(parts) {
     return [r.gene, r.u, r.protein_name, r.tier === "afdb" ? "AlphaFold model" : (r.pdb || ""), r.n_res, bandName(r), r.conf == null ? "" : r.conf.toFixed(4), C.stateOf(r), s && s.v != null ? s.v : "",
       C.hasRes(r) ? r.pocket_resids.join(" ") : "", C.reachText(r), C.chemText(r),
       d && d.d ? d.d : "", d && d.s != null ? d.s : "", d && d.g != null ? d.g : "", d ? (d.inh === "r" ? "yes" : (d.inh === "d" ? "no (dominant)" : (d.inh === "m" ? "no (recessive and dominant forms)" : "not annotated"))) : "not looked up",
-      r.tdl || "", d ? C.chemWord(d) : "", x ? EV[x].word : "not checked"].map(csvCell).join(",");
+      r.tdl || "", d ? C.chemWord(d) : "", x ? EV[x].word : "not checked", C.idTrain(r) == null ? "" : C.idTrain(r)].map(csvCell).join(",");
   };
   C.csv = list => [C.CSV_COLUMNS.join(",")].concat(list.map(C.csvRow)).join("\n") + "\n";
 
@@ -1361,7 +1379,7 @@ const PARTS={catalogue:null,state:null,disease:null,md:null,cav:null};
 const PAGE=50;      /* rows shown at a time: the table is long, and the simulations below it should not be a long scroll away */
 let C=null,DOC=null,ROWS=[],BYU={},SEL=null,VIEW=[],CAP=PAGE,READY=false,DRAWER=false,ALONE=null,PCOUNT={};
 const DEFAULT_PRESET="hidden";
-const UI={band:CPC.PRESETS[DEFAULT_PRESET].band,state:CPC.PRESETS[DEFAULT_PRESET].state,checks:{},query:"",sort:{k:"conf",dir:-1,user:false}};
+const UI={band:CPC.PRESETS[DEFAULT_PRESET].band,state:CPC.PRESETS[DEFAULT_PRESET].state,checks:{},src:"any",idmax:null,query:"",sort:{k:"conf",dir:-1,user:false}};
 
 /* Escapes for HTML and normalises away em dashes: the page renders strings straight from data files,
    and a file written elsewhere can reintroduce one long after this page was reviewed. */
@@ -1400,7 +1418,7 @@ const WHY={
 };
 const PHAROS={Tclin:"approved drug",Tchem:"potent compounds",Tbio:"studied, none yet",Tdark:"little studied"};
 const checkIds=()=>CPC.CHECK_ORDER.filter(k=>UI.checks[k]);
-const params=()=>({query:UI.query,band:UI.band,state:UI.state,checks:checkIds()});
+const params=()=>({query:UI.query,band:UI.band,state:UI.state,checks:checkIds(),src:UI.src,idmax:UI.idmax});
 
 /* ── data ─────────────────────────────────────────────────────────────────── */
 function rebuild(){
@@ -1446,16 +1464,16 @@ const bandHtml=(r,suffix)=>{const b=bandOf(r);return b?'<span class="bd '+b.k+'"
 /* ── controls: always drawn from UI ───────────────────────────────────────── */
 function setSeg(id,attr,val){document.querySelectorAll("#"+id+" button").forEach(b=>b.setAttribute("aria-pressed",String(String(b.dataset[attr])===String(val))));}
 function leaveSearch(){if(UI.query){UI.query="";$("q").value="";$("hq").value="";}}
-function isDefault(){const p=CPC.PRESETS[DEFAULT_PRESET];return !UI.query&&UI.band===p.band&&UI.state===p.state&&!checkIds().length;}
+function isDefault(){const p=CPC.PRESETS[DEFAULT_PRESET];return !UI.query&&UI.band===p.band&&UI.state===p.state&&!checkIds().length&&UI.src==="any"&&UI.idmax==null;}
 function renderControls(){
   const have=C?C.have:{state:false,disease:false};
-  const cur=C?C.matchPreset({band:UI.band,state:UI.state,checks:checkIds()}):null;
+  const cur=C&&UI.src==="any"&&UI.idmax==null?C.matchPreset({band:UI.band,state:UI.state,checks:checkIds()}):null;
   document.querySelectorAll("#presets .pst").forEach(b=>{
     const k=b.dataset.p;b.setAttribute("aria-pressed",String(!UI.query&&k===cur));
     b.disabled=!C||(k==="impact"&&!have.disease)||(k==="hidden"&&!have.state);
     const c=$("cnt_"+k);if(c)c.textContent=C&&PCOUNT[k]!=null?fmt(PCOUNT[k]):"";
   });
-  setSeg("bandseg","b",UI.band);setSeg("stateseg","s",UI.state);
+  setSeg("bandseg","b",UI.band);setSeg("stateseg","s",UI.state);setSeg("srcseg","v",UI.src);setSeg("idseg","v",UI.idmax==null?"any":UI.idmax);
   document.querySelectorAll("#stateseg button").forEach(b=>{b.disabled=!!C&&!have.state&&b.dataset.s!=="any";});
   document.querySelectorAll(".sw[data-c]").forEach(b=>{
     const id=b.dataset.c,off=!!C&&!C.available(id),on=!!UI.checks[id]&&!off;
@@ -1467,7 +1485,7 @@ function renderControls(){
 }
 function applyPreset(k){
   const p=CPC.PRESETS[k];if(!p)return;
-  leaveSearch();UI.band=p.band;UI.state=p.state;UI.checks={};p.checks.forEach(id=>{UI.checks[id]=true;});UI.sort={k:"conf",dir:-1,user:false};CAP=PAGE;sync();
+  leaveSearch();UI.band=p.band;UI.state=p.state;UI.src="any";UI.idmax=null;UI.checks={};p.checks.forEach(id=>{UI.checks[id]=true;});UI.sort={k:"conf",dir:-1,user:false};CAP=PAGE;sync();
 }
 function sync(){renderControls();apply();}
 
@@ -1547,7 +1565,7 @@ function table(){
   $("tbody").innerHTML=shown.map((r,i)=>{
     const b=bandHtml(r);
     return '<tr data-i="'+i+'" tabindex="0" aria-selected="'+(!!SEL&&SEL.u===r.u)+'">'+
-      '<td class="gene"><b>'+esc(r.gene||"unnamed")+'</b><span class="mbd">'+b+'</span><span class="pn" title="'+esc(r.protein_name||"")+'">'+esc(shortName(r)||r.u)+'</span></td>'+
+      '<td class="gene"><b>'+esc(r.gene||"unnamed")+'</b><span class="mbd">'+b+'</span><span class="pn" title="'+esc(r.protein_name||"")+'">'+esc(shortName(r)||r.u)+'</span><span class="src" title="'+(r.tier==="afdb"?"Scored on an AlphaFold model":"Scored on an experimental structure")+'">'+(r.tier==="afdb"?"AlphaFold":"PDB")+'</span></td>'+
       '<td class="c-conf">'+b+'</td><td class="c-site">'+siteCell(r)+'</td><td class="c-cys">'+cysCell(r)+'</td><td class="c-dz">'+disCell(r)+'</td><td class="c-drug">'+drugCell(r)+'</td></tr>';
   }).join("");
   const more=$("more");
@@ -2472,6 +2490,8 @@ $("browselink").addEventListener("click",()=>{if(!isDefault()||UI.query)applyPre
 document.querySelectorAll("#presets .pst").forEach(b=>b.addEventListener("click",()=>applyPreset(b.dataset.p)));
 document.querySelectorAll("#bandseg button").forEach(b=>b.addEventListener("click",()=>{leaveSearch();UI.band=+b.dataset.b;sync();}));
 document.querySelectorAll("#stateseg button").forEach(b=>b.addEventListener("click",()=>{leaveSearch();UI.state=b.dataset.s;sync();}));
+document.querySelectorAll("#srcseg button").forEach(b=>b.addEventListener("click",()=>{leaveSearch();UI.src=b.dataset.v;CAP=PAGE;sync();}));
+document.querySelectorAll("#idseg button").forEach(b=>b.addEventListener("click",()=>{leaveSearch();UI.idmax=b.dataset.v==="any"?null:+b.dataset.v;CAP=PAGE;sync();}));
 document.querySelectorAll(".sw[data-c]").forEach(b=>b.addEventListener("click",()=>{leaveSearch();const id=b.dataset.c;if(UI.checks[id])delete UI.checks[id];else UI.checks[id]=true;sync();}));
 $("reset").addEventListener("click",()=>applyPreset(DEFAULT_PRESET));
 $("more").addEventListener("click",()=>{CAP+=PAGE;table();});

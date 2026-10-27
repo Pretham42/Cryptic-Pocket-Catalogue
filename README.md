@@ -13,6 +13,8 @@ A website that shows where proteins may hide a drug pocket. A cryptic pocket is 
 - **Narrow the list like a funnel.** Pick a starting list (the hidden pockets, hidden pockets or any confident site with a cysteine in reach, the disease-linked proteins, or everything), then switch on filters.
   - **Confidence** is how sure the model is that the site is a pocket.
   - **Pocket** is whether the site is closed (no cavity yet), open (a cavity is already visible) or already holds a drug-like molecule.
+  - **Structure** keeps proteins whose row was scored on an experimental structure or on an AlphaFold model; each table row carries a PDB or AlphaFold tag.
+  - **Unlike training proteins** keeps proteins whose highest sequence identity to any protein the model learned from is under 10, 30, 50 or 75 percent. Confidence rises with that identity, so low values are the strictest test.
   - **Strong disease link** keeps proteins whose gene is strongly tied to a disease.
   - **Not a recessive-disease gene** drops proteins whose strongest disease is recessive, which usually comes from a missing or broken protein that a pocket drug rarely fixes (a gene whose strongest disease is mostly dominant stays).
   - **Not already drugged** keeps proteins with no approved drug or potent compound yet.
