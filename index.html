@@ -8,7 +8,7 @@
 <meta name="description" content="Predicted cryptic drug pockets in 18,336 human proteins: which are hidden, which have a strong disease link, which a lab could test, and whether a simulation opens them.">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/3Dmol/2.4.2/3Dmol-min.js" defer></script>
 <style>
-/* Cryptic Pocket Catalogue. One accent colour, hairlines instead of boxes, system fonts, light and dark. */
+/* Cryptic Pocket Catalog. One accent color, hairlines instead of boxes, system fonts, light and dark. */
 [hidden]{display:none!important}
 :root{
   color-scheme:light dark;
@@ -474,7 +474,7 @@ details.dd .dsec{padding:0;border:0}
 <a class="skip" href="#screen">Skip to the screening tool</a>
 <header class="nav">
   <div class="wrap">
-    <a class="brand" href="#top" aria-label="Cryptic Pocket Catalogue, home"><span class="logo" aria-hidden="true"></span><span class="bn">Cryptic Pocket Catalogue</span></a>
+    <a class="brand" href="#top" aria-label="Cryptic Pocket Catalog, home"><span class="logo" aria-hidden="true"></span><span class="bn">Cryptic Pocket Catalog</span></a>
     <nav aria-label="Sections">
       <a href="#screen">Screen</a>
       <a href="#mut" id="navmut" hidden>Mutations</a>
@@ -492,11 +492,11 @@ details.dd .dsec{padding:0;border:0}
     <div class="hero-grid">
       <div class="hero-text">
         <h1>Which human proteins hide a drug pocket?</h1>
-        <p class="lede">A cryptic pocket is closed in the structures we have and opens when a drug arrives, so docking and screening miss it. This catalogue predicts where such pockets are in <b><span id="n_all">18,336</span> human proteins</b> and shows which are worth a look.</p>
+        <p class="lede">A cryptic pocket is closed in the structures we have and opens when a drug arrives, so docking and screening miss it. This catalog predicts where such pockets are in <b><span id="n_all">18,336</span> human proteins</b> and shows which are worth a look.</p>
         <div id="sample" role="status"></div>
         <form class="hero-search" id="herosearch" role="search" autocomplete="off">
           <svg class="ic-search" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13 13l4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-          <input id="hq" type="search" placeholder="Search a gene, accession or protein name" aria-label="Search the catalogue">
+          <input id="hq" type="search" placeholder="Search a gene, accession or protein name" aria-label="Search the catalog">
           <button class="btn" type="submit">Search</button>
         </form>
         <p class="try">Try <button type="button" class="tryq" data-q="ARHGDIB" title="Closed here; a later structure shows a compound at the site">ARHGDIB</button><button type="button" class="tryq" data-q="KRAS" title="A drug-like ligand already sits at the predicted site">KRAS</button><button type="button" class="tryq" data-q="MCL1" title="Closed here; another structure shows a cavity at the site">MCL1</button><button type="button" class="tryq" data-q="PARK7" title="A flat groove: other structures show no enclosed cavity">PARK7</button>
@@ -505,7 +505,7 @@ details.dd .dsec{padding:0;border:0}
       </div>
       <figure class="hero-fig" id="herofig">
         <div class="hero-stage" id="herostage">
-          <picture id="heropic"><source media="(prefers-color-scheme: dark)" srcset="img/hero_arhgdib_dark.webp"><img src="img/hero_arhgdib_light.webp" width="440" height="340" loading="lazy" decoding="async" alt="The surface of the protein ARHGDIB in grey-blue, with a small pocket in violet and a compound in green lying across it"></picture>
+          <picture id="heropic"><source media="(prefers-color-scheme: dark)" srcset="img/hero_arhgdib_dark.webp"><img src="img/hero_arhgdib_light.webp" width="440" height="340" loading="lazy" decoding="async" alt="The surface of the protein ARHGDIB in gray-blue, with a small pocket in violet and a compound in green lying across it"></picture>
           <div class="hero-live" id="herov" tabindex="0" role="img" aria-label="Live 3D view of ARHGDIB with a compound bound. Drag to rotate, or use the arrow keys."></div>
           <div class="vbusy" id="herobusy" hidden>Building the surface&hellip;</div>
           <button type="button" class="hero-spin" id="herospin">Rotate in 3D</button>
@@ -513,7 +513,7 @@ details.dd .dsec{padding:0;border:0}
             <button type="button" class="hero-reset" id="heroreset">Reset</button>
           </div>
         </div>
-        <figcaption id="herocap">The pocket the catalogue predicts in ARHGDIB (violet), from PDB 5H1D, where it is closed. In PDB 9X59 (2025) a compound (green) sits there and touches 8 of the 9 residues.</figcaption>
+        <figcaption id="herocap">The pocket the catalog predicts in ARHGDIB (violet), from PDB 5H1D, where it is closed. In PDB 9X59 (2025) a compound (green) sits there and touches 8 of the 9 residues.</figcaption>
       </figure>
     </div>
 
@@ -528,7 +528,7 @@ details.dd .dsec{padding:0;border:0}
 
     <div class="srchrow">
       <label class="srch"><svg class="ic-search" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13 13l4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-        <input id="q" type="search" placeholder="Search a gene, accession or protein name" aria-label="Search the catalogue. Several gene symbols separated by commas also work." autocomplete="off"></label>
+        <input id="q" type="search" placeholder="Search a gene, accession or protein name" aria-label="Search the catalog. Several gene symbols separated by commas also work." autocomplete="off"></label>
     </div>
 
     <div class="presets" id="presets" role="group" aria-label="Starting points">
@@ -622,13 +622,13 @@ details.dd .dsec{padding:0;border:0}
 <!-- ══ CANCER MUTATIONS AT THE PREDICTED POCKETS ═══════════════════════ -->
 <section class="blk" id="mut" hidden>
   <div class="wrap">
-    <h2 class="sec">Which cancer mutations add a handle for a covalent drug? <span class="mdex">exploratory</span></h2>
+    <h2 class="sec">Which cancer mutations add a residue a covalent drug can bond? <span class="mdex">exploratory</span></h2>
     <p class="sub" id="mutintro"></p>
     <div class="mutctl">
       <span class="seg" id="mutres" role="group" aria-label="The residue the mutation adds"></span>
       <span class="seg" id="mutsite" role="group" aria-label="Whether a ligand already sits at the site"></span>
     </div>
-    <div class="tw-res" id="mutw"><table class="mdsimple" id="muttable"><thead><tr><th>Protein</th><th>Change</th><th>Tumours</th><th>Where</th><th title="A drug-like molecule already sits at the predicted site in the structure the row was scored from">Ligand there</th></tr></thead><tbody id="mutrows"></tbody></table></div>
+    <div class="tw-res" id="mutw"><table class="mdsimple" id="muttable"><thead><tr><th>Protein</th><th>Change</th><th>Tumors</th><th>Where</th><th title="A drug-like molecule already sits at the predicted site in the structure the row was scored from">Ligand there</th></tr></thead><tbody id="mutrows"></tbody></table></div>
     <button class="more" id="mutmore" hidden></button>
     <p class="foot-note" id="mutnote"></p>
     <h3 class="mdch" id="lossh" hidden>The other direction: a mutation removes the cysteine a drug binds</h3>
@@ -669,7 +669,7 @@ details.dd .dsec{padding:0;border:0}
       <p class="mdcap" id="mdccap"></p>
       <p class="foot-note" id="mdcnote"></p>
       <details class="acc"><summary>All twenty simulations, and the rule</summary><div class="in">
-        <div class="tw-res"><table class="mdsimple" id="mdctable"><thead><tr><th>Molecule</th><th>Simulation</th><th title="The centre of the molecule stayed within 6 &Aring;ngstr&ouml;ms of its docked position in at least 80% of the frames and never went beyond 10 &Aring;ngstr&ouml;ms for more than 1 nanosecond">Stayed near its docked position</th><th>Share of the time within 6 &Aring;</th><th title="The median distance of the molecule's atoms from the docked pose, after fitting the protein on the pocket residues">Typical distance from the docked pose</th></tr></thead><tbody id="mdcrows"></tbody></table></div>
+        <div class="tw-res"><table class="mdsimple" id="mdctable"><thead><tr><th>Molecule</th><th>Simulation</th><th title="The center of the molecule stayed within 6 &Aring;ngstr&ouml;ms of its docked position in at least 80% of the frames and never went beyond 10 &Aring;ngstr&ouml;ms for more than 1 nanosecond">Stayed near its docked position</th><th>Share of the time within 6 &Aring;</th><th title="The median distance of the molecule's atoms from the docked pose, after fitting the protein on the pocket residues">Typical distance from the docked pose</th></tr></thead><tbody id="mdcrows"></tbody></table></div>
         <p class="foot-note" id="mdcmore"></p>
       </div></details>
     </div>
@@ -690,9 +690,9 @@ details.dd .dsec{padding:0;border:0}
         <h3>Can a lab test it as it is?</h3>
         <div class="waffle-row">
           <div class="big"><b>13%</b><span>of 2,313 annotated cryptic pockets</span></div>
-          <div class="waffle" id="waffle" role="img" aria-label="13 of 100 squares filled: 13 percent of annotated cryptic pockets already contain a cysteine that a thiol-labelling assay can reach without engineering the protein"></div>
+          <div class="waffle" id="waffle" role="img" aria-label="13 of 100 squares filled: 13 percent of annotated cryptic pockets already contain a cysteine that a thiol-labeling assay can reach without engineering the protein"></div>
         </div>
-        <p>About 1 in 8 known pockets has a cysteine that thiol labelling, one common test, can reach without engineering. For the rest, one would have to be introduced.</p>
+        <p>About 1 in 8 known pockets has a cysteine that thiol labeling, one common test, can reach without engineering. For the rest, one would have to be introduced.</p>
       </div>
       <div class="tcard">
         <h3>Most ligand sites are already open</h3>
@@ -739,8 +739,8 @@ details.dd .dsec{padding:0;border:0}
       <div class="vbar" id="vbar">
         <div class="vgrp"><span class="vlab" id="lab_rep">Show as</span>
           <span class="seg" id="repseg" role="group" aria-labelledby="lab_rep"><button data-r="cartoon" aria-pressed="true" title="The backbone as a ribbon, the usual picture in the PDB">Cartoon</button><button data-r="surface" aria-pressed="false" title="The molecular surface, slightly see-through, pocket in violet. Chains over about 500 residues are surfaced only within 24 &Aring; of the pocket">Surface</button><button data-r="both" aria-pressed="false" title="The ribbon inside a lighter surface">Both</button></span></div>
-        <div class="vgrp"><label class="vlab" for="v_color">Colour</label>
-          <select id="v_color" class="sel" title="How the protein itself is coloured. The pocket stays violet in every choice.">
+        <div class="vgrp"><label class="vlab" for="v_color">Color</label>
+          <select id="v_color" class="sel" title="How the protein itself is colored. The pocket stays violet in every choice.">
             <option value="ss">Secondary structure</option><option value="plain">Plain</option><option value="rainbow">Rainbow, N to C</option><option value="hydro">Oily vs water-loving</option><option value="plddt">AlphaFold confidence</option>
           </select></div>
         <div class="vgrp"><span class="vlab" id="lab_hl">Highlight</span>
@@ -788,7 +788,7 @@ const EV = {
   "0": { word: "none to check", sentence: "No other structure of this protein holds a ligand at the site." }
 };
 
-/* the starting points: each is just a setting of the gates (the reader can change any of them afterwards) */
+/* the starting points: each is just a setting of the gates (the reader can change any of them afterward) */
 const PRESETS = {
   hidden: { label: "Hidden pockets",                 band: 3, state: "closed", checks: [], note: "Confident, closed and empty: the cryptic-pocket candidates." },
   hidden_cys: { label: "Hidden, with a cysteine in reach", band: 3, state: "closed", checks: ["cys"], note: "Confident, closed and empty, with a free native cysteine within 4.5 A of the pocket: a pocket a lab could test." },
@@ -1000,11 +1000,11 @@ function context(parts) {
 root.CPC = { context, FLOOR, EV, PRESETS, PRESET_ORDER, CHECK_ORDER, constants: { FLOOR, DZ_MIN } };
 })(typeof globalThis !== "undefined" ? globalThis : this);
 
-/* Geometry for one structure, computed in the reader's browser from the file the viewer has just downloaded: the cysteines the chain already has that lie in or near the predicted pocket, and the colours of
+/* Geometry for one structure, computed in the reader's browser from the file the viewer has just downloaded: the cysteines the chain already has that lie in or near the predicted pocket, and the colors of
    the 3D view (a pure function of a residue, so they are tested). Pure functions, no page and no network, so they run and are tested outside a browser (website/src/test_geom.py runs them under JavaScriptCore
-   and compares every answer with the Python reference code/md/candidate_positions.py, which uses biotite's SASA, the one the catalogue's cysteine column used).
+   and compares every answer with the Python reference code/md/candidate_positions.py, which uses biotite's SASA, the one the catalog's cysteine column used).
 
-   native  a cysteine the chain already has that a labelling or tethering experiment could use. kind "pocket": a pocket residue. kind "window": not in the pocket, exposed (relative SASA 0.25 or more) and its CB
+   native  a cysteine the chain already has that a labeling or tethering experiment could use. kind "pocket": a pocket residue. kind "window": not in the pocket, exposed (relative SASA 0.25 or more) and its CB
            4 to 8 A from the nearest heavy atom of any pocket residue (the usual choice in a tethering screen). kind "label": in neither of those, buried (residue SASA at or below the 25th percentile of the chain's)
            and its CA within 6 A of a pocket CA. `ss` marks an SG within 2.5 A of another cysteine's SG (a disulfide in this structure). Metal binding is not checked.
    The page once also listed the positions where a cysteine could be added and the known variants on the pocket. Both were removed on 2026-10-05 to keep the page readable (website/src_v1_20261005 holds that version). */
@@ -1218,7 +1218,7 @@ function pocketCysteines(table, pocketResi) {
   pk.forEach(r => r.xyz.forEach(p => pkAtoms.push(p)));
   return { native: nativeList(table, pocket, thr, pkCa, pkAtoms), thr };
 }
-/* the cysteines the chain already has that lie in the pocket, in the tethering window, or within labelling reach (see the header) */
+/* the cysteines the chain already has that lie in the pocket, in the tethering window, or within labeling reach (see the header) */
 function nativeList(table, pocket, thr, pkCa, pkAtoms) {
   const cys = table.filter(r => r.aa === "C"), out = [];
   for (const r of cys) {
@@ -1249,17 +1249,17 @@ function analyse(text, chain, pocketResi, opts) {
   return { nAtoms: atoms.length, nResidues: table.length, table, native: res.native, thr: res.thr };
 }
 
-/* ── colours of the 3D view ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── */
+/* ── colors of the 3D view ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── */
 /* Pastel on purpose: the predicted pocket is drawn in a vivid violet, and must be the one thing that stands out. */
 const KD = { A: 1.8, R: -4.5, N: -3.5, D: -3.5, C: 2.5, Q: -3.5, E: -3.5, G: -0.4, H: -3.2, I: 4.5, L: 3.8, K: -3.9, M: 1.9, F: 2.8, P: -1.6, S: -0.8, T: -0.7, W: -0.9, Y: -1.3, V: 4.2 };   /* Kyte and Doolittle 1982 hydropathy */
-/* THE colours of every protein view: the page's 3D viewer, the simulation player, the figure by the title, and the report's structure figures (Documents/Figure_Style_Guide.md, section 3b). One place, so they cannot drift:
-   protein    the soft blue-grey every protein is drawn in unless a colouring is chosen (cartoon or surface), mid-tone so it reads on the light and the dark viewer
+/* THE colors of every protein view: the page's 3D viewer, the simulation player, the figure by the title, and the report's structure figures (Documents/Figure_Style_Guide.md, section 3b). One place, so they cannot drift:
+   protein    the soft blue-gray every protein is drawn in unless a coloring is chosen (cartoon or surface), mid-tone so it reads on the light and the dark viewer
    pocket     the predicted pocket residues (and, in the KRAS figure, the pocket the drug sits in): a vivid violet, always opaque on a ribbon, never used for anything else
-   cys        a cysteine that could be labelled or tethered: dark amber (dark enough to stay apart from the ligand's yellow-green under red-green colour blindness)
-   ligand     the carbons of a ligand or drug (the other atoms keep the usual element colours): a yellow-green
-   cloud      the empty space next to the pocket in the simulation player: deep teal (dark enough to stay apart from the blue-grey protein under red-green colour blindness)
-   Checked with the Machado, Oliveira and Fernandes (2009) simulation of protan, deutan and tritan vision: no two of the five are closer than a CIE76 colour difference of 14 in any of them (the weakest pair is the
-   protein and the ligand under tritan vision, which is very rare; the weakest under red-green vision is 20.7), and the pocket is the darkest of the light colours, so it also stands out in grayscale. */
+   cys        a cysteine that could be labeled or tethered: dark amber (dark enough to stay apart from the ligand's yellow-green under red-green color blindness)
+   ligand     the carbons of a ligand or drug (the other atoms keep the usual element colors): a yellow-green
+   cloud      the empty space next to the pocket in the simulation player: deep teal (dark enough to stay apart from the blue-gray protein under red-green color blindness)
+   Checked with the Machado, Oliveira and Fernandes (2009) simulation of protan, deutan and tritan vision: no two of the five are closer than a CIE76 color difference of 14 in any of them (the weakest pair is the
+   protein and the ligand under tritan vision, which is very rare; the weakest under red-green vision is 20.7), and the pocket is the darkest of the light colors, so it also stands out in grayscale. */
 const PAL = { protein: "#8fa3bf", pocket: "#7c3fe4", cys: "#a86a12", ligand: "#8cc63f", cloud: "#0f766e" };
 const SSC = { helix: "#e9967a", sheet: "#7fb2e5", loop: "#cfd6df" }, PLAIN = PAL.protein, WATER = [96, 165, 222], NEUTRAL = [236, 238, 242], OILY = [232, 150, 58];
 const hex = (r, g, b) => "#" + [r, g, b].map(x => Math.max(0, Math.min(255, Math.round(x))).toString(16).padStart(2, "0")).join("");
@@ -1291,7 +1291,7 @@ CPC.geom = { PAL, CONTACT, BURIAL_PCT, RSA_EXPOSED, TETHER_MIN, TETHER_MAX, PROB
 
 /* The figure at the top of the page: the surface of ARHGDIB (Rho GDP-dissociation inhibitor 2, chain A of PDB 9X59) with the predicted pocket in violet and a compound that binds there in green.
 
-   What the figure is. The catalogue scored ARHGDIB from PDB 5H1D (released 2016), a structure with no ligand at the site, where the predicted pocket (9 residues, 127, 129 to 132, 134, 172, 174 and 193) holds 10 A^3 of
+   What the figure is. The catalog scored ARHGDIB from PDB 5H1D (released 2016), a structure with no ligand at the site, where the predicted pocket (9 residues, 127, 129 to 132, 134, 172, 174 and 193) holds 10 A^3 of
    empty space: closed. Five structures of the same protein with a compound at that site (9X53, 9X54, 9X55, 9X56 and 9X59, each "RhoGDI2 in complex with Compound ...") were released on 2025-10-29, after the date from which the project
    counts a structure as later than its data (2025-08-12).
    This figure draws one of them, 9X59 (1.65 A, Compound 2102, component "A1EY2", 19 heavy atoms, written as the three-letter name LIG in the file because PDB format has no room for five). Eight of the nine predicted residues touch the compound
@@ -1303,11 +1303,11 @@ CPC.geom = { PAL, CONTACT, BURIAL_PCT, RSA_EXPOSED, TETHER_MIN, TETHER_MAX, PROB
    so the picture and the live view are one scene. The file it draws, website/data/hero_arhgdib_9x59.pdb, is made by src/make_hero_pdb.py: the protein atoms of chain A and one copy of the compound.
 
    CONFIG below is the single source of everything that belongs to this protein (the page's text, the tests and make_hero_figure.py read it from here):
-   resi     the catalogue's predicted pocket in the numbering of the file (the same as the UniProt numbers for this chain), painted in the page's pocket violet (PAL.pocket)
+   resi     the catalog's predicted pocket in the numbering of the file (the same as the UniProt numbers for this chain), painted in the page's pocket violet (PAL.pocket)
    contact  the residues of the chain within 4.5 A of the compound
-   view     the line of sight (dir, from the centre of the protein toward the viewer) is the best of 600 directions on a sphere for the share of the compound's heavy atoms with a clear line out of the protein (rays from every
+   view     the line of sight (dir, from the center of the protein toward the viewer) is the best of 600 directions on a sphere for the share of the compound's heavy atoms with a clear line out of the protein (rays from every
             heavy atom through the other protein atoms, radius 1.5 to 1.8 A): from there 100 % of its atoms are visible, against 22 % on average over all directions. The picture is then turned about the line of sight so
-            that the compound's long axis lies across (the long axis of its atoms laid along the horizontal, plus view.roll degrees), and centred on the compound. src/make_hero_figure.py repeats the count and test_geom.py checks it.
+            that the compound's long axis lies across (the long axis of its atoms laid along the horizontal, plus view.roll degrees), and centered on the compound. src/make_hero_figure.py repeats the count and test_geom.py checks it.
 
    Pure scene building: no page, no network. Needs 3Dmol and CPC.geom.PAL (geom.js).
 */
@@ -1315,7 +1315,7 @@ CPC.geom = { PAL, CONTACT, BURIAL_PCT, RSA_EXPOSED, TETHER_MIN, TETHER_MAX, PROB
 "use strict";
 const CPC = root.CPC, PAL = CPC.geom.PAL;
 /*HERO_CONFIG*/const CONFIG = {"gene":"ARHGDIB","slug":"arhgdib","protein":"Rho GDP-dissociation inhibitor 2","accession":"P52566","pdb":"data/hero_arhgdib_9x59.pdb","entry":"9X59","chain":"A","ligand":"LIG","ligand_id":"A1EY2","scored":"5H1D","resi":[127,129,130,131,132,134,172,174,193],"contact":[74,101,107,109,127,129,130,131,134,135,137,163,172,174,191,193],"view":{"dir":[0.712,-0.407,0.572],"roll":0},"zoom":2.0}/*END_HERO_CONFIG*/;
-const VIEW = { dir: CONFIG.view.dir, roll: CONFIG.view.roll, opacity: 1 };         /* opacity of the pocket's surface: opaque, so the pocket is exactly PAL.pocket in both colour schemes */
+const VIEW = { dir: CONFIG.view.dir, roll: CONFIG.view.roll, opacity: 1 };         /* opacity of the pocket's surface: opaque, so the pocket is exactly PAL.pocket in both color schemes */
 
 const xyz = l => [+l.slice(30, 38), +l.slice(38, 46), +l.slice(46, 54)];
 function rotTo(f, t) {                                         /* the rotation that turns the unit vector f onto t (Rodrigues) */
@@ -1329,7 +1329,7 @@ const rz = a => [[Math.cos(a), -Math.sin(a), 0], [Math.sin(a), Math.cos(a), 0], 
 const mul = (A, B) => A.map(r => [0, 1, 2].map(j => r[0] * B[0][j] + r[1] * B[1][j] + r[2] * B[2][j]));
 const apply = (R, p) => [0, 1, 2].map(a => R[a][0] * p[0] + R[a][1] * p[1] + R[a][2] * p[2]);
 
-/* the file's atom lines turned so that VIEW.dir points at the viewer (+z), the protein's centre at the origin */
+/* the file's atom lines turned so that VIEW.dir points at the viewer (+z), the protein's center at the origin */
 function orient(text, view) {
   view = view || VIEW;
   const lines = text.split("\n").filter(l => l.startsWith("ATOM") || l.startsWith("HETATM")), P = lines.map(xyz);
@@ -1381,12 +1381,12 @@ let C=null,DOC=null,ROWS=[],BYU={},SEL=null,VIEW=[],CAP=PAGE,READY=false,DRAWER=
 const DEFAULT_PRESET="hidden";
 const UI={band:CPC.PRESETS[DEFAULT_PRESET].band,state:CPC.PRESETS[DEFAULT_PRESET].state,checks:{},src:"any",idmax:null,query:"",sort:{k:"conf",dir:-1,user:false}};
 
-/* Escapes for HTML and normalises away em dashes: the page renders strings straight from data files,
+/* Escapes for HTML and normalizes away em dashes: the page renders strings straight from data files,
    and a file written elsewhere can reintroduce one long after this page was reviewed. */
 function esc(s){return String(s==null?"":s).replace(/\s+\u2014\s+/g,", ").replace(/[\u2014\u2013]/g,"-")
   .replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]));}
 function num(v,d){return (v==null||v!==v)?"not measured":Number(v).toFixed(d==null?3:d);}
-/* The real catalogue stores precision as {mean, lo, hi}; the log-parsed sample stored a bare number. One accessor, and it refuses to return NaN. */
+/* The real catalog stores precision as {mean, lo, hi}; the log-parsed sample stored a bare number. One accessor, and it refuses to return NaN. */
 function stat(v){
   if(v==null)return null;
   if(typeof v==="number")return isFinite(v)?{mean:v,lo:null,hi:null}:null;
@@ -1414,7 +1414,7 @@ const WHY={
   "check:dz":"No strong link to a disease, or not looked up (only proteins above the lowest confidence band were).",
   "check:rec":"Its strongest disease is recessive: usually both copies are broken, so a drug would have to restore the protein, not block it, which is harder.",
   "check:tdl":"Pharos lists an approved drug or a potent compound for it (Tclin or Tchem), or records no level.",
-  "check:cys":"No cysteine within reach, so labelling, tethering or a covalent drug would need one engineered in."
+  "check:cys":"No cysteine within reach, so labeling, tethering or a covalent drug would need one engineered in."
 };
 const PHAROS={Tclin:"approved drug",Tchem:"potent compounds",Tbio:"studied, none yet",Tdark:"little studied"};
 const checkIds=()=>CPC.CHECK_ORDER.filter(k=>UI.checks[k]);
@@ -1426,11 +1426,11 @@ function rebuild(){
   PCOUNT={};CPC.PRESET_ORDER.forEach(k=>{PCOUNT[k]=C.presetCount(k);});
 }
 function boot(){
-  $("tblempty").hidden=false;$("tblempty").innerHTML="Loading the catalogue (18,336 proteins, about 14 MB)&hellip;";
+  $("tblempty").hidden=false;$("tblempty").innerHTML="Loading the catalog (18,336 proteins, about 14 MB)&hellip;";
   const get=(file,key)=>fetch("data/"+file).then(r=>{if(!r.ok)throw new Error("HTTP "+r.status);return r.json();}).then(d=>{PARTS[key]=d;return true;},()=>false);
   Promise.all([get("catalogue.json","catalogue"),get("state.json","state"),get("disease.json","disease"),get("cys_reach.json","reach"),get("cysdb.json","cysdb"),get("md_examples.json","md"),get("md_cavity.json","cav"),get("md_complex.json","mdc"),get("mutations.json","mut")]).then(ok=>{
     if(!ok[0]){PARTS.catalogue=jget("embedded-sample");}
-    if(!PARTS.catalogue){$("tblempty").innerHTML="The catalogue could not be loaded. Serve the <b>website</b> folder over HTTP (<code>python3 -m http.server --directory website 8777</code>) and open <code>http://localhost:8777</code>.";return;}
+    if(!PARTS.catalogue){$("tblempty").innerHTML="The catalog could not be loaded. Serve the <b>website</b> folder over HTTP (<code>python3 -m http.server --directory website 8777</code>) and open <code>http://localhost:8777</code>.";return;}
     install(!ok[0]);
   });
 }
@@ -1439,7 +1439,7 @@ function install(isSample){
   const m=(DOC&&DOC._meta)||{};
   $("n_all").textContent=fmt(ROWS.length);
   const sm=$("sample");
-  if(isSample){sm.style.display="block";sm.innerHTML="<b>This is a sample of "+ROWS.length+" proteins.</b> The page could not load its data folder, so it shows the published shortlist only. Serve the <b>website</b> folder over HTTP (<code>python3 -m http.server --directory website 8777</code>) for the full catalogue.";}
+  if(isSample){sm.style.display="block";sm.innerHTML="<b>This is a sample of "+ROWS.length+" proteins.</b> The page could not load its data folder, so it shows the published shortlist only. Serve the <b>website</b> folder over HTTP (<code>python3 -m http.server --directory website 8777</code>) for the full catalog.";}
   else sm.style.display="none";
   const gen=String((PARTS.state&&PARTS.state._meta&&PARTS.state._meta.generated)||m.generated||"").slice(0,10);
   $("verchip").textContent=isSample?"Sample data":(gen?"Data of "+gen:"");
@@ -1582,7 +1582,7 @@ function userSort(k){
 $("csv").addEventListener("click",()=>{
   if(!C)return;
   const blob=new Blob([C.csv(VIEW)],{type:"text/csv"});
-  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="cryptic_pocket_catalogue_view.csv";document.body.appendChild(a);a.click();
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="cryptic_pocket_catalog_view.csv";document.body.appendChild(a);a.click();
   setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);
 });
 
@@ -1645,7 +1645,7 @@ function select(r,keepFocus){
   $("v_cys").disabled=!V.cys;$("v_cys").setAttribute("aria-pressed",String(V.cys));
   $("v_lig").disabled=true;$("v_lig").setAttribute("aria-pressed","false");
   V.baseKey=null;V.surfId=null;V.hasSS=true;
-  if(!V.colorUser)V.color=srcFor(r).kind=="afdb"?"plddt":"plain";      /* until the reader chooses a colouring, a model opens coloured by its confidence (as AlphaFold DB shows it) and an experimental structure in the plain blue-grey of every protein view on the page */
+  if(!V.colorUser)V.color=srcFor(r).kind=="afdb"?"plddt":"plain";      /* until the reader chooses a coloring, a model opens colored by its confidence (as AlphaFold DB shows it) and an experimental structure in the plain blue-gray of every protein view on the page */
   colourOptions();
   $("v_spin").disabled=false;$("v_reset").disabled=false;$("v_zoomp").disabled=!hasRes(r);
   $("dinfo").scrollTop=0;
@@ -1692,7 +1692,7 @@ function zoomPocket(){                                    /* the pocket, with th
 }
 /* Ligand contact, measured HERE from the coordinates that were just loaded: the fraction of predicted pocket residues with any
    atom within 4.5 A of a ligand atom. A ligand is a heteroatom group of 8 or more heavy atoms that is not water, an ion or a
-   common buffer or crystallisation additive. AlphaFold models contain no ligands. */
+   common buffer or crystallization additive. AlphaFold models contain no ligands. */
 function analyseLigands(r){
   V.ligs=[];V.contact=null;
   if(srcFor(r).kind!=="pdb"){setLig(r,{kind:"afdb"});return;}
@@ -1755,14 +1755,14 @@ function hoverLabels(v){
   });
 }
 /* ── what the view draws ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-   The protein itself is drawn as a cartoon, a surface or both, in one of five colourings (colours are in geom.js, pastel on purpose). On top of it, whatever the reader highlights: the predicted pocket in a vivid
+   The protein itself is drawn as a cartoon, a surface or both, in one of five colorings (colors are in geom.js, pastel on purpose). On top of it, whatever the reader highlights: the predicted pocket in a vivid
    violet, always opaque (the protein around it may be see-through, the pocket never is; on a surface the pocket residues are also painted violet where they reach it), the cysteine, the ligands, candidate
-   positions, variants. The surface is the slow part (0.3 s for 1,400 atoms, and it grows faster than the atom count), so it is kept between redraws and rebuilt only when the representation, the colouring,
+   positions, variants. The surface is the slow part (0.3 s for 1,400 atoms, and it grows faster than the atom count), so it is kept between redraws and rebuilt only when the representation, the coloring,
    the pocket highlight or the structure changes; chains above SURF_MAX atoms are surfaced only around the pocket. The camera buttons are in the view, the appearance controls under it. */
-const PAL=CPC.geom.PAL;                                        /* the colours of every protein view (geom.js) */
+const PAL=CPC.geom.PAL;                                        /* the colors of every protein view (geom.js) */
 const POCKET=PAL.pocket;
 const COL={nat:PAL.cys,pocket:POCKET};
-const ligColor=a=>a.elem==="C"?PAL.ligand:((window.$3Dmol&&window.$3Dmol.elementColors.Jmol[a.elem])||"#888888");      /* ligand carbons in the ligand colour, the other atoms in the usual element colours */
+const ligColor=a=>a.elem==="C"?PAL.ligand:((window.$3Dmol&&window.$3Dmol.elementColors.Jmol[a.elem])||"#888888");      /* ligand carbons in the ligand color, the other atoms in the usual element colors */
 const REPS={cartoon:{cartoon:true,surf:0},surface:{cartoon:false,surf:0.42},both:{cartoon:true,surf:0.3}};      /* the surface is a see-through shell: the pocket of a hidden-pocket row is closed, so it lies under the skin and a solid surface would hide it */
 function effectiveColor(){
   const m=V.color,afdb=!!V.row&&srcFor(V.row).kind==="afdb";
@@ -1779,7 +1779,7 @@ function baseSpec(){
   return {color:P.PLAIN};
 }
 const SURF_MAX=4000,SURF_RADIUS=24;
-/* The surface algorithm in 3Dmol slows with roughly the square of the atom count (0.3 s for 1,400 atoms, 10 s for 7,700, with the page frozen all the while), and a fifth of the catalogue's chains are over 500 residues.
+/* The surface algorithm in 3Dmol slows with roughly the square of the atom count (0.3 s for 1,400 atoms, 10 s for 7,700, with the page frozen all the while), and a fifth of the catalog's chains are over 500 residues.
    Above SURF_MAX protein atoms the surface is drawn for the part of the chain within SURF_RADIUS angstroms of the pocket, which is the part anyone looks at; the legend says so. */
 function surfaceSel(r){
   const sel=Object.assign({},chainSel(r),{hetflag:false});
@@ -1793,10 +1793,10 @@ function surfaceSel(r){
   sel.resi=Object.keys(keep).map(Number);
   return {sel,local:true};
 }
-function surfSpec(base){                                  /* the colouring of the surface: the same as the ribbon, with the predicted pocket painted violet where it reaches the surface */
+function surfSpec(base){                                  /* the coloring of the surface: the same as the ribbon, with the predicted pocket painted violet where it reaches the surface */
   const r=V.row;if(!V.pocket||!r||!hasRes(r))return base;
   const pk={};r.pocket_resids.forEach(x=>{pk[x]=1;});
-  const tint=shellTint(),f=effectiveColor()==="plain"?(()=>tint):(base.colorfunc||(()=>base.color));      /* the plain colouring is the shell tint on the dark viewer (read once: the colour function runs for every vertex) */
+  const tint=shellTint(),f=effectiveColor()==="plain"?(()=>tint):(base.colorfunc||(()=>base.color));      /* the plain coloring is the shell tint on the dark viewer (read once: the color function runs for every vertex) */
   return {colorfunc:a=>pk[a.resi]?POCKET:f(a)};
 }
 function chainFacts(r){                                   /* the numbers of the first and last residue of the chain, and whether the file carries secondary structure */
@@ -1956,7 +1956,7 @@ function reachHtml(r){
   if(all==null)return h+'<p class="hint" style="margin:0">Not analyzed: fewer than three pocket residues were found in the structure, or it could not be read.</p></div>';
   const near=all.filter(x=>x[1]<=C.REACH_A);
   h+=near.length?'<div class="chipsr">'+near.map(x=>reachChip(r,x)).join("")+'</div>':'<p class="hint" style="margin:0">No free native cysteine has its sulfur within '+C.REACH_A+' &Aring; of an atom of a pocket residue'+(all.length?" (the nearest is "+all[0][1].toFixed(1)+" &Aring; away).":".")+'</p>';
-  return h+'<p class="note">Free native cysteines (no disulfide, no metal) whose sulfur lies within '+C.REACH_A+' &Aring; of an atom of a pocket residue, from the structure the row names. Buried: protected until the pocket opens, so a labelling test can report it. Measured: CysDB, lysate chemoproteomics, which covers about a quarter of cysteines; not measured is not unreactive. Geometry only: nothing here says a compound will bond.</p></div>';
+  return h+'<p class="note">Free native cysteines (no disulfide, no metal) whose sulfur lies within '+C.REACH_A+' &Aring; of an atom of a pocket residue, from the structure the row names. Buried: protected until the pocket opens, so a labeling test can report it. Measured: CysDB, lysate chemoproteomics, which covers about a quarter of cysteines; not measured is not unreactive. Geometry only: nothing here says a compound will bond.</p></div>';
 }
 function detail(r){
   const s=srcFor(r);
@@ -2022,7 +2022,7 @@ function rotTo(d,z){                                         /* the rotation tha
   for(let i=0;i<3;i++)for(let j=0;j<3;j++)R[i][j]=(i===j?1:0)+s*K[i][j]+(1-c)*(K[i][0]*K[0][j]+K[i][1]*K[1][j]+K[i][2]*K[2][j]);
   return R;
 }
-function mdOrient(la,pocket){                                /* turn the structure so that the pocket faces the viewer: the line from the centre of the protein to the centre of the pocket residues becomes the line of sight */
+function mdOrient(la,pocket){                                /* turn the structure so that the pocket faces the viewer: the line from the center of the protein to the center of the pocket residues becomes the line of sight */
   const pk={};pocket.forEach(x=>{pk[x]=1;});
   const c=[0,0,0],q=[0,0,0];let n=0;
   la.forEach(l=>{const p=pdbXYZ(l);c[0]+=p[0];c[1]+=p[1];c[2]+=p[2];if(pk[+l.slice(22,26)]){q[0]+=p[0];q[1]+=p[1];q[2]+=p[2];n++;}});
@@ -2047,8 +2047,8 @@ function morphPdb(a,b,n,pocket){
 const CLOUD=PAL.cloud,MD_MS=5200,SURF_KEYS=5;                /* the empty space is teal so it cannot be mistaken for the violet pocket residues; the path plays once in about 5 seconds; the surface (the slow part) is built for 5 frames */
 const CLOUD_R=0.5;                              /* CLOUD_R: the balls of the empty space are wide enough to overlap (the grid is 0.7 angstroms), so it reads as one mass and not as dust */
 const pressSeg=(box,attr,val)=>{if(box)box.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset[attr]===val)));};
-/* The see-through surface. A translucent layer over a near-black viewer always looks darker than the opaque ribbon, so on the dark viewer the shell is a lighter tint of the same blue-grey; it is half solid on both;
-   on the light viewer it is the protein colour itself. Read when the surface is built or shown, so a change of colour scheme is picked up. */
+/* The see-through surface. A translucent layer over a near-black viewer always looks darker than the opaque ribbon, so on the dark viewer the shell is a lighter tint of the same blue-gray; it is half solid on both;
+   on the light viewer it is the protein color itself. Read when the surface is built or shown, so a change of color scheme is picked up. */
 const viewerDark=()=>{const h=(getComputedStyle(document.documentElement).getPropertyValue("--viewer").trim()||"#f3f5f8").replace("#","");const n=parseInt(h.length===3?h.replace(/./g,"$&$&"):h,16);return ((n>>16&255)*0.299+(n>>8&255)*0.587+(n&255)*0.114)<110;};
 const shellTint=()=>viewerDark()?"#e3ebf6":PAL.protein,shellAlpha=()=>0.5;
 const ICO=(()=>{const t=(1+Math.sqrt(5))/2,V=[[-1,t,0],[1,t,0],[-1,-t,0],[1,-t,0],[0,-1,t],[0,1,t],[0,-1,-t],[0,1,-t],[t,0,-1],[t,0,1],[-t,0,-1],[-t,0,1]].map(v=>{const l=Math.hypot(v[0],v[1],v[2]);return v.map(x=>x/l);});
@@ -2200,7 +2200,7 @@ function mdCardInit(r){
   requestAnimationFrame(()=>{const h=$("mdcardview");if(h)mdPlayer(h,m,mdUi("mdcard"),MDCARD);});      /* the drawer may have moved to another protein within the frame */
   const a=document.querySelector(".mdjump");if(a)a.addEventListener("click",ev=>{ev.preventDefault();drawerClose();showTab("sim",true);showSim("open");mdSelect(mdRuns().indexOf(m));});
 }
-const WORD={"2":"Opens in most simulations and more than its neighbours","1":"Opens, but not clearly more than similar patches","descriptive":"Opens, but so do similar patches of the protein","0":"Rarely opens, and so do its neighbours"};
+const WORD={"2":"Opens in most simulations and more than its neighbors","1":"Opens, but not clearly more than similar patches","descriptive":"Opens, but so do similar patches of the protein","0":"Rarely opens, and so do its neighbors"};
 const mdGroupName=g=>({registered:"Predicted pockets",exploratory:"Exploratory",control:"Controls"}[g]||g);
 const mdSub=m=>m.name.replace(/^[^(]*/,"").replace(/[()]/g,"").trim();
 function mdSelect(i){
@@ -2325,7 +2325,7 @@ function mdcSelect(i){
   document.querySelectorAll("#mdctabs button").forEach((b,k)=>b.setAttribute("aria-selected",String(k===i)));
   document.querySelectorAll("#mdcrows tr[data-sys]").forEach(tr=>tr.classList.toggle("sel",tr.dataset.sys===S.system));
   mdcPlayer($("mdcview"),C,S,mdcUi("mdc"),MDCLIVE);
-  $("mdccap").innerHTML="<b>"+esc(y.label)+".</b> Simulation "+S.run+" of "+C._meta.replicas_per_system+", which "+esc(S.how)+": its centre moved "+S.end_shift_A.toFixed(1)+" &Aring; in "+S.end.time_ns+" ns.";
+  $("mdccap").innerHTML="<b>"+esc(y.label)+".</b> Simulation "+S.run+" of "+C._meta.replicas_per_system+", which "+esc(S.how)+": its center moved "+S.end_shift_A.toFixed(1)+" &Aring; in "+S.end.time_ns+" ns.";
 }
 function renderMDC(){
   const C=PARTS.mdc,box=$("mdc");
@@ -2344,7 +2344,7 @@ function renderMDC(){
   }).join("");
   $("mdcnote").innerHTML="Nothing here shows that any molecule binds.";
   const full=ctl.filter(id=>sysBy[id].stays===sysBy[id].n).map(id=>lc(id)),E=M.earlier_round,es=E.stays;
-  $("mdcmore").innerHTML="A molecule stays if its centre keeps within 6 &Aring; of its docked position in at least 80% of the frames and never goes beyond 10 &Aring; for more than 1 nanosecond. It keeps the docked pose if its atoms are, at the median, under 3 &Aring; from that pose (kept the pose, of "+n+": "+C.systems.map(s=>lc(s.id)+" "+s.holds).join(", ")+"). "+
+  $("mdcmore").innerHTML="A molecule stays if its center keeps within 6 &Aring; of its docked position in at least 80% of the frames and never goes beyond 10 &Aring; for more than 1 nanosecond. It keeps the docked pose if its atoms are, at the median, under 3 &Aring; from that pose (kept the pose, of "+n+": "+C.systems.map(s=>lc(s.id)+" "+s.holds).join(", ")+"). "+
     esc(sysBy.MBZ.label)+" is an approved drug of the same chemical family as the molecules the docking search proposed. The controls are unrelated approved drugs: "+lc("PRP")+" (positively charged), "+lc("IBU")+" (negatively charged) and "+lc("NDC")+" (neutral, chosen before the simulations by a fixed rule: the best-docking of "+M.neutral_pool+" neutral drugs of mebendazole's size and polarity). The other cavity is a small surface cavity "+M.control_cavity_distance_A+" &Aring; from the pocket, lined by none of its residues. "+
     n+" simulations of "+M.ns+" nanoseconds for each molecule, one force field, molecules placed by docking. Staying that long is weak evidence of anything"+(full.length?": "+full.join(" and ")+" stay"+(full.length===1?"s":"")+" in "+n+" of "+n:"")+". Shown: "+lc("MBZ")+" in the simulation where it kept closest to the docked pose and in the one where it moved furthest, and "+lc("NDC")+" in the one where it kept closest; the start and the end frame are real, the path between them is a straight line, not the simulation. "+
     "An earlier round, in a different opened frame without the C-terminal tail, ran "+E.replicas_per_system+" simulations of "+E.ns+" nanoseconds: mebendazole stayed in "+es.MBZ[0]+" of "+es.MBZ[1]+", F03 (the docking search's best-scoring molecule) in "+es.F03[0]+" of "+es.F03[1]+", propranolol in "+es.PRP[0]+" of "+es.PRP[1]+".";
@@ -2383,21 +2383,21 @@ function renderMut(){
   const open=tr=>{const x=M.rows[+tr.dataset.i];if(x)openRow(x.u,x.gene);};
   $("mutrows").addEventListener("click",ev=>{const tr=ev.target.closest("tr[data-i]");if(tr)open(tr);});
   $("mutrows").addEventListener("keydown",ev=>{const tr=ev.target.closest("tr[data-i]");if(tr&&(ev.key==="Enter"||ev.key===" ")){ev.preventDefault();open(tr);}});
-  $("mutnote").innerHTML="Recurrent substitutions in "+fmt(m.tumours)+" sequenced tumours (Cancer Hotspots); a tumour can be counted twice. One predicted pocket per protein. Nothing here shows that the new residue is reachable or that a drug binds.";
+  $("mutnote").innerHTML="Recurrent substitutions in "+fmt(m.tumours)+" sequenced tumors (Cancer Hotspots); a tumor can be counted twice. One predicted pocket per protein. Nothing here shows that the new residue is reachable or that a drug binds.";
   const L=M.losses||[];
   $("lossh").hidden=!L.length;$("lossw").hidden=!L.length;
-  $("lossrows").innerHTML=L.map((x,i)=>'<tr data-i="'+i+'" tabindex="0"><td class="sy"><b>'+esc(x.gene)+'</b></td><td><span class="chg">'+esc(x.change)+'</span><span class="lh">removes Cys'+x.pos+'</span></td><td>'+esc(x.therapies)+'<span class="lh">'+esc(x.diseases)+'</span></td><td>'+(LOSS_WHERE[x.where]||esc(x.where))+((x.catalogue_cys&&x.catalogue_cys!==x.pos)?'<span class="lh">the catalogue names Cys'+x.catalogue_cys+' for this protein</span>':"")+'</td><td><a href="https://civicdb.org/links/evidence_items/'+x.evidence[0]+'" target="_blank" rel="noopener">CIViC level '+esc(x.levels)+'</a><span class="lh">'+esc(x.citations)+'</span></td></tr>').join("");
+  $("lossrows").innerHTML=L.map((x,i)=>'<tr data-i="'+i+'" tabindex="0"><td class="sy"><b>'+esc(x.gene)+'</b></td><td><span class="chg">'+esc(x.change)+'</span><span class="lh">removes Cys'+x.pos+'</span></td><td>'+esc(x.therapies)+'<span class="lh">'+esc(x.diseases)+'</span></td><td>'+(LOSS_WHERE[x.where]||esc(x.where))+((x.catalogue_cys&&x.catalogue_cys!==x.pos)?'<span class="lh">the catalog names Cys'+x.catalogue_cys+' for this protein</span>':"")+'</td><td><a href="https://civicdb.org/links/evidence_items/'+x.evidence[0]+'" target="_blank" rel="noopener">CIViC level '+esc(x.levels)+'</a><span class="lh">'+esc(x.citations)+'</span></td></tr>').join("");
   $("lossrows").addEventListener("click",ev=>{if(ev.target.closest("a"))return;const tr=ev.target.closest("tr[data-i]");if(tr){const x=L[+tr.dataset.i];if(x)openRow(x.u,x.gene);}});
   $("mutmore2").innerHTML="Recurrent cancer substitutions ("+fmt(m.hotspot_substitutions)+" in "+fmt(m.hotspot_genes)+" genes, Cancer Hotspots) were joined to the predicted pocket of each protein, the residue numbers checked against UniProt and the structure. A substitution counts when it creates a Cys, or a Ser, Lys or Tyr from a residue that is none of the four, at a pocket residue or one with an atom within 4.5 &Aring; of it: "+c.substitutions+" in "+c.genes+" genes ("+c.in_pocket+" at a pocket residue). "+
     "<b>Chance.</b> Recurrent substitutions fall on predicted pocket residues "+ratio(e.position_matched.observed,e.position_matched.expected)+" times as often as chance for the same residue type in the same protein ("+e.position_matched.observed+" against "+e.position_matched.expected+"), and "+ratio(e.patches.observed,e.patches.expected)+" times as often as burial-matched patches of the same size ("+e.patches.observed+" against "+e.patches.expected+", "+e.proteins+" proteins); "+ratio(e.patches_no_ligand.observed,e.patches_no_ligand.expected)+" times where no ligand sits at the site ("+e.patches_no_ligand.observed+" against "+e.patches_no_ligand.expected+"). With the pocket moved along the sequence the excess is gone. A minority of proteins carries it. "+
-    "<b>What it does not show.</b> Positions outside the structure the catalogue scored were not tested ("+Math.round(100*m.not_tested.outside_structure_share)+"% of the pairs); the pocket of KRAS here is the nucleotide site, which holds G12, not the switch II pocket; "+c.genes_no_ligand_tumour_suppressor+" of the "+c.genes_no_ligand+" proteins with no ligand at the site are tumour suppressors, where a covalent inhibitor would be the wrong direction. "+
+    "<b>What it does not show.</b> Positions outside the structure the catalog scored were not tested ("+Math.round(100*m.not_tested.outside_structure_share)+"% of the pairs); the pocket of KRAS here is the nucleotide site, which holds G12, not the switch II pocket; "+c.genes_no_ligand_tumor_suppressor+" of the "+c.genes_no_ligand+" proteins with no ligand at the site are tumor suppressors, where a covalent inhibitor would be the wrong direction. "+
     "Acquired cysteines in cancer were listed before by Visscher, Arkin and Dansen (2016).";
   box.hidden=false;$("navmut").hidden=false;
   if(WANTMUT)showTab("mut",false);
 }
 function mutChips(r){                                             /* the pocket residues of this structure that carry a cancer substitution: {residue number in the structure: text} */
   const M=PARTS.mut,out={};if(!M||!M.by_uniprot)return out;
-  (M.by_uniprot[r.u]||[]).forEach(i=>{const x=M.rows[i];if(x.where==="pocket"&&x.auth!=null)out[x.auth]=(out[x.auth]?out[x.auth]+"; ":"")+x.ref+x.pos+x.alt+" adds "+x.gained+" ("+fmt(x.tumours)+" tumours)";});
+  (M.by_uniprot[r.u]||[]).forEach(i=>{const x=M.rows[i];if(x.where==="pocket"&&x.auth!=null)out[x.auth]=(out[x.auth]?out[x.auth]+"; ":"")+x.ref+x.pos+x.alt+" adds "+x.gained+" ("+fmt(x.tumours)+" tumors)";});
   return out;
 }
 function mutHtml(r){
@@ -2406,10 +2406,10 @@ function mutHtml(r){
   if(!idx.length&&!loss.length)return"";
   const site=s=>s==="ligand"?"a ligand already sits at the site":(s==="none"?"no ligand at the site in this structure":"");
   let h='<div class="dsec"><h4>Cancer mutations at the pocket</h4>';
-  idx.slice(0,5).forEach(i=>{const x=M.rows[i];h+='<p class="note" style="margin:0 0 6px"><b>'+esc(x.ref+x.pos+x.alt)+'</b> adds '+esc(x.gained)+': '+fmt(x.tumours)+' tumours'+(x.organs.length?', most in '+esc(x.organs[0][0]):"")+'. '+(x.where==="pocket"?"In the pocket":"Next to the pocket")+(site(x.site)?"; "+site(x.site):"")+'.</p>';});
+  idx.slice(0,5).forEach(i=>{const x=M.rows[i];h+='<p class="note" style="margin:0 0 6px"><b>'+esc(x.ref+x.pos+x.alt)+'</b> adds '+esc(x.gained)+': '+fmt(x.tumours)+' tumors'+(x.organs.length?', most in '+esc(x.organs[0][0]):"")+'. '+(x.where==="pocket"?"In the pocket":"Next to the pocket")+(site(x.site)?"; "+site(x.site):"")+'.</p>';});
   if(idx.length>5)h+='<p class="note" style="margin:0 0 6px">'+(idx.length-5)+' more in the table under Mutations.</p>';
   loss.forEach(x=>{h+='<p class="note" style="margin:0 0 6px"><b>'+esc(x.change)+'</b> removes Cys'+x.pos+', the cysteine '+esc(x.therapies.toLowerCase())+' binds: resistance (CIViC level '+esc(x.levels)+').</p>';});
-  return h+'<p class="note">Recurrent substitutions in '+fmt(M._meta.tumours)+' sequenced tumours. Nothing here shows that the new residue is reachable or that a drug binds.</p></div>';
+  return h+'<p class="note">Recurrent substitutions in '+fmt(M._meta.tumours)+' sequenced tumors. Nothing here shows that the new residue is reachable or that a drug binds.</p></div>';
 }
 
 /* ── how far to trust a row ───────────────────────────────────────────────── */
@@ -2453,7 +2453,7 @@ function heroRotate(e){
   if(!k||!HERO.v)return;
   e.preventDefault();HERO.v.rotate(k[0],k[1]);HERO.v.render();
 }
-function retheme(){                                            /* the colour scheme changed: every live viewer takes the new background */
+function retheme(){                                            /* the color scheme changed: every live viewer takes the new background */
   const bg=viewerBg();
   [V.v,HERO.v].concat(MDLIVE.map(p=>p.v),MDCARD.map(p=>p.v)).forEach(v=>{if(v){v.setBackgroundColor(bg);v.render();}});
 }

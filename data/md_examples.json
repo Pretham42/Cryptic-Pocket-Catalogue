@@ -161,7 +161,7 @@
    },
    "facts": [
     "The sulfur of Cys662 was exposed (over 10 A^2) in 1.1 % of frames.",
-    "Scored against the cGMP of the bound structure 4KL1, 17 % of all frames overlap it with 4.8 atoms of 23 or fewer, and the frames the volume label calls open are not the ones that fit (an open frame is better than its neighbours by 0.8 atoms; replica 9 never opens by the label and 42 % of its frames fit)."
+    "Scored against the cGMP of the bound structure 4KL1, 17 % of all frames overlap it with 4.8 atoms of 23 or fewer, and the frames the volume label calls open are not the ones that fit (an open frame is better than its neighbors by 0.8 atoms; replica 9 never opens by the label and 42 % of its frames fit)."
    ],
    "sensitivity": [
     {
@@ -345,7 +345,7 @@
    "band": 3,
    "conf": 0.489,
    "tier": "out",
-   "why": "An exploratory probe of the AlphaFold-cavity rule, fixed as descriptive before the run: the label cannot be checked at this site (the bound crystals show a neighbouring groove, gain under 10 A^3).",
+   "why": "An exploratory probe of the AlphaFold-cavity rule, fixed as descriptive before the run: the label cannot be checked at this site (the bound crystals show a neighboring groove, gain under 10 A^3).",
    "start": {
     "entry": "3DLM",
     "chain": "A",
@@ -1548,7 +1548,7 @@
    "start": {
     "entry": "5CEM",
     "chain": "A",
-    "model": "crystal; the tail (357 to 364) kept, two loops and a 14-residue linker modelled",
+    "model": "crystal; the tail (357 to 364) kept, two loops and a 14-residue linker modeled",
     "residues": "88 to 364",
     "n_res": 277,
     "covers": "74 %",
@@ -1726,11 +1726,11 @@
    "band": 3,
    "conf": 0.594,
    "tier": "B",
-   "why": "The first TRIB1 run, chosen by biology after the screen: the pocket sits on the pseudokinase's regulatory switch, and the loop 229 to 237 that was modelled is the activation loop that gates it. There is no tail in this run. Not counted in the pooled test.",
+   "why": "The first TRIB1 run, chosen by biology after the screen: the pocket sits on the pseudokinase's regulatory switch, and the loop 229 to 237 that was modeled is the activation loop that gates it. There is no tail in this run. Not counted in the pooled test.",
    "start": {
     "entry": "5CEM",
     "chain": "A",
-    "model": "crystal; two loops (140 to 141 and 229 to 237) modelled",
+    "model": "crystal; two loops (140 to 141 and 229 to 237) modeled",
     "residues": "88 to 342",
     "n_res": 255,
     "covers": "69 %",

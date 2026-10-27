@@ -11,7 +11,7 @@
   "neutral_pool": 7,
   "source": "TRIB1_Complex_MD_v2_Results_2026-10-14.md (audit rows V2R1 to V2R10); frames by code/md/site_complex2_frames_vm.py, checked against the readout's own displacement (max difference 0.01 A over the twenty ligand simulations)",
   "rules": {
-   "stays": "the molecule's centre stays within 6 A of its docked position in at least 80 % of the frames and never goes beyond 10 A for more than 1 ns",
+   "stays": "the molecule's center stays within 6 A of its docked position in at least 80 % of the frames and never goes beyond 10 A for more than 1 ns",
    "holds": "the median distance of the molecule's atoms from the docked pose, after fitting the protein on the pocket residues, is under 3 A",
    "rmsd": "the median distance of the molecule's atoms from the docked pose after fitting the protein on the pocket residues (A)"
   },
