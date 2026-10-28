@@ -1931,6 +1931,8 @@ function knownHtml(r){
   if(kn&&kn.d)bits.push("DNA or RNA lies within 4.5 \u00c5 of the pocket in this entry.");
   return '<div class="vd '+cls+'"><h4>What is known at the site</h4><p class="vd-t">'+esc(t)+'</p>'+(bits.length?'<p class="vd-s">'+esc(bits.join(" "))+'</p>':"")+'</div>';
 }
+/* a row whose structure was replaced by hand (data/catalogue.json `sub`): say so before anything else the drawer shows */
+function subHtml(r){return r.sub&&r.sub.note?'<div class="vd a"><h4>Structure substituted</h4><p class="vd-t">'+esc(r.sub.note)+'</p></div>':"";}
 function headHtml(r){
   const b=bandOf(r),d=C.dz(r),sc=C.dzScore(r);
   const nc=C.nearCys(r),cys=nc?"Cys"+nc[0]+(nc[3]?' <small>in pocket</small>':' <small>'+nc[1].toFixed(1)+' &Aring;</small>'):(C.reachList(r)==null?'<small class="ink">not analyzed</small>':'none');
@@ -1938,7 +1940,7 @@ function headHtml(r){
   return '<div class="dh"><h3>'+esc(r.gene||"unnamed")+'</h3><div class="pn" title="'+esc(r.protein_name||"")+'">'+esc(shortName(r))+" &middot; "+esc(r.u)+'</div><div class="row">'+
     (b?'<span class="tag b">'+b.n+' confidence</span>':"")+structTag(r)+
     (r.tdl?'<span class="tag '+((r.tdl==="Tbio"||r.tdl==="Tdark")?"g":"a")+'">'+esc(PHAROS[r.tdl]||r.tdl)+'</span>':"")+'</div></div>'+
-    answerHtml(r)+knownHtml(r)+
+    subHtml(r)+answerHtml(r)+knownHtml(r)+
     '<div class="qf"><div><span class="k">Cysteine</span><div class="v">'+cys+'</div></div>'+
     '<div><span class="k">Pocket</span><div class="v">'+(hasRes(r)?r.pocket_resids.length+" residues":(r.cluster_size!=null?r.cluster_size+", not listed":"pending"))+'</div></div>'+
     '<div><span class="k">Disease link</span><div class="v">'+dis+'</div></div></div>';
