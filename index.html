@@ -565,7 +565,7 @@ details.dd .dsec{padding:0;border:0}
         </div>
         <div class="gate">
           <div class="gtop"><span class="gt">A cysteine in reach</span><button class="sw" data-c="cys" role="switch" aria-checked="false" aria-label="A cysteine in reach"></button></div>
-          <p class="gw">A free native cysteine has its sulfur within 4.5 &Aring; of a pocket residue: a handle for labeling, tethering or a covalent ligand. Geometry only.</p>
+          <p class="gw">A free cysteine has its sulfur within 4.5 &Aring; of a pocket residue: a handle for labeling, tethering or a covalent ligand. Geometry only; one made by mutation is marked.</p>
           <span class="gf" id="gf_cys"></span>
         </div>
         <div class="gsub">Optional extras, not part of the main funnel</div>
@@ -616,7 +616,7 @@ details.dd .dsec{padding:0;border:0}
         <th data-k="gene" class="w-gene" title="Gene symbol and protein name">Protein</th>
         <th data-k="conf" class="w-conf" aria-sort="descending" title="How sure the model is that the site is a pocket">Confidence</th>
         <th data-k="state" class="w-site" title="Closed, open, or a ligand already there, with the empty volume in cubic angstroms">Pocket</th>
-        <th data-k="cys_dist" class="w-cys" title="Free native cysteines within 4.5 Å of an atom of a pocket residue, nearest first">Cysteine</th>
+        <th data-k="cys_dist" class="w-cys" title="Free cysteines within 4.5 Å of an atom of a pocket residue, nearest first">Cysteine</th>
         <th data-k="dz" class="w-dz" title="The strongest disease link of the gene (Open Targets, 0 to 1)">Disease link</th>
         <th data-k="tdl" class="w-drug" title="Pharos development level: how much chemistry exists for this protein">Drugged?</th>
       </tr></thead><tbody id="tbody"></tbody></table>
@@ -779,7 +779,7 @@ details.dd .dsec{padding:0;border:0}
      rec          not a recessive-disease gene (Open Targets lists recessive or biallelic inheritance for the gene's strongest-link disease: usually both copies of the gene are broken, so a drug would have to restore the protein)
      tdl          not already drugged: Pharos level Tbio or Tdark (no approved drug, no potent small molecule)
      ns           not a UniProt-annotated site: no pocket residue lies on a UniProt functional-site feature (active, binding, metal, DNA, nucleotide or zinc-finger site), read through the entry's own numbering (SIFTS); a row whose entry could not be mapped is left out, because nothing was checked for it (data/known_site.json)
-     cys          a cysteine in reach: a free native cysteine (no other sulfur within 2.5 angstroms, no metal within 3.0) whose sulfur lies within 4.5 angstroms of a heavy atom of a pocket residue (the shared core, data/cys_reach.json)
+     cys          a cysteine in reach: a free cysteine (no other sulfur within 2.5 angstroms, no metal within 3.0) whose sulfur lies within 4.5 angstroms of a heavy atom of a pocket residue (the shared core, data/cys_reach.json)
      lig          a cysteine in reach that CysDB found engaged by an electrophile (data/cysdb.json)
    Two scope filters narrow the list before the gates: the structure a row was scored on (experimental or AlphaFold) and its highest identity to a training protein.
    Only two gates were audited as defaults (band 3 or better, and closed and empty); every other gate is a choice the reader makes. */
@@ -799,9 +799,9 @@ const EV = {
 /* the starting points: each is just a setting of the gates (the reader can change any of them afterward) */
 const PRESETS = {
   hidden: { label: "Closed and empty",               band: 3, state: "closed", checks: [], note: "Confident, with no cavity at the predicted site yet and no ligand there. Closed is a fact about this structure, not about what is known: the annotation gate asks that." },
-  hidden_cys: { label: "Closed and empty, with a cysteine in reach", band: 3, state: "closed", checks: ["cys"], note: "Confident, closed and empty, with a free native cysteine within 4.5 A of the pocket: a pocket a lab could test." },
+  hidden_cys: { label: "Closed and empty, with a cysteine in reach", band: 3, state: "closed", checks: ["cys"], note: "Confident, closed and empty, with a free cysteine within 4.5 A of the pocket: a pocket a lab could test." },
   sites:  { label: "Ligand sites in general",         band: 3, state: "any",    checks: [], note: "Every confident predicted site, whether closed, open or already holding a ligand." },
-  sites_cys: { label: "Any site, with a cysteine in reach", band: 3, state: "any", checks: ["cys"], note: "Every confident site, closed, open or holding a ligand, with a free native cysteine within 4.5 A of the pocket: a site a covalent ligand could use." },
+  sites_cys: { label: "Any site, with a cysteine in reach", band: 3, state: "any", checks: ["cys"], note: "Every confident site, closed, open or holding a ligand, with a free cysteine within 4.5 A of the pocket: a site a covalent ligand could use." },
   impact: { label: "Disease-linked, high confidence", band: 4, state: "any",    checks: ["dz"], note: "High confidence and a strong disease link, nothing else asked." },
   all:    { label: "Everything",                      band: 0, state: "any",    checks: [], note: "Every protein." }
 };
@@ -848,13 +848,15 @@ function context(parts) {
   };
   C.bandIdx = r => { const q = C.qOf(r); return q ? q.quartile : 0; };
 
-  /* the shared core (code/utils/shared_core.py, data/cys_reach.json): a free native cysteine (no other sulfur within 2.5 A, no metal within 3.0 A) whose sulfur lies within REACH_A of a heavy atom of a pocket residue, on the
-     structure the row names. [[residue, distance in A, buried, in the pocket], ...] holds those within 6 A; a protein that is not in the file was not analyzed. Geometry only. */
+  /* the shared core (code/utils/shared_core.py, data/cys_reach.json): a free cysteine (no other sulfur within 2.5 A, no metal within 3.0 A) whose sulfur lies within REACH_A of a heavy atom of a pocket residue, on the
+     structure the row names. [[residue, distance in A, buried, in the pocket], ...] holds those within 6 A; a protein that is not in the file was not analyzed. Geometry only. Any cysteine the structure has counts, including one created by an engineered or disease change in that entry (KRAS G12C in 4LDJ, FECH H341C in 2PO7): C.madeCys finds it in data/known_site.json and the drawer marks it. */
   const REACH_A = 4.5;
   C.REACH_A = REACH_A;
   C.reachAll = r => RE[r.u] || null;
   C.reachList = r => { const l = RE[r.u]; return l ? l.filter(x => x[1] <= REACH_A) : null; };
   C.reachCys = r => { const l = C.reachList(r); return !!(l && l.length); };
+  /* the engineered change that created the cysteine at a position of the scored entry ("G12C": Gly12 to Cys), or null; known_site.json lists the engineered changes at pocket residues */
+  C.madeCys = (r, pos) => { const k = KN[r.u]; const m = k && k.m ? k.m.find(x => /^[A-Z]\d+C$/.test(x) && +x.slice(1, -1) === pos) : null; return m || null; };
   /* the cysteine in reach whose sulfur is nearest the pocket: [residue, distance, buried, in the pocket], or null */
   C.nearCys = r => { const l = C.reachList(r); return l && l.length ? l.reduce((a, b) => (b[1] < a[1] ? b : a)) : null; };
   /* CysDB (lysate chemoproteomics): [hyperreactive, ligandable, R10:1] for each cysteine it identified; a cysteine that is not listed was not measured, which is not the same as unreactive */
@@ -1979,9 +1981,9 @@ function selText(r){
           chimera:"select /"+ch+":"+r.pocket_resids.join(",")+(rs.length?"\nselect /"+ch+":"+rs.join(",")+"@SG":"")};
 }
 function reachChip(r,x){
-  const f=C.cysdb(r.u,x[0]),where=x[3]?"in the pocket":x[1].toFixed(1)+" \u00c5";
-  const tip="Cys "+x[0]+": the sulfur is "+(x[3]?"in the pocket":x[1].toFixed(1)+" \u00c5 from an atom of a pocket residue")+"; "+(x[2]?"buried (the lowest quarter of this chain's residue accessibility)":"exposed")+". CysDB: "+C.measWord(f)+".";
-  return '<button class="pos-chip reach'+(x[2]?" buried":"")+(f&&f[1]?" lig":"")+'" data-resi="'+x[0]+'" title="'+esc(tip)+'">C'+x[0]+'<small>'+where+", "+(x[2]?"buried":"exposed")+'</small><em>'+esc(C.measWord(f))+'</em></button>';
+  const f=C.cysdb(r.u,x[0]),made=C.madeCys(r,x[0]),where=x[3]?"in the pocket":x[1].toFixed(1)+" \u00c5";
+  const tip="Cys "+x[0]+": the sulfur is "+(x[3]?"in the pocket":x[1].toFixed(1)+" \u00c5 from an atom of a pocket residue")+"; "+(x[2]?"buried (the lowest quarter of this chain's residue accessibility)":"exposed")+(made?"; created by the change "+made+" in this structure, not in the protein's own sequence":"")+". CysDB: "+C.measWord(f)+".";
+  return '<button class="pos-chip reach'+(x[2]?" buried":"")+(f&&f[1]?" lig":"")+'" data-resi="'+x[0]+'" title="'+esc(tip)+'">C'+x[0]+'<small>'+where+", "+(x[2]?"buried":"exposed")+(made?", made by "+made:"")+'</small><em>'+esc(C.measWord(f))+'</em></button>';
 }
 function reachHtml(r){
   if(!C.have.reach)return "";
@@ -1989,8 +1991,8 @@ function reachHtml(r){
   let h='<div class="dsec"><h4>Cysteines in reach of the pocket</h4>';
   if(all==null)return h+'<p class="hint" style="margin:0">Not analyzed: fewer than three pocket residues were found in the structure, or it could not be read.</p></div>';
   const near=all.filter(x=>x[1]<=C.REACH_A);
-  h+=near.length?'<div class="chipsr">'+near.map(x=>reachChip(r,x)).join("")+'</div>':'<p class="hint" style="margin:0">No free native cysteine has its sulfur within '+C.REACH_A+' &Aring; of an atom of a pocket residue'+(all.length?" (the nearest is "+all[0][1].toFixed(1)+" &Aring; away).":".")+'</p>';
-  return h+'<p class="note">Free native cysteines (no disulfide, no metal) whose sulfur lies within '+C.REACH_A+' &Aring; of an atom of a pocket residue, from the structure the row names. Buried: protected until the pocket opens, so a labeling test can report it. Measured: CysDB, lysate chemoproteomics, which covers about a quarter of cysteines; not measured is not unreactive. Geometry only: nothing here says a compound will bond.</p></div>';
+  h+=near.length?'<div class="chipsr">'+near.map(x=>reachChip(r,x)).join("")+'</div>':'<p class="hint" style="margin:0">No free cysteine has its sulfur within '+C.REACH_A+' &Aring; of an atom of a pocket residue'+(all.length?" (the nearest is "+all[0][1].toFixed(1)+" &Aring; away).":".")+'</p>';
+  return h+'<p class="note">Free cysteines (no disulfide, no metal) whose sulfur lies within '+C.REACH_A+' &Aring; of an atom of a pocket residue, from the structure the row names; one created by a change in that structure is marked. Buried: protected until the pocket opens, so a labeling test can report it. Measured: CysDB, lysate chemoproteomics, which covers about a quarter of cysteines; not measured is not unreactive. Geometry only: nothing here says a compound will bond.</p></div>';
 }
 function detail(r){
   const s=srcFor(r);
