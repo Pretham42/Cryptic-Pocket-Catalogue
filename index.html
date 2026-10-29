@@ -1980,10 +1980,16 @@ function selText(r){
   return {pymol:"select pocket, chain "+ch+" and resi "+r.pocket_resids.join("+")+(rs.length?"\nselect cys, chain "+ch+" and resi "+rs.join("+")+" and name SG":""),
           chimera:"select /"+ch+":"+r.pocket_resids.join(",")+(rs.length?"\nselect /"+ch+":"+rs.join(",")+"@SG":"")};
 }
+/* a cysteine that a change created in the scored entry: is the change also a recurrent tumor substitution (data/mutations.json, Cancer Hotspots)? The structure numbering (auth) is the one the change is written in. */
+function tumorChange(r,made){
+  const M=PARTS.mut;if(!made||!M||!M.by_uniprot)return null;
+  const i=(M.by_uniprot[r.u]||[]).find(k=>{const x=M.rows[k];return x.ref+x.auth+x.alt===made;});
+  return i==null?null:M.rows[i];
+}
 function reachChip(r,x){
-  const f=C.cysdb(r.u,x[0]),made=C.madeCys(r,x[0]),where=x[3]?"in the pocket":x[1].toFixed(1)+" \u00c5";
-  const tip="Cys "+x[0]+": the sulfur is "+(x[3]?"in the pocket":x[1].toFixed(1)+" \u00c5 from an atom of a pocket residue")+"; "+(x[2]?"buried (the lowest quarter of this chain's residue accessibility)":"exposed")+(made?"; created by the change "+made+" in this structure, not in the protein's own sequence":"")+". CysDB: "+C.measWord(f)+".";
-  return '<button class="pos-chip reach'+(x[2]?" buried":"")+(f&&f[1]?" lig":"")+'" data-resi="'+x[0]+'" title="'+esc(tip)+'">C'+x[0]+'<small>'+where+", "+(x[2]?"buried":"exposed")+(made?", made by "+made:"")+'</small><em>'+esc(C.measWord(f))+'</em></button>';
+  const f=C.cysdb(r.u,x[0]),made=C.madeCys(r,x[0]),tum=tumorChange(r,made),where=x[3]?"in the pocket":x[1].toFixed(1)+" \u00c5";
+  const tip="Cys "+x[0]+": the sulfur is "+(x[3]?"in the pocket":x[1].toFixed(1)+" \u00c5 from an atom of a pocket residue")+"; "+(x[2]?"buried (the lowest quarter of this chain's residue accessibility)":"exposed")+(made?"; created by the change "+made+" in this structure, not in the protein's own sequence; "+(tum?"it is also a recurrent tumor substitution ("+fmt(tum.tumours)+" tumors in Cancer Hotspots)":"it is not listed as a recurrent tumor substitution in Cancer Hotspots"):"")+". CysDB: "+C.measWord(f)+".";
+  return '<button class="pos-chip reach'+(x[2]?" buried":"")+(f&&f[1]?" lig":"")+'" data-resi="'+x[0]+'" title="'+esc(tip)+'">C'+x[0]+'<small>'+where+", "+(x[2]?"buried":"exposed")+(made?", made by "+made+(tum?" ("+fmt(tum.tumours)+" tumors)":""):"")+'</small><em>'+esc(C.measWord(f))+'</em></button>';
 }
 function reachHtml(r){
   if(!C.have.reach)return "";
